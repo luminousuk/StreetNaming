@@ -1,0 +1,190 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "Existing Property";
+}
+
+<div id="form-wrapper" class="container">
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            <h1>
+                <img class="img-responsive" src="~/img/Bath_&_North_East_Somerset_Council_logo.gif" alt="Bath & North East Somerset Council" />
+            </h1>
+        </div>
+        <div class="col-sm-6 text-center">
+            <h1 class="text-uppercase">Application to name or rename an existing property</h1>
+            <p>
+                <small>
+                    Public Health Act 1925: Section 17 & 18<br/>Towns Improvement Clauses Act 1847: Section 64 & 65
+                </small>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <form role="form">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-uppercase">Applicant Details</h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label for="name" class="control-label col-xs-3 col-sm-2">Name:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label for="address" class="control-label col-xs-3 col-sm-2">Address:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <textarea type="text" class="form-control" id="address" name="address"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="postcode" class="control-label col-xs-3 col-sm-2">Post code:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="postcode" name="postcode">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label for="telephone" class="control-label col-xs-3 col-sm-2">Telephone:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="telephone" name="telephone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile" class="control-label col-xs-3 col-sm-2">Mobile:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="mobile" name="mobile">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="control-label col-xs-3 col-sm-2">Email:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="email" name="email">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="panel-heading">
+                    <h3 class="panel-title text-uppercase">Existing Address <small class="text-lowercase">(address to be changed)</small>
+                    </h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label for="CurrentAddress" class="control-label col-xs-3 col-sm-2">Address:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <textarea type="text" class="form-control" id="CurrentAddress" name="CurrentAddress"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="panel-heading">
+                    <h3 class="panel-title text-uppercase">Proposed Address <small class="text-lowercase">(please supply 3 suggestions in order of preference)</small>
+                    </h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label for="ProposedAddress1" class="control-label col-xs-3 col-sm-2">1:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="ProposedAddress1" name="ProposedAddress1">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label for="ProposedAddress2" class="control-label col-xs-3 col-sm-2">2:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="ProposedAddress2" name="ProposedAddress2">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label for="ProposedAddress3" class="control-label col-xs-3 col-sm-2">3:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="ProposedAddress3" name="ProposedAddress3">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="panel-heading">
+                    <h3 class="panel-title text-uppercase">
+                        Are you the registered owner of the property? <small class="text-lowercase">(if not we need written confirmation from the owner that they have no objection to the change)</small>
+                    </h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item form-horizontal">
+                        <div class="row">
+                            <div class="radio col-xs-4 col-xs-offset-2 text-center">
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                                <label for="optionsRadios1">
+                                    Yes
+                                </label>
+
+                            </div>
+                            <div class="radio col-xs-4 text-center">
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                <label for="optionsRadios2">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+                <div class="panel-heading">
+                    <h3 class="panel-title text-uppercase">
+                        Confirmation
+                    </h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group col-sm-7">
+                            <label for="signed" class="control-label col-xs-3 col-sm-2">Signed:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="signed" name="signed">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label for="date" class="control-label col-xs-3 col-sm-2">Date:</label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input type="text" class="form-control" id="date" name="date">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
+                <div class="panel-footer">
+                    <button class="btn btn-lg btn-success pull-right">Submit form <i class="fa fa-arrow-circle-right"></i></button>
+                    <h5 class="pull-left"><small>By clicking submit, I confirm that I have read and understand the <a href="#">Terms & Conditions</a>.</small></h5>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h4 class="text-right">For more information please get in touch:</h4>
+        </div>
+        <div class="col-sm-6">
+            <p>
+                <address>
+                    <strong>Street Naming and Numbering Officer</strong><br>
+                    GIS Team<br>
+                    Bath and North East Somerset Council<br>
+                    Lewis House<br>
+                    Manvers Street<br>
+                    Bath, BA1 1JG<br>
+                    Tel: 01225 394427<br>
+                    Email: <a href="mailto:gis_team@bathnes.gov.uk">gis_team@bathnes.gov.uk</a>
+                </address>
+            </p>
+        </div>
+    </div>
+</div>
