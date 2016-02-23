@@ -25,13 +25,14 @@ var path = {
 path.dest = {
     js: path.webroot + "js",
     css: path.webroot + "css",
-    font: path.webroot + "fonts"
+    font: path.webroot + "fonts",
+    font_azurefix: path.webroot + "css/fonts"
 };
 
 
 gulp.task("min:js", function () {
     return gulp.src([path.js.jQuery])
-        .pipe(concat(path.dest.js + "/min/site.min.js"))
+        .pipe(concat(path.dest.js + "/site.min.js"))
         .pipe(uglify())
         .pipe(gulp.dest("."));
 });
@@ -43,7 +44,7 @@ gulp.task("copy:js", function () {
 
 gulp.task("min:css", function () {
     return gulp.src([path.css.bootstrap, path.css.fontAwesome, path.css.awesomeCheckbox])
-        .pipe(concat(path.dest.css + "/min/site.min.css"))
+        .pipe(concat(path.dest.css + "/site.min.css"))
         .pipe(cssmin())
         .pipe(gulp.dest("."));
 });
@@ -55,7 +56,8 @@ gulp.task("copy:css", function () {
 
 gulp.task("copy:fonts", function () {
     return gulp.src([path.font.fontAwesome])
-        .pipe(gulp.dest(path.dest.font));
+        .pipe(gulp.dest(path.dest.font))
+        .pipe(gulp.dest(path.dest.font_azurefix));
 });
 
 gulp.task("min", ["min:js", "min:css"]);
