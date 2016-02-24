@@ -30,13 +30,13 @@ namespace StreetNaming.Web.ViewModels
         [Display(Name = "Address")]
         public string CurrentAddress { get; set; }
 
-        [Display(Name = "Proposed Address 1")]
+        [Display(Name = "Address 1")]
         public string ProposedAddress1 { get; set; }
 
-        [Display(Name = "Proposed Address 2")]
+        [Display(Name = "Address 2")]
         public string ProposedAddress2 { get; set; }
 
-        [Display(Name = "Proposed Address 3")]
+        [Display(Name = "Address 3")]
         public string ProposedAddress3 { get; set; }
 
         public bool IsRegisteredOwner { get; set; }
