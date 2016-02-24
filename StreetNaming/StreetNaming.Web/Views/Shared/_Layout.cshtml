@@ -8,7 +8,7 @@
         <link asp-href-include="~/css/*.css" rel="stylesheet"/>
     </environment>
     <environment names="Staging, Production">
-        <link href="~/css/min/site.min.css" rel="stylesheet"/>
+        <link href="~/css/site.min.css" rel="stylesheet"/>
     </environment>
 </head>
 <body>
@@ -16,15 +16,26 @@
     <script asp-src-include="~/js/*.js"></script>
 </environment>
 <environment names="Staging, Production">
-    <script src="~/js/min/site.min.js"></script>
+    <script src="~/js/site.min.js"></script>
 </environment>
-<div>
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
-        <div class="navbar-header">
-            <div class="navbar-brand">Street Naming App</div>
-        </div>
-    </nav>
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+    <div class="navbar-header">
+        <div class="navbar-brand">Street Naming App</div>
+    </div>
+</nav>
+<div class="body-content">
     @RenderBody()
+    <hr/>
+    <footer class="container text-muted">
+        <ul class="list-inline">
+            <li><small>&copy; @DateTime.Now.Year Bath & North East Somerset Council</small></li>
+            <li><small><a href="http://www.bathnes.gov.uk/accessibility">Accessibility</a></small></li>
+            <li><small><a href="http://www.bathnes.gov.uk/contact-us">Contact Us</a></small></li>
+            <li><small><a href="http://www.bathnes.gov.uk/disclaimer-and-privacy-statement">Disclaimer & Privacy Policy</a></small></li>
+            <li><small><a href="http://www.bathnes.gov.uk/cookies">Cookies</a></small></li>
+            <li><small><a href="http://www.bathnes.gov.uk/website-advertising">Advertising</a></small></li>
+        </ul>
+    </footer>
 </div>
 </body>
 </html>
