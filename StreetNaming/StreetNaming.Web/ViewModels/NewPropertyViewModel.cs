@@ -27,19 +27,15 @@ namespace StreetNaming.Web.ViewModels
         [EmailAddress]
         public string ApplicantEmail { get; set; }
 
-        [Display(Name = "Proposed Address 1")]
+        [Display(Name = "Address 1")]
         public string ProposedAddress1 { get; set; }
 
-        [Display(Name = "Proposed Address 2")]
+        [Display(Name = "Address 2")]
         public string ProposedAddress2 { get; set; }
 
-        [Display(Name = "Proposed Address 3")]
+        [Display(Name = "Address 3")]
         public string ProposedAddress3 { get; set; }
 
-        [Display(
-            Name =
-                "Are you the registered owner of the property? (if not we need written confirmation from the owner that they have no objection to the change)"
-            )]
         public bool IsRegisteredOwner { get; set; }
 
         [Display(Name = "Signed")]

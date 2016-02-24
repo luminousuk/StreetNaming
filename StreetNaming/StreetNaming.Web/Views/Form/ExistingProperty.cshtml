@@ -1,4 +1,5 @@
-﻿@{
+﻿@model StreetNaming.Web.ViewModels.ExistingPropertyViewModel
+@{
     Layout = "_Layout";
     ViewBag.Title = "Existing Property";
 }
@@ -20,7 +21,7 @@
         </div>
     </div>
     <div class="row">
-        <form role="form">
+        <form role="form" asp-controller="Form" asp-action="ExistingProperty" method="post">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-uppercase">Applicant Details</h3>
@@ -28,87 +29,89 @@
                 <ul class="list-group">
                     <li class="list-group-item form-horizontal">
                         <div class="form-group">
-                            <label for="name" class="control-label col-xs-3 col-sm-2">Name:</label>
+                            <label asp-for="ApplicantName" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="name" name="name">
+                                <input asp-for="ApplicantName" class="form-control">
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item form-horizontal">
                         <div class="form-group">
-                            <label for="address" class="control-label col-xs-3 col-sm-2">Address:</label>
+                            <label asp-for="ApplicantAddress" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <textarea type="text" class="form-control" id="address" name="address"></textarea>
+                                <textarea asp-for="ApplicantAddress" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="postcode" class="control-label col-xs-3 col-sm-2">Post code:</label>
+                            <label asp-for="ApplicantPostcode" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="postcode" name="postcode">
+                                <input asp-for="ApplicantPostcode" class="form-control">
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item form-horizontal">
                         <div class="form-group">
-                            <label for="telephone" class="control-label col-xs-3 col-sm-2">Telephone:</label>
+                            <label asp-for="ApplicantTelephone" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="telephone" name="telephone">
+                                <input asp-for="ApplicantTelephone" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="mobile" class="control-label col-xs-3 col-sm-2">Mobile:</label>
+                            <label asp-for="ApplicantMobile" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="mobile" name="mobile">
+                                <input asp-for="ApplicantMobile" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="control-label col-xs-3 col-sm-2">Email:</label>
+                            <label asp-for="ApplicantEmail" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="email" name="email">
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="panel-heading">
-                    <h3 class="panel-title text-uppercase">Existing Address <small class="text-lowercase">(address to be changed)</small>
-                    </h3>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item form-horizontal">
-                        <div class="form-group">
-                            <label for="CurrentAddress" class="control-label col-xs-3 col-sm-2">Address:</label>
-                            <div class="col-xs-9 col-sm-10">
-                                <textarea type="text" class="form-control" id="CurrentAddress" name="CurrentAddress"></textarea>
+                                <input asp-for="ApplicantEmail" class="form-control">
                             </div>
                         </div>
                     </li>
                 </ul>
                 <div class="panel-heading">
-                    <h3 class="panel-title text-uppercase">Proposed Address <small class="text-lowercase">(please supply 3 suggestions in order of preference)</small>
+                    <h3 class="panel-title text-uppercase">
+                        Existing Address <small class="text-lowercase">(address to be changed)</small>
                     </h3>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item form-horizontal">
                         <div class="form-group">
-                            <label for="ProposedAddress1" class="control-label col-xs-3 col-sm-2">1:</label>
+                            <label asp-for="CurrentAddress" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="ProposedAddress1" name="ProposedAddress1">
+                                <textarea asp-for="CurrentAddress" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="panel-heading">
+                    <h3 class="panel-title text-uppercase">
+                        Proposed Address <small class="text-lowercase">(please supply 3 suggestions in order of preference)</small>
+                    </h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label asp-for="ProposedAddress1" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ProposedAddress1" class="form-control">
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item form-horizontal">
                         <div class="form-group">
-                            <label for="ProposedAddress2" class="control-label col-xs-3 col-sm-2">2:</label>
+                            <label asp-for="ProposedAddress2" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="ProposedAddress2" name="ProposedAddress2">
+                                <input asp-for="ProposedAddress2" class="form-control">
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item form-horizontal">
                         <div class="form-group">
-                            <label for="ProposedAddress3" class="control-label col-xs-3 col-sm-2">3:</label>
+                            <label asp-for="ProposedAddress3" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="ProposedAddress3" name="ProposedAddress3">
+                                <input asp-for="ProposedAddress3" class="form-control">
                             </div>
                         </div>
                     </li>
@@ -122,15 +125,15 @@
                     <li class="list-group-item form-horizontal">
                         <div class="row">
                             <div class="radio col-xs-4 col-xs-offset-2 text-center">
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-                                <label for="optionsRadios1">
+                                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerYes" value="1">
+                                <label for="IsRegisteredOwnerYes">
                                     Yes
                                 </label>
 
                             </div>
                             <div class="radio col-xs-4 text-center">
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                <label for="optionsRadios2">
+                                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerNo" value="0">
+                                <label for="IsRegisteredOwnerNo">
                                     No
                                 </label>
                             </div>
@@ -146,15 +149,15 @@
                 <ul class="list-group">
                     <li class="list-group-item form-horizontal">
                         <div class="form-group col-sm-7">
-                            <label for="signed" class="control-label col-xs-3 col-sm-2">Signed:</label>
+                            <label asp-for="Signed" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="signed" name="signed">
+                                <input asp-for="Signed" class="form-control">
                             </div>
                         </div>
                         <div class="form-group col-sm-5">
-                            <label for="date" class="control-label col-xs-3 col-sm-2">Date:</label>
+                            <label asp-for="SignedDate" class="control-label col-xs-3 col-sm-2"></label>
                             <div class="col-xs-9 col-sm-10">
-                                <input type="text" class="form-control" id="date" name="date">
+                                <input asp-for="SignedDate" class="form-control">
                             </div>
                         </div>
                         <div class="clearfix"></div>

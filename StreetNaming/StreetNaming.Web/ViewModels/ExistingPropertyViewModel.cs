@@ -27,7 +27,7 @@ namespace StreetNaming.Web.ViewModels
         [EmailAddress]
         public string ApplicantEmail { get; set; }
 
-        [Display(Name = "Existing Address (address to be changed)")]
+        [Display(Name = "Address")]
         public string CurrentAddress { get; set; }
 
         [Display(Name = "Proposed Address 1")]
@@ -39,10 +39,6 @@ namespace StreetNaming.Web.ViewModels
         [Display(Name = "Proposed Address 3")]
         public string ProposedAddress3 { get; set; }
 
-        [Display(
-            Name =
-                "Are you the registered owner of the property? (if not we need written confirmation from the owner that they have no objection to the change)"
-            )]
         public bool IsRegisteredOwner { get; set; }
 
         [Display(Name = "Signed")]
