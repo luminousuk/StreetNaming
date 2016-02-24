@@ -12,7 +12,9 @@
         "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
         "StreetNaming.Util": "1.0.0-dev",
         "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
-        "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final"
+        "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final",
+        "StreetNaming.Domain": "1.0.0-dev",
+        "StreetNaming.DAL.Static": "1.0.0-dev"
     },
 
     "commands": {
