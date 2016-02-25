@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace StreetNaming.Domain
 {
-    public interface IEntityRepositoryAsync<T>
+    public interface IEntityRepositoryAsync<T> where T : class
     {
         Task Add(T source);
 
