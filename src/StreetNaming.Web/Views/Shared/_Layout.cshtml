@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width"/>
     <title>@ViewBag.Title</title>
     <environment names="Development">
-        <link asp-href-include="~/css/*.css" rel="stylesheet"/>
+        <link asp-href-include="~/css/*.css" asp-href-exclude="~/css/*.min.css" rel="stylesheet"/>
     </environment>
     <environment names="Staging, Production">
         <link href="~/css/site.min.css" rel="stylesheet"/>
@@ -13,7 +13,7 @@
 </head>
 <body>
 <environment names="Development">
-    <script asp-src-include="~/js/*.js"></script>
+    <script asp-src-include="~/js/*.js" asp-src-exclude="~/js/*.min.js"></script>
 </environment>
 <environment names="Staging, Production">
     <script src="~/js/site.min.js"></script>

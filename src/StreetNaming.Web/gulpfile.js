@@ -16,7 +16,8 @@ var path = {
         awesomeCheckbox: "./bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
     },
     js: {
-        jQuery: "./bower_components/jquery/dist/jquery.js"
+        jQuery: "./bower_components/jquery/dist/jquery.js",
+        bootstrap_filestyle: "./bower_components/bootstrap-filestyle/src/bootstrap-filestyle.js"
     },
     font: {
         fontAwesome: "./bower_components/font-awesome/fonts/*"
@@ -31,14 +32,14 @@ path.dest = {
 
 
 gulp.task("min:js", function () {
-    return gulp.src([path.js.jQuery])
+    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle])
         .pipe(concat(path.dest.js + "/site.min.js"))
         .pipe(uglify())
         .pipe(gulp.dest("."));
 });
 
 gulp.task("copy:js", function () {
-    return gulp.src([path.js.jQuery])
+    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle])
         .pipe(gulp.dest(path.dest.js));
 });
 
