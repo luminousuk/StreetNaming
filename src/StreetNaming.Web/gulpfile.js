@@ -20,6 +20,7 @@ var path = {
         bootstrap_filestyle: "./bower_components/bootstrap-filestyle/src/bootstrap-filestyle.js"
     },
     font: {
+        bootstrap: "./bower_components/bootstrap/fonts/*",
         fontAwesome: "./bower_components/font-awesome/fonts/*"
     }
 };
@@ -56,7 +57,7 @@ gulp.task("copy:css", function () {
 });
 
 gulp.task("copy:fonts", function () {
-    return gulp.src([path.font.fontAwesome])
+    return gulp.src([path.font.bootstrap, path.font.fontAwesome])
         .pipe(gulp.dest(path.dest.font))
         .pipe(gulp.dest(path.dest.font_azurefix));
 });
