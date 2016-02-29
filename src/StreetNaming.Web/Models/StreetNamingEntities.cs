@@ -1,0 +1,17 @@
+﻿using Microsoft.Data.Entity;
+using StreetNaming.Domain.Models;
+
+namespace StreetNaming.Web.Models
+{
+    public sealed class StreetNamingEntities : DbContext
+    {
+        public DbSet<Applicant> Applicants { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.Name)
+                .IsRequired();
+        }
+    }
+}

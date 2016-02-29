@@ -5,17 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using StreetNaming.Domain;
 using StreetNaming.Domain.Models;
+using StreetNaming.Web.Models;
 using StreetNaming.Web.ViewModels;
 
 namespace StreetNaming.Web.Controllers
 {
     public class FormController : Controller
     {
-        private readonly IStreetNamingRepositoryAsync _repository;
+        private readonly StreetNamingEntities _db;
 
-        public FormController(IStreetNamingRepositoryAsync repository)
+        public FormController(StreetNamingEntities context)
         {
-            _repository = repository;
+            _db = context;
         }
 
         public IActionResult ExistingProperty()
@@ -33,9 +34,11 @@ namespace StreetNaming.Web.Controllers
         {
             // TODO: AutoMapper map viewModel into domain models
             var applicant = new Applicant();
-            await _repository.Add(applicant);
 
-            throw new NotImplementedException();
+            _db.Applicants.Add(applicant);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -43,9 +46,11 @@ namespace StreetNaming.Web.Controllers
         {
             // TODO: AutoMapper map viewModel into domain models
             var applicant = new Applicant();
-            await _repository.Add(applicant);
 
-            throw new NotImplementedException();
+            _db.Applicants.Add(applicant);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

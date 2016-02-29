@@ -7,7 +7,7 @@
 
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>d28b9e60-8f64-428a-9313-9b9909ce15b0</ProjectGuid>
+    <ProjectGuid>d27201cc-b382-4d18-aaa2-46e6c2555bbc</ProjectGuid>
     <RootNamespace>StreetNaming.Domain</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">..\..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>

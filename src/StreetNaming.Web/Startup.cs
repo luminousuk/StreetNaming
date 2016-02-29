@@ -1,30 +1,39 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.Data.Entity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StreetNaming.DAL.Static;
-using StreetNaming.Domain;
+using StreetNaming.Web.Models;
 
 namespace StreetNaming.Web
 {
     public class Startup
     {
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IConfiguration _config;
 
         public Startup(IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
+
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("settings.json")
+                .AddJsonFile($"settings.{_hostingEnvironment.EnvironmentName}.json", optional: true);
+
+            builder.AddEnvironmentVariables();
+            
+            _config = builder.Build();
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IStreetNamingRepositoryAsync, StaticRepositoryAsync>();
-
             services.AddMvc();
+
+            services.AddEntityFramework()
+                .AddNpgsql()
+                .AddDbContext<StreetNamingEntities>(opts => opts.UseNpgsql(_config["Data:DefaultConnection:ConnectionString"]));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
             if (_hostingEnvironment.IsDevelopment())
@@ -39,7 +48,6 @@ namespace StreetNaming.Web
             app.UseStatusCodePages();
         }
 
-        // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
