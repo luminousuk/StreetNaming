@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNet.Mvc;
-using StreetNaming.Domain;
 using StreetNaming.Domain.Models;
 using StreetNaming.Web.Models;
 using StreetNaming.Web.ViewModels;
@@ -13,10 +10,12 @@ namespace StreetNaming.Web.Controllers
     public class FormController : Controller
     {
         private readonly StreetNamingEntities _db;
+        private readonly IMapper _mapper;
 
-        public FormController(StreetNamingEntities context)
+        public FormController(StreetNamingEntities context, IMapper mapper)
         {
             _db = context;
+            _mapper = mapper;
         }
 
         public IActionResult ExistingProperty()
@@ -32,8 +31,7 @@ namespace StreetNaming.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ExistingProperty(ExistingPropertyViewModel viewModel)
         {
-            // TODO: AutoMapper map viewModel into domain models
-            var applicant = new Applicant();
+            var applicant = _mapper.Map<Applicant>(viewModel);
 
             _db.Applicants.Add(applicant);
             await _db.SaveChangesAsync();
@@ -44,8 +42,7 @@ namespace StreetNaming.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> NewProperty(NewPropertyViewModel viewModel)
         {
-            // TODO: AutoMapper map viewModel into domain models
-            var applicant = new Applicant();
+            var applicant = _mapper.Map<Applicant>(viewModel);
 
             _db.Applicants.Add(applicant);
             await _db.SaveChangesAsync();

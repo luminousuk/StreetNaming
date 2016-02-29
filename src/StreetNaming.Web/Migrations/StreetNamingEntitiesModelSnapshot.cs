@@ -37,6 +37,39 @@ namespace StreetNaming.Web.Migrations
 
                     b.HasKey("ApplicantId");
                 });
+
+            modelBuilder.Entity("StreetNaming.Domain.Models.Request", b =>
+                {
+                    b.Property<long>("RequestId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("ApplicantApplicantId");
+
+                    b.Property<string>("ExistingAddress");
+
+                    b.Property<bool>("IsRegisteredOwner");
+
+                    b.Property<string>("ProposedAddress1");
+
+                    b.Property<string>("ProposedAddress2");
+
+                    b.Property<string>("ProposedAddress3");
+
+                    b.Property<int>("RequestType");
+
+                    b.Property<string>("Signed");
+
+                    b.Property<DateTime>("SubmitDate");
+
+                    b.HasKey("RequestId");
+                });
+
+            modelBuilder.Entity("StreetNaming.Domain.Models.Request", b =>
+                {
+                    b.HasOne("StreetNaming.Domain.Models.Applicant")
+                        .WithMany()
+                        .HasForeignKey("ApplicantApplicantId");
+                });
         }
     }
 }

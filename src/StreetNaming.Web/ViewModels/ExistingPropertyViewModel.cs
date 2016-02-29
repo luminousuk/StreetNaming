@@ -6,6 +6,9 @@ namespace StreetNaming.Web.ViewModels
 {
     public class ExistingPropertyViewModel
     {
+        [Display(Name = "Title")]
+        public string ApplicantTitle { get; set; }
+
         [Display(Name = "Name")]
         public string ApplicantName { get; set; }
 

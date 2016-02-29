@@ -7,6 +7,8 @@ namespace StreetNaming.Web.Models
     {
         public DbSet<Applicant> Applicants { get; set; }
 
+        public DbSet<Request> Requests { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Applicant>()

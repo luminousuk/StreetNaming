@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StreetNaming.Web.AutoMapper;
 using StreetNaming.Web.Models;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace StreetNaming.Web
 {
@@ -28,10 +31,15 @@ namespace StreetNaming.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
             services.AddEntityFramework()
                 .AddNpgsql()
                 .AddDbContext<StreetNamingEntities>(opts => opts.UseNpgsql(_config["Data:DefaultConnection:ConnectionString"]));
+
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new StreetNamingProfile());
+            });
+            services.AddSingleton(sp => mapperConfig.CreateMapper());
         }
 
         public void Configure(IApplicationBuilder app)
