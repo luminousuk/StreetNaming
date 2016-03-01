@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using StreetNaming.Domain.Models.Interfaces;
 
 namespace StreetNaming.Domain.Models
@@ -26,5 +27,7 @@ namespace StreetNaming.Domain.Models
         public DateTime CreatedDate { get; set; }
 
         public DateTime ModifiedDate { get; set; }
+
+        public ICollection<Request> Requests { get; set; }
     }
 }

@@ -13,11 +13,9 @@ namespace StreetNaming.Domain.Models
 
         public string OriginalFileName { get; set; }
 
-        public string MimeType { get; set; }
+        public string ContentType { get; set; }
 
         public byte[] Bytes { get; set; }
-
-        public DateTime Mod { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

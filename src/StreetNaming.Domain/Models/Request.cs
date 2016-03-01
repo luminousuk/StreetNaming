@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using StreetNaming.Domain.Models.Interfaces;
 
 namespace StreetNaming.Domain.Models
 {
     public class Request
         : ICreatable
-        , IModifiable
+            , IModifiable
     {
         public long RequestId { get; set; }
 
         public RequestType RequestType { get; set; }
 
         public RequestStatus RequestStatus { get; set; }
-        
+
         public Applicant Applicant { get; set; }
 
         public string ProposedAddress1 { get; set; }
@@ -30,6 +31,8 @@ namespace StreetNaming.Domain.Models
         public DateTime CreatedDate { get; set; }
 
         public DateTime ModifiedDate { get; set; }
+
+        public ICollection<Attachment> Attachments { get; set; }
     }
 
     public enum RequestType

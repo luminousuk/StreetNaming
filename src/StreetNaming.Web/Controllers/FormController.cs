@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Net.Http.Headers;
 using StreetNaming.Domain.Models;
 using StreetNaming.Web.Models;
 using StreetNaming.Web.ViewModels;
@@ -42,7 +44,13 @@ namespace StreetNaming.Web.Controllers
         {
             var applicant = _mapper.Map<Applicant>(viewModel);
 
+            // TODO: Determine if Applicant already exists
             _db.Applicants.Add(applicant);
+
+            var request = _mapper.Map<Request>(viewModel);
+            request.Applicant = applicant;
+            _db.Requests.Add(request);
+
             await _db.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");

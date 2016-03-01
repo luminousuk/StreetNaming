@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Http;
 using StreetNaming.Util.DataAnnotations;
 
 namespace StreetNaming.Web.ViewModels
@@ -31,7 +33,7 @@ namespace StreetNaming.Web.ViewModels
         public string ApplicantEmail { get; set; }
 
         [Display(Name = "Address")]
-        public string CurrentAddress { get; set; }
+        public string ExistingAddress { get; set; }
 
         [Display(Name = "Address 1")]
         public string ProposedAddress1 { get; set; }
@@ -43,6 +45,9 @@ namespace StreetNaming.Web.ViewModels
         public string ProposedAddress3 { get; set; }
 
         public bool IsRegisteredOwner { get; set; }
+
+        [Display(Name = "Attachments")]
+        public IEnumerable<IFormFile> Attachments { get; set; }
 
         [Display(Name = "Signed")]
         public string Signed { get; set; }
