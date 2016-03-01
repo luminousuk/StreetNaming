@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
 using StreetNaming.Domain.Models;
@@ -20,12 +21,20 @@ namespace StreetNaming.Web.Controllers
 
         public IActionResult ExistingProperty()
         {
-            return View();
+            var viewModel = new ExistingPropertyViewModel
+            {
+                SignedDate = DateTime.Today.ToString("D")
+            };
+            return View(viewModel);
         }
 
         public IActionResult NewProperty()
         {
-            return View();
+            var viewModel = new ExistingPropertyViewModel
+            {
+                SignedDate = DateTime.Today.ToString("D")
+            };
+            return View(viewModel);
         }
 
         [HttpPost]

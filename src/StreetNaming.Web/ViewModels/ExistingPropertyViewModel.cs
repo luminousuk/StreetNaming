@@ -48,6 +48,6 @@ namespace StreetNaming.Web.ViewModels
         public string Signed { get; set; }
 
         [Display(Name = "Date")]
-        public DateTime SignedDate { get; set; }
+        public string SignedDate { get; set; }
     }
 }
