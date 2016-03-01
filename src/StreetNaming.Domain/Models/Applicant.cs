@@ -1,6 +1,11 @@
-﻿namespace StreetNaming.Domain.Models
+﻿using System;
+using StreetNaming.Domain.Models.Interfaces;
+
+namespace StreetNaming.Domain.Models
 {
     public class Applicant
+        : ICreatable
+        , IModifiable
     {
         public long ApplicantId { get; set; }
 
@@ -17,5 +22,9 @@
         public string Mobile { get; set; }
 
         public string Email { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime ModifiedDate { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace StreetNaming.Web.Models
 
         public DbSet<Request> Requests { get; set; }
 
+        public DbSet<Attachment> Attachments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Applicant>()

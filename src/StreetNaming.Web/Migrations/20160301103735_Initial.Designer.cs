@@ -8,7 +8,7 @@ using StreetNaming.Web.Models;
 namespace StreetNaming.Web.Migrations
 {
     [DbContext(typeof(StreetNamingEntities))]
-    [Migration("20160229154536_Initial")]
+    [Migration("20160301103735_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,13 @@ namespace StreetNaming.Web.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<DateTime>("CreatedDate");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("Mobile");
+
+                    b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -39,6 +43,28 @@ namespace StreetNaming.Web.Migrations
                     b.HasKey("ApplicantId");
                 });
 
+            modelBuilder.Entity("StreetNaming.Domain.Models.Attachment", b =>
+                {
+                    b.Property<long>("AttachmentId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("Bytes");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("MimeType");
+
+                    b.Property<DateTime>("Mod");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("OriginalFileName");
+
+                    b.Property<long?>("RequestRequestId");
+
+                    b.HasKey("AttachmentId");
+                });
+
             modelBuilder.Entity("StreetNaming.Domain.Models.Request", b =>
                 {
                     b.Property<long>("RequestId")
@@ -46,9 +72,13 @@ namespace StreetNaming.Web.Migrations
 
                     b.Property<long?>("ApplicantApplicantId");
 
+                    b.Property<DateTime>("CreatedDate");
+
                     b.Property<string>("ExistingAddress");
 
                     b.Property<bool>("IsRegisteredOwner");
+
+                    b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("ProposedAddress1");
 
@@ -56,13 +86,20 @@ namespace StreetNaming.Web.Migrations
 
                     b.Property<string>("ProposedAddress3");
 
+                    b.Property<int>("RequestStatus");
+
                     b.Property<int>("RequestType");
 
                     b.Property<string>("Signed");
 
-                    b.Property<DateTime>("SubmitDate");
-
                     b.HasKey("RequestId");
+                });
+
+            modelBuilder.Entity("StreetNaming.Domain.Models.Attachment", b =>
+                {
+                    b.HasOne("StreetNaming.Domain.Models.Request")
+                        .WithMany()
+                        .HasForeignKey("RequestRequestId");
                 });
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Request", b =>
