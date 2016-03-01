@@ -23,6 +23,8 @@ namespace StreetNaming.Web
                 .AddJsonFile("settings.json")
                 .AddJsonFile($"settings.{_hostingEnvironment.EnvironmentName}.json", optional: true);
 
+            builder.AddUserSecrets();
+
             builder.AddEnvironmentVariables();
             
             _config = builder.Build();

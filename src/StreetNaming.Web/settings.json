@@ -1,7 +1,7 @@
 ﻿{
     "Data": {
         "DefaultConnection": {
-            "ConnectionString": "Host=HERMES.ad.luminousuk.com;Port=5432;Database=StreetNaming;Username=StreetNaming;Password=StreetNaming;Application Name=StreetNaming.Web"
+            "ConnectionString": ""
         }
     }
 }
