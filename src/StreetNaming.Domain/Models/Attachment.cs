@@ -9,6 +9,8 @@ namespace StreetNaming.Domain.Models
     {
         public long AttachmentId { get; set; }
 
+        public long RequestId { get; set; }
+
         public Request Request { get; set; }
 
         public string OriginalFileName { get; set; }

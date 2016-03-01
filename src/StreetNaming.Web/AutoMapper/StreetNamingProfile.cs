@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
@@ -16,43 +13,37 @@ namespace StreetNaming.Web.AutoMapper
         protected override void Configure()
         {
             CreateMap<NewPropertyViewModel, Applicant>()
-                .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.ApplicantName))
+                .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.ApplicantFirstName))
+                .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.ApplicantLastName))
                 .ForMember(dest => dest.Address, opts => opts.MapFrom(src => src.ApplicantAddress))
                 .ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.ApplicantEmail))
                 .ForMember(dest => dest.Mobile, opts => opts.MapFrom(src => src.ApplicantMobile))
                 .ForMember(dest => dest.PostCode, opts => opts.MapFrom(src => src.ApplicantPostcode))
                 .ForMember(dest => dest.Telephone, opts => opts.MapFrom(src => src.ApplicantTelephone))
-                .ForMember(dest => dest.Title, opts => opts.MapFrom(src => src.ApplicantTitle))
-                .ForMember(dest => dest.CreatedDate, opts => opts.UseValue(DateTime.Now))
-                .ForMember(dest => dest.ModifiedDate, opts => opts.UseValue(DateTime.Now));
+                .ForMember(dest => dest.Title, opts => opts.MapFrom(src => src.ApplicantTitle));
 
             CreateMap<ExistingPropertyViewModel, Applicant>()
-                .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.ApplicantName))
+                .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.ApplicantFirstName))
+                .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.ApplicantLastName))
                 .ForMember(dest => dest.Address, opts => opts.MapFrom(src => src.ApplicantAddress))
                 .ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.ApplicantEmail))
                 .ForMember(dest => dest.Mobile, opts => opts.MapFrom(src => src.ApplicantMobile))
                 .ForMember(dest => dest.PostCode, opts => opts.MapFrom(src => src.ApplicantPostcode))
                 .ForMember(dest => dest.Telephone, opts => opts.MapFrom(src => src.ApplicantTelephone))
-                .ForMember(dest => dest.Title, opts => opts.MapFrom(src => src.ApplicantTitle))
-                .ForMember(dest => dest.CreatedDate, opts => opts.UseValue(DateTime.Now))
-                .ForMember(dest => dest.ModifiedDate, opts => opts.UseValue(DateTime.Now));
+                .ForMember(dest => dest.Title, opts => opts.MapFrom(src => src.ApplicantTitle));
 
             CreateMap<NewPropertyViewModel, Request>()
-                .ForMember(dest => dest.RequestType, opts => opts.UseValue(RequestType.NewPropertyRequest))
-                .ForMember(dest => dest.CreatedDate, opts => opts.UseValue(DateTime.Now))
-                .ForMember(dest => dest.ModifiedDate, opts => opts.UseValue(DateTime.Now));
+                .ForMember(dest => dest.RequestType, opts => opts.UseValue(RequestType.NewPropertyRequest));
 
             CreateMap<ExistingPropertyViewModel, Request>()
-                .ForMember(dest => dest.RequestType, opts => opts.UseValue(RequestType.ExistingPropertyRequest))
-                .ForMember(dest => dest.CreatedDate, opts => opts.UseValue(DateTime.Now))
-                .ForMember(dest => dest.ModifiedDate, opts => opts.UseValue(DateTime.Now));
+                .ForMember(dest => dest.RequestType, opts => opts.UseValue(RequestType.ExistingPropertyRequest));
 
             CreateMap<IFormFile, Attachment>()
                 .ForMember(dest => dest.OriginalFileName,
-                    opts => opts.MapFrom(src => ContentDispositionHeaderValue.Parse(src.ContentDisposition).FileName.Trim('"')))
-                .ForMember(dest => dest.Bytes, opts => opts.MapFrom(src => src.OpenReadStream().ToBytes()))
-                .ForMember(dest => dest.CreatedDate, opts => opts.UseValue(DateTime.Now))
-                .ForMember(dest => dest.ModifiedDate, opts => opts.UseValue(DateTime.Now));
+                    opts =>
+                        opts.MapFrom(
+                            src => ContentDispositionHeaderValue.Parse(src.ContentDisposition).FileName.Trim('"')))
+                .ForMember(dest => dest.Bytes, opts => opts.MapFrom(src => src.OpenReadStream().ToBytes()));
         }
     }
 }

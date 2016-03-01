@@ -14,6 +14,8 @@ namespace StreetNaming.Domain.Models
 
         public RequestStatus RequestStatus { get; set; }
 
+        public long ApplicantId { get; set; }
+
         public Applicant Applicant { get; set; }
 
         public string ProposedAddress1 { get; set; }

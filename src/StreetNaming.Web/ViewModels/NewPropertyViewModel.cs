@@ -9,8 +9,11 @@ namespace StreetNaming.Web.ViewModels
         [Display(Name = "Title")]
         public string ApplicantTitle { get; set; }
 
-        [Display(Name = "Name")]
-        public string ApplicantName { get; set; }
+        [Display(Name = "Forename(s)")]
+        public string ApplicantFirstName { get; set; }
+
+        [Display(Name = "Surname")]
+        public string ApplicantLastName { get; set; }
 
         [Display(Name = "Address")]
         public string ApplicantAddress { get; set; }

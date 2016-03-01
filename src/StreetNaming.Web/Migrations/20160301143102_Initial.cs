@@ -14,13 +14,14 @@ namespace StreetNaming.Web.Migrations
                 {
                     ApplicantId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
-                    Address = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     Email = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
                     Mobile = table.Column<string>(nullable: true),
-                    ModifiedDate = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    PostCode = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
+                    PostCode = table.Column<string>(nullable: false),
                     Telephone = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true)
                 },
@@ -34,24 +35,24 @@ namespace StreetNaming.Web.Migrations
                 {
                     RequestId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
-                    ApplicantApplicantId = table.Column<long>(nullable: true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ApplicantId = table.Column<long>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     ExistingAddress = table.Column<string>(nullable: true),
                     IsRegisteredOwner = table.Column<bool>(nullable: false),
-                    ModifiedDate = table.Column<DateTime>(nullable: false),
-                    ProposedAddress1 = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
+                    ProposedAddress1 = table.Column<string>(nullable: false),
                     ProposedAddress2 = table.Column<string>(nullable: true),
                     ProposedAddress3 = table.Column<string>(nullable: true),
                     RequestStatus = table.Column<int>(nullable: false),
                     RequestType = table.Column<int>(nullable: false),
-                    Signed = table.Column<string>(nullable: true)
+                    Signed = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Request", x => x.RequestId);
                     table.ForeignKey(
-                        name: "FK_Request_Applicant_ApplicantApplicantId",
-                        column: x => x.ApplicantApplicantId,
+                        name: "FK_Request_Applicant_ApplicantId",
+                        column: x => x.ApplicantId,
                         principalTable: "Applicant",
                         principalColumn: "ApplicantId",
                         onDelete: ReferentialAction.Restrict);
@@ -62,23 +63,22 @@ namespace StreetNaming.Web.Migrations
                 {
                     AttachmentId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
-                    Bytes = table.Column<byte[]>(nullable: true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    MimeType = table.Column<string>(nullable: true),
-                    Mod = table.Column<DateTime>(nullable: false),
-                    ModifiedDate = table.Column<DateTime>(nullable: false),
-                    OriginalFileName = table.Column<string>(nullable: true),
-                    RequestRequestId = table.Column<long>(nullable: true)
+                    Bytes = table.Column<byte[]>(nullable: false),
+                    ContentType = table.Column<string>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
+                    ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
+                    OriginalFileName = table.Column<string>(nullable: false),
+                    RequestId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Attachment", x => x.AttachmentId);
                     table.ForeignKey(
-                        name: "FK_Attachment_Request_RequestRequestId",
-                        column: x => x.RequestRequestId,
+                        name: "FK_Attachment_Request_RequestId",
+                        column: x => x.RequestId,
                         principalTable: "Request",
                         principalColumn: "RequestId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
         }
 

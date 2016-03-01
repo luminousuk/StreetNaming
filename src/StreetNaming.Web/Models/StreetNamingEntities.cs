@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Metadata;
 using StreetNaming.Domain.Models;
 
 namespace StreetNaming.Web.Models
@@ -13,8 +14,162 @@ namespace StreetNaming.Web.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            /*
+             * Applicant
+             */
             modelBuilder.Entity<Applicant>()
-                .Property(x => x.Name)
+                .HasKey(x => x.ApplicantId);
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.Title)
+                .HasMaxLength(20);
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.FirstName)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.LastName)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.Address)
+                .HasMaxLength(400)
+                .IsRequired();
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.PostCode)
+                .HasMaxLength(10)
+                .IsRequired();
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.Telephone)
+                .HasMaxLength(20);
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.Mobile)
+                .HasMaxLength(20);
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.Email)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.CreatedDate)
+                .ValueGeneratedOnAdd()
+                .HasDefaultValueSql("NOW()")
+                .IsRequired();
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.ModifiedDate)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("NOW()")
+                .IsRequired();
+
+
+            /*
+             * Attachment
+             */
+            modelBuilder.Entity<Attachment>()
+                .HasKey(x => x.AttachmentId);
+
+            modelBuilder.Entity<Attachment>()
+                .Property(x => x.OriginalFileName)
+                .HasMaxLength(128)
+                .IsRequired();
+
+            modelBuilder.Entity<Attachment>()
+                .Property(x => x.ContentType)
+                .HasMaxLength(128)
+                .IsRequired();
+
+            modelBuilder.Entity<Attachment>()
+                .Property(x => x.Bytes)
+                .IsRequired();
+
+            modelBuilder.Entity<Attachment>()
+                .Property(x => x.CreatedDate)
+                .ValueGeneratedOnAdd()
+                .HasDefaultValueSql("NOW()")
+                .IsRequired();
+
+            modelBuilder.Entity<Attachment>()
+                .Property(x => x.ModifiedDate)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("NOW()")
+                .IsRequired();
+
+
+            /*
+             * Request
+             */
+            modelBuilder.Entity<Request>()
+                .HasKey(x => x.RequestId);
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.RequestType)
+                .IsRequired();
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.RequestStatus)
+                .IsRequired();
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.ProposedAddress1)
+                .HasMaxLength(400)
+                .IsRequired();
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.ProposedAddress2)
+                .HasMaxLength(400);
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.ProposedAddress3)
+                .HasMaxLength(400);
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.ExistingAddress)
+                .HasMaxLength(400);
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.IsRegisteredOwner)
+                .IsRequired();
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.Signed)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.CreatedDate)
+                .ValueGeneratedOnAdd()
+                .HasDefaultValueSql("NOW()")
+                .IsRequired();
+
+            modelBuilder.Entity<Request>()
+                .Property(x => x.ModifiedDate)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("NOW()")
+                .IsRequired();
+
+
+            /*
+             * Relationships
+             */
+            modelBuilder.Entity<Attachment>()
+                .HasOne(a => a.Request)
+                .WithMany(r => r.Attachments)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasForeignKey(a => a.RequestId)
+                .IsRequired();
+
+            modelBuilder.Entity<Request>()
+                .HasOne(r => r.Applicant)
+                .WithMany(a => a.Requests)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasForeignKey(r => r.ApplicantId)
                 .IsRequired();
         }
     }
