@@ -1,0 +1,12 @@
+{
+  "name": "StreetNaming.Web",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3.3.5",
+    "jquery": "2.1.4",
+    "awesome-bootstrap-checkbox": "~0.3.7",
+    "bootstrap-filestyle": "~1.2.1",
+    "font-awesome": "4.4.0",
+    "typeahead.js": "0.11.1"
+  }
+}
