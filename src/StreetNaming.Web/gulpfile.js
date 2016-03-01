@@ -17,7 +17,8 @@ var path = {
     },
     js: {
         jQuery: "./bower_components/jquery/dist/jquery.js",
-        bootstrap_filestyle: "./bower_components/bootstrap-filestyle/src/bootstrap-filestyle.js"
+        bootstrap_filestyle: "./bower_components/bootstrap-filestyle/src/bootstrap-filestyle.js",
+        typeahead: "./bower_components/typeahead.js/dist/typeahead.bundle.js"
     },
     font: {
         bootstrap: "./bower_components/bootstrap/fonts/*",
@@ -33,14 +34,14 @@ path.dest = {
 
 
 gulp.task("min:js", function () {
-    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle])
+    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle, path.js.typeahead])
         .pipe(concat(path.dest.js + "/site.min.js"))
         .pipe(uglify())
         .pipe(gulp.dest("."));
 });
 
 gulp.task("copy:js", function () {
-    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle])
+    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle, path.js.typeahead])
         .pipe(gulp.dest(path.dest.js));
 });
 
