@@ -49,6 +49,7 @@ namespace StreetNaming.Web.Controllers
 
             var request = _mapper.Map<Request>(viewModel);
             request.Applicant = applicant;
+            request.RequestStatus = RequestStatus.New;
             _db.Requests.Add(request);
 
             await _db.SaveChangesAsync();
@@ -66,6 +67,7 @@ namespace StreetNaming.Web.Controllers
 
             var request = _mapper.Map<Request>(viewModel);
             request.Applicant = applicant;
+            request.RequestStatus = RequestStatus.New;
             _db.Requests.Add(request);
 
             await _db.SaveChangesAsync();

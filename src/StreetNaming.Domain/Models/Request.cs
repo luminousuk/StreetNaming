@@ -39,15 +39,15 @@ namespace StreetNaming.Domain.Models
 
     public enum RequestType
     {
-        NewPropertyRequest = 1,
-        ExistingPropertyRequest = 2
+        NewPropertyRequest = 0,
+        ExistingPropertyRequest = 1
     }
 
     public enum RequestStatus
     {
-        New = 1,
-        Active = 2,
-        Completed = 3,
+        New = 0,
+        Active = 1,
+        Completed = 2,
         Rejected = 4
     }
 }
