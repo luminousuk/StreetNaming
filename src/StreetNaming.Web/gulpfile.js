@@ -1,9 +1,4 @@
-﻿/*
-This file in the main entry point for defining Gulp tasks and using Gulp plugins.
-Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
-*/
-
-var gulp = require('gulp'),
+﻿var gulp = require('gulp'),
     concat = require('gulp-concat'),
     cssmin = require('gulp-cssmin'),
     uglify = require('gulp-uglify');
@@ -13,12 +8,13 @@ var path = {
     css: {
         bootstrap: "./bower_components/bootstrap/dist/css/bootstrap.css",
         fontAwesome: "./bower_components/font-awesome/css/font-awesome.css",
-        awesomeCheckbox: "./bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+        awesomeCheckbox: "./bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css",
+        selectize: "./bower_components/selectize/dist/css/selectize.bootstrap3.css"
     },
     js: {
         jQuery: "./bower_components/jquery/dist/jquery.js",
         bootstrap_filestyle: "./bower_components/bootstrap-filestyle/src/bootstrap-filestyle.js",
-        typeahead: "./bower_components/typeahead.js/dist/typeahead.bundle.js"
+        selectize: "./bower_components/selectize/dist/js/standalone/selectize.js"
     },
     font: {
         bootstrap: "./bower_components/bootstrap/fonts/*",
@@ -34,26 +30,26 @@ path.dest = {
 
 
 gulp.task("min:js", function () {
-    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle, path.js.typeahead])
+    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle, path.js.selectize])
         .pipe(concat(path.dest.js + "/site.min.js"))
         .pipe(uglify())
         .pipe(gulp.dest("."));
 });
 
 gulp.task("copy:js", function () {
-    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle, path.js.typeahead])
+    return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle, path.js.selectize])
         .pipe(gulp.dest(path.dest.js));
 });
 
 gulp.task("min:css", function () {
-    return gulp.src([path.css.bootstrap, path.css.fontAwesome, path.css.awesomeCheckbox])
+    return gulp.src([path.css.bootstrap, path.css.fontAwesome, path.css.awesomeCheckbox, path.css.selectize])
         .pipe(concat(path.dest.css + "/site.min.css"))
         .pipe(cssmin())
         .pipe(gulp.dest("."));
 });
 
 gulp.task("copy:css", function () {
-    return gulp.src([path.css.bootstrap, path.css.fontAwesome, path.css.awesomeCheckbox])
+    return gulp.src([path.css.bootstrap, path.css.fontAwesome, path.css.awesomeCheckbox, path.css.selectize])
         .pipe(gulp.dest(path.dest.css));
 });
 
