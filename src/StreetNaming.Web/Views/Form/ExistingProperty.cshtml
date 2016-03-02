@@ -90,9 +90,9 @@
             <ul class="list-group">
                 <li class="list-group-item form-horizontal">
                     <div class="form-group">
-                        <label asp-for="ExistingAddress" class="control-label col-xs-3 col-sm-2"></label>
+                        <label asp-for="ExistingPropertyUrn" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ExistingAddress" class="form-control">
+                            <select asp-for="ExistingPropertyUrn" class="form-control"></select>
                         </div>
                     </div>
                 </li>
@@ -221,3 +221,58 @@
     </div>
 </div>
 </div>
+
+@section Scripts {
+<script>
+$(function(){
+    var $existingPropertyUrn = $("#ExistingPropertyUrn");
+
+    var opts = {
+        className: "AddressAutocomplete",
+        url: "https://isharemapstest.bathnes.gov.uk/getdata.aspx",
+        pageSize: 20,
+        minChars: 3,
+        timeOut: 1000,
+        placeholder: "Begin typing address..."
+    };
+
+    $existingPropertyUrn.selectize({
+        valueField: "id",
+        labelField: "address",
+        searchField: "search",
+        maxOptions: 20,
+        maxItems: 1,
+        create: false,
+        closeAfterSelect: true,
+        persist: false,
+        highlight: false,
+        selectOnTab: true,
+        load: function(query, callback) {
+            if (!query.length) return callback();
+            $.ajax({
+                url: opts.url,
+                dataType: "jsonp",
+                jsonp: "callback",
+                data: {
+                    type: "jsonp",
+                    service: "LocationSearch",
+                    requesttype: "LocationSearch",
+                    location: query,
+                    pagesize: opts.pageSize,
+                    startnum: 1
+                },
+                success: function (response, textStatus, jqXhr) {
+                    if (typeof (response) !== "undefined") {
+                        var addresses = [];
+                        $.each(response.data, function(i, val) {
+                            addresses.push({id: val[0], address: val[7], search: val[7].replace(/\W/g,'') });
+                        });
+                        callback(addresses);
+                    }
+                }
+            });
+        }
+    });
+ });
+</script>
+}

@@ -130,8 +130,8 @@ namespace StreetNaming.Web.Models
                 .HasMaxLength(400);
 
             modelBuilder.Entity<Request>()
-                .Property(x => x.ExistingAddress)
-                .HasMaxLength(400);
+                .Property(x => x.ExistingPropertyUrn)
+                .IsRequired(false);
 
             modelBuilder.Entity<Request>()
                 .Property(x => x.IsRegisteredOwner)

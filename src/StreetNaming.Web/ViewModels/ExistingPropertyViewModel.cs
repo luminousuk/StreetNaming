@@ -34,9 +34,9 @@ namespace StreetNaming.Web.ViewModels
         [Display(Name = "Email")]
         [EmailAddress]
         public string ApplicantEmail { get; set; }
-
+        
         [Display(Name = "Address")]
-        public string ExistingAddress { get; set; }
+        public long ExistingPropertyUrn { get; set; }
 
         [Display(Name = "Address 1")]
         public string ProposedAddress1 { get; set; }
