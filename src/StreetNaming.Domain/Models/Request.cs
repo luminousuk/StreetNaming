@@ -35,6 +35,8 @@ namespace StreetNaming.Domain.Models
         public DateTime ModifiedDate { get; set; }
 
         public ICollection<Attachment> Attachments { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; }
     }
 
     public enum RequestType

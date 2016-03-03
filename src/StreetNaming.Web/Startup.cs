@@ -5,6 +5,7 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StreetNaming.Web.AutoMapper;
+using StreetNaming.Web.Configuration;
 using StreetNaming.Web.Models;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
@@ -23,7 +24,8 @@ namespace StreetNaming.Web
                 .AddJsonFile("settings.json")
                 .AddJsonFile($"settings.{_hostingEnvironment.EnvironmentName}.json", optional: true);
 
-            builder.AddUserSecrets();
+            if (hostingEnvironment.IsDevelopment())
+                builder.AddUserSecrets();
 
             builder.AddEnvironmentVariables();
             
@@ -32,6 +34,8 @@ namespace StreetNaming.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<StreetNamingOptions>(_config.GetSection("Settings"));
+
             services.AddMvc();
             services.AddEntityFramework()
                 .AddNpgsql()
@@ -47,7 +51,14 @@ namespace StreetNaming.Web
         public void Configure(IApplicationBuilder app)
         {
             if (_hostingEnvironment.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                // TODO: Create exception handler
+                app.UseExceptionHandler("/Home/Error");
+            }
 
             app.UseIISPlatformHandler();
 

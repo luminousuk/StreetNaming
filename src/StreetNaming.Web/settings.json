@@ -3,5 +3,15 @@
         "DefaultConnection": {
             "ConnectionString": ""
         }
+    },
+    "Settings": {
+        "Payment": {
+            "Provider": "CivicaEpay",
+            "Amount": 15.0,
+            "Currency": "£",
+            "Endpoint": "https://www.civicaepay.co.uk/BATHNESXMLTEST/PaylinkXMLUI/default.aspx",
+            "ApplicationId": "StreetNaming",
+            "PaymentSourceCode": "03"
+        }
     }
 }

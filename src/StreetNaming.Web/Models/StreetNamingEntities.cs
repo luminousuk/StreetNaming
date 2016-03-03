@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Entity;
+﻿using System;
+using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
 using StreetNaming.Domain.Models;
 
@@ -11,6 +12,8 @@ namespace StreetNaming.Web.Models
         public DbSet<Request> Requests { get; set; }
 
         public DbSet<Attachment> Attachments { get; set; }
+
+        public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -156,6 +159,52 @@ namespace StreetNaming.Web.Models
 
 
             /*
+             * RelationshipsTransaction
+             */
+            modelBuilder.Entity<Transaction>()
+                .HasKey(x => x.TransactionId);
+
+            modelBuilder.Entity<Transaction>()
+                .Property(x => x.Provider)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(x => x.Reference)
+                .ValueGeneratedOnAdd()
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(x => x.Amount)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(x => x.Currency)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(x => x.ResponseCode)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Transaction>()
+                .Property(x => x.ResponseDescription)
+                .HasMaxLength(500)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Transaction>()
+                .Property(x => x.ResponseDate)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Transaction>()
+                .Property(x => x.TransactionStatus)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(x => x.CreatedDate)
+                .HasDefaultValueSql("NOW()")
+                .IsRequired();
+
+            /*
              * Relationships
              */
             modelBuilder.Entity<Attachment>()
@@ -170,6 +219,13 @@ namespace StreetNaming.Web.Models
                 .WithMany(a => a.Requests)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(r => r.ApplicantId)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .HasOne(t => t.Request)
+                .WithMany(r => r.Transactions)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasForeignKey(t => t.RequestId)
                 .IsRequired();
         }
     }
