@@ -22,6 +22,14 @@ namespace StreetNaming.Web.Configuration
             public string ApplicationId { get; set; }
 
             public string PaymentSourceCode { get; set; }
+
+            public string Reference { get; set; }
+
+            public string FundCode { get; set; }
+
+            public string VatCode { get; set; }
+
+            public string Narrative { get; set; }
         }
     }
 }

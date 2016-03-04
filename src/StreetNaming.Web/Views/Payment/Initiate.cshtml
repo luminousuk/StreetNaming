@@ -1,0 +1,33 @@
+﻿@model StreetNaming.Web.ViewModels.PaymentInitiateViewModel
+
+<form action="@Model.EndpointUrl" method="post">
+    <div class="form-group">
+        <label asp-for="CallingApplicationId"></label>
+        <input asp-for="CallingApplicationId" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="PaymentTotal"></label>
+        <input asp-for="PaymentTotal" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="ReturnUrl"></label>
+        <input asp-for="ReturnUrl" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="BackButtonUrl"></label>
+        <input asp-for="BackButtonUrl" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="PaymentSourceCode"></label>
+        <input asp-for="PaymentSourceCode" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Payment_1"></label>
+        <input asp-for="Payment_1" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="CallingApplicationTransactionReference"></label>
+        <input asp-for="CallingApplicationTransactionReference" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>

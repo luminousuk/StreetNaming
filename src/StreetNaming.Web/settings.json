@@ -11,7 +11,11 @@
             "Currency": "£",
             "Endpoint": "https://www.civicaepay.co.uk/BATHNESXMLTEST/PaylinkXMLUI/default.aspx",
             "ApplicationId": "StreetNaming",
-            "PaymentSourceCode": "03"
+            "PaymentSourceCode": "03",
+            "Reference": "REFERENCE",
+            "FundCode": "FUND",
+            "VatCode": "VAT",
+            "Narrative":  "Property naming/numbering"
         }
     }
 }

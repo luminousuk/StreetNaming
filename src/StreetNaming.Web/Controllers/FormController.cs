@@ -54,7 +54,7 @@ namespace StreetNaming.Web.Controllers
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Initiate", "Payment", new { requestId = request.RequestId });
         }
 
         [HttpPost]
@@ -72,7 +72,7 @@ namespace StreetNaming.Web.Controllers
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Initiate", "Payment", new { requestId = request.RequestId });
         }
     }
 }
