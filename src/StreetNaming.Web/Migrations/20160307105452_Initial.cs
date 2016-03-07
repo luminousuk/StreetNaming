@@ -89,7 +89,7 @@ namespace StreetNaming.Web.Migrations
                         .Annotation("Npgsql:Serial", true),
                     Amount = table.Column<decimal>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
-                    Currency = table.Column<char>(nullable: false),
+                    Currency = table.Column<string>(nullable: false),
                     Provider = table.Column<string>(nullable: false),
                     Reference = table.Column<Guid>(nullable: false),
                     RequestId = table.Column<long>(nullable: false),

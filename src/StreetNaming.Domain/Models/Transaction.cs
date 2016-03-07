@@ -19,7 +19,7 @@ namespace StreetNaming.Domain.Models
 
         public decimal Amount { get; set; }
 
-        public char Currency { get; set; }
+        public string Currency { get; set; }
 
         public int? ResponseCode { get; set; }
 

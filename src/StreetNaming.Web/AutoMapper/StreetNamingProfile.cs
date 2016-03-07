@@ -44,6 +44,9 @@ namespace StreetNaming.Web.AutoMapper
                         opts.MapFrom(
                             src => ContentDispositionHeaderValue.Parse(src.ContentDisposition).FileName.Trim('"')))
                 .ForMember(dest => dest.Bytes, opts => opts.MapFrom(src => src.OpenReadStream().ToBytes()));
+
+            CreateMap<PaymentResponseViewModel, Transaction>()
+                .ForMember(dest => dest.ResponseDate, opts => opts.UseValue(DateTime.Now));
         }
     }
 }

@@ -145,7 +145,9 @@ namespace StreetNaming.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("Relational:GeneratedValueSql", "NOW()");
 
-                    b.Property<char>("Currency");
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 3);
 
                     b.Property<string>("Provider")
                         .IsRequired()

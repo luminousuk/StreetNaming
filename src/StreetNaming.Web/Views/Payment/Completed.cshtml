@@ -1,0 +1,26 @@
+﻿@model StreetNaming.Domain.Models.Transaction
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Transaction Completed";
+}
+
+
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Transaction Completed</h1>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Thanks for your payment!</h2>
+    <dl class="dl-horizontal">
+        <dt>Reference</dt>
+        <dd>@Model.Reference</dd>
+        <dt>Amount</dt>
+        <dd>@Model.Amount</dd>
+        <dt>Response Description</dt>
+        <dd>@Model.ResponseDescription</dd>
+    </dl>
+
+</div>

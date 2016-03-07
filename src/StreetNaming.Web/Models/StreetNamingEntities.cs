@@ -185,6 +185,7 @@ namespace StreetNaming.Web.Models
 
             modelBuilder.Entity<Transaction>()
                 .Property(x => x.Currency)
+                .HasMaxLength(3)
                 .IsRequired();
 
             modelBuilder.Entity<Transaction>()

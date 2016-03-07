@@ -15,7 +15,7 @@ namespace StreetNaming.Web.Configuration
 
             public decimal Amount { get; set; }
 
-            public char Currency { get; set; }
+            public string Currency { get; set; }
 
             public string Endpoint { get; set; }
 

@@ -32,7 +32,7 @@ namespace StreetNaming.Web.Controllers
 
         public IActionResult NewProperty()
         {
-            var viewModel = new ExistingPropertyViewModel
+            var viewModel = new NewPropertyViewModel
             {
                 SignedDate = DateTime.Today.ToString("D")
             };

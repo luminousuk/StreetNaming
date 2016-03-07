@@ -1,0 +1,25 @@
+﻿@model StreetNaming.Domain.Models.Transaction
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Transaction Failed";
+}
+
+
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Transaction Failed :(</h1>
+    </div>
+</div>
+
+<div class="container">
+    <dl class="dl-horizontal">
+        <dt>Reference</dt>
+        <dd>@Model.Reference</dd>
+        <dt>Response Code</dt>
+        <dd>@Model.ResponseCode</dd>
+        <dt>Response Description</dt>
+        <dd>@Model.ResponseDescription</dd>
+    </dl>
+
+</div>

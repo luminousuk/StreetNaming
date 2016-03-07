@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Routing;
@@ -65,15 +66,35 @@ namespace StreetNaming.Web.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
         public async Task<IActionResult> ProviderResponse(PaymentResponseViewModel viewModel)
         {
             var reference = new Guid(viewModel.CallingApplicationTransactionReference);
+
             var transaction = await _context.Transactions.FirstOrDefaultAsync(t => t.Reference == reference);
 
             if (transaction == null) return HttpBadRequest();
 
-            return View();
+            transaction.ResponseDate = DateTime.Now;
+            transaction.ResponseCode = int.Parse(viewModel.ResponseCode);
+            transaction.ResponseDescription = viewModel.ResponseDescription;
+
+            // Business Logic here
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Completed", new { transactionReference = transaction.Reference });
+        }
+
+        public async Task<IActionResult> Completed(Guid transactionReference)
+        {
+            var transaction = await _context.Transactions.FirstOrDefaultAsync(t => t.Reference == transactionReference);
+
+            if (transaction == null) return HttpBadRequest();
+
+            if (transaction.ResponseCode > 0)
+                return View("Failed", transaction);
+
+            return View("Completed", transaction);
         }
     }
 }

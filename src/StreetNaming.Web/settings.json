@@ -1,21 +1,21 @@
 ﻿{
     "Data": {
         "DefaultConnection": {
-            "ConnectionString": ""
+            "ConnectionString": "IN USER SECRETS"
         }
     },
     "Settings": {
         "Payment": {
             "Provider": "CivicaEpay",
             "Amount": 15.0,
-            "Currency": "£",
+            "Currency": "GBP",
             "Endpoint": "https://www.civicaepay.co.uk/BATHNESXMLTEST/PaylinkXMLUI/default.aspx",
             "ApplicationId": "StreetNaming",
             "PaymentSourceCode": "03",
             "Reference": "REFERENCE",
             "FundCode": "FUND",
             "VatCode": "VAT",
-            "Narrative":  "Property naming/numbering"
+            "Narrative": "Property naming/numbering"
         }
     }
 }
