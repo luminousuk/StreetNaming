@@ -50,11 +50,12 @@ namespace StreetNaming.Web.Controllers
             var request = _mapper.Map<Request>(viewModel);
             request.Applicant = applicant;
             request.RequestStatus = RequestStatus.New;
+            request.Reference = Guid.NewGuid();
             _db.Requests.Add(request);
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Initiate", "Payment", new { requestId = request.RequestId });
+            return RedirectToAction("Initiate", "Payment", new { requestReference = request.Reference });
         }
 
         [HttpPost]
@@ -68,11 +69,12 @@ namespace StreetNaming.Web.Controllers
             var request = _mapper.Map<Request>(viewModel);
             request.Applicant = applicant;
             request.RequestStatus = RequestStatus.New;
+            request.Reference = Guid.NewGuid();
             _db.Requests.Add(request);
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Initiate", "Payment", new { requestId = request.RequestId });
+            return RedirectToAction("Initiate", "Payment", new { requestReference = request.Reference });
         }
     }
 }

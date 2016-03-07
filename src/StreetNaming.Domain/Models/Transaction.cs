@@ -3,7 +3,9 @@ using StreetNaming.Domain.Models.Interfaces;
 
 namespace StreetNaming.Domain.Models
 {
-    public class Transaction : ICreatable
+    public class Transaction
+        : ICreatable
+            , IReferable
     {
         // WORK IN PROGRESS
 
@@ -14,8 +16,6 @@ namespace StreetNaming.Domain.Models
         public Request Request { get; set; }
 
         public string Provider { get; set; }
-
-        public Guid Reference { get; set; }
 
         public decimal Amount { get; set; }
 
@@ -30,6 +30,8 @@ namespace StreetNaming.Domain.Models
         public TransactionStatus TransactionStatus { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        public Guid Reference { get; set; }
     }
 
     public enum TransactionStatus

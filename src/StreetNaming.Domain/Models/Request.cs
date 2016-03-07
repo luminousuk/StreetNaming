@@ -7,6 +7,7 @@ namespace StreetNaming.Domain.Models
     public class Request
         : ICreatable
             , IModifiable
+            , IReferable
     {
         public long RequestId { get; set; }
 
@@ -30,13 +31,15 @@ namespace StreetNaming.Domain.Models
 
         public string Signed { get; set; }
 
+        public ICollection<Attachment> Attachments { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; }
+
         public DateTime CreatedDate { get; set; }
 
         public DateTime ModifiedDate { get; set; }
 
-        public ICollection<Attachment> Attachments { get; set; }
-
-        public ICollection<Transaction> Transactions { get; set; }
+        public Guid Reference { get; set; }
     }
 
     public enum RequestType

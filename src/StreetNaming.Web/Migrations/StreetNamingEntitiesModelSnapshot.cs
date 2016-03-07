@@ -117,6 +117,9 @@ namespace StreetNaming.Web.Migrations
                     b.Property<string>("ProposedAddress3")
                         .HasAnnotation("MaxLength", 400);
 
+                    b.Property<Guid>("Reference")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<int>("RequestStatus");
 
                     b.Property<int>("RequestType");
@@ -126,6 +129,9 @@ namespace StreetNaming.Web.Migrations
                         .HasAnnotation("MaxLength", 100);
 
                     b.HasKey("RequestId");
+
+                    b.HasIndex("Reference")
+                        .IsUnique();
                 });
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Transaction", b =>
@@ -160,6 +166,9 @@ namespace StreetNaming.Web.Migrations
                     b.Property<int>("TransactionStatus");
 
                     b.HasKey("TransactionId");
+
+                    b.HasIndex("Reference")
+                        .IsUnique();
                 });
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Attachment", b =>

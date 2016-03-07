@@ -37,12 +37,13 @@ namespace StreetNaming.Web.Migrations
                         .Annotation("Npgsql:Serial", true),
                     ApplicantId = table.Column<long>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
-                    ExistingAddress = table.Column<string>(nullable: true),
+                    ExistingPropertyUrn = table.Column<long>(nullable: true),
                     IsRegisteredOwner = table.Column<bool>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     ProposedAddress1 = table.Column<string>(nullable: false),
                     ProposedAddress2 = table.Column<string>(nullable: true),
                     ProposedAddress3 = table.Column<string>(nullable: true),
+                    Reference = table.Column<Guid>(nullable: false),
                     RequestStatus = table.Column<int>(nullable: false),
                     RequestType = table.Column<int>(nullable: false),
                     Signed = table.Column<string>(nullable: false)
@@ -80,11 +81,49 @@ namespace StreetNaming.Web.Migrations
                         principalColumn: "RequestId",
                         onDelete: ReferentialAction.Cascade);
                 });
+            migrationBuilder.CreateTable(
+                name: "Transaction",
+                columns: table => new
+                {
+                    TransactionId = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:Serial", true),
+                    Amount = table.Column<decimal>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
+                    Currency = table.Column<char>(nullable: false),
+                    Provider = table.Column<string>(nullable: false),
+                    Reference = table.Column<Guid>(nullable: false),
+                    RequestId = table.Column<long>(nullable: false),
+                    ResponseCode = table.Column<int>(nullable: true),
+                    ResponseDate = table.Column<DateTime>(nullable: true),
+                    ResponseDescription = table.Column<string>(nullable: true),
+                    TransactionStatus = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transaction", x => x.TransactionId);
+                    table.ForeignKey(
+                        name: "FK_Transaction_Request_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "Request",
+                        principalColumn: "RequestId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+            migrationBuilder.CreateIndex(
+                name: "IX_Request_Reference",
+                table: "Request",
+                column: "Reference",
+                unique: true);
+            migrationBuilder.CreateIndex(
+                name: "IX_Transaction_Reference",
+                table: "Transaction",
+                column: "Reference",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable("Attachment");
+            migrationBuilder.DropTable("Transaction");
             migrationBuilder.DropTable("Request");
             migrationBuilder.DropTable("Applicant");
         }

@@ -8,8 +8,8 @@ using StreetNaming.Web.Models;
 namespace StreetNaming.Web.Migrations
 {
     [DbContext(typeof(StreetNamingEntities))]
-    [Migration("20160302164439_NullablePropUrn")]
-    partial class NullablePropUrn
+    [Migration("20160307091506_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,6 +118,9 @@ namespace StreetNaming.Web.Migrations
                     b.Property<string>("ProposedAddress3")
                         .HasAnnotation("MaxLength", 400);
 
+                    b.Property<Guid>("Reference")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<int>("RequestStatus");
 
                     b.Property<int>("RequestType");
@@ -127,6 +130,46 @@ namespace StreetNaming.Web.Migrations
                         .HasAnnotation("MaxLength", 100);
 
                     b.HasKey("RequestId");
+
+                    b.HasIndex("Reference")
+                        .IsUnique();
+                });
+
+            modelBuilder.Entity("StreetNaming.Domain.Models.Transaction", b =>
+                {
+                    b.Property<long>("TransactionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Relational:GeneratedValueSql", "NOW()");
+
+                    b.Property<char>("Currency");
+
+                    b.Property<string>("Provider")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
+
+                    b.Property<Guid>("Reference")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("RequestId");
+
+                    b.Property<int?>("ResponseCode");
+
+                    b.Property<DateTime?>("ResponseDate");
+
+                    b.Property<string>("ResponseDescription")
+                        .HasAnnotation("MaxLength", 500);
+
+                    b.Property<int>("TransactionStatus");
+
+                    b.HasKey("TransactionId");
+
+                    b.HasIndex("Reference")
+                        .IsUnique();
                 });
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Attachment", b =>
@@ -141,6 +184,13 @@ namespace StreetNaming.Web.Migrations
                     b.HasOne("StreetNaming.Domain.Models.Applicant")
                         .WithMany()
                         .HasForeignKey("ApplicantId");
+                });
+
+            modelBuilder.Entity("StreetNaming.Domain.Models.Transaction", b =>
+                {
+                    b.HasOne("StreetNaming.Domain.Models.Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId");
                 });
         }
     }

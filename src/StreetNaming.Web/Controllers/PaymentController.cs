@@ -24,11 +24,9 @@ namespace StreetNaming.Web.Controllers
             _options = options;
         }
 
-        public async Task<IActionResult> Initiate(long requestId)
+        public async Task<IActionResult> Initiate(Guid requestReference)
         {
-            // TODO: Switch requestId to a GUID reference
-
-            var request = await _context.Requests.FirstOrDefaultAsync(r => r.RequestId == requestId);
+            var request = await _context.Requests.FirstOrDefaultAsync(r => r.Reference == requestReference);
 
             if (request == null) return new BadRequestResult();
 
@@ -49,7 +47,7 @@ namespace StreetNaming.Web.Controllers
 
             var viewModel = new PaymentInitiateViewModel
             {
-                BackButtonUrl = Url.Action("Initiate", "Payment", new {requestId = requestId}, "http"),
+                BackButtonUrl = Url.Action("Initiate", "Payment", new { requestReference }, "http"),
                 CallingApplicationId = _options.Value.Payment.ApplicationId,
                 CallingApplicationTransactionReference = transaction.Reference.ToString(),
                 EndpointUrl = _options.Value.Payment.Endpoint,

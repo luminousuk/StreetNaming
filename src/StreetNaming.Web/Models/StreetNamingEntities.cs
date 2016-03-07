@@ -146,6 +146,11 @@ namespace StreetNaming.Web.Models
                 .IsRequired();
 
             modelBuilder.Entity<Request>()
+                .Property(x => x.Reference)
+                .ValueGeneratedOnAdd()
+                .IsRequired();
+
+            modelBuilder.Entity<Request>()
                 .Property(x => x.CreatedDate)
                 .ValueGeneratedOnAdd()
                 .HasDefaultValueSql("NOW()")
@@ -159,7 +164,7 @@ namespace StreetNaming.Web.Models
 
 
             /*
-             * RelationshipsTransaction
+             * Transaction
              */
             modelBuilder.Entity<Transaction>()
                 .HasKey(x => x.TransactionId);
@@ -204,6 +209,7 @@ namespace StreetNaming.Web.Models
                 .HasDefaultValueSql("NOW()")
                 .IsRequired();
 
+
             /*
              * Relationships
              */
@@ -227,6 +233,18 @@ namespace StreetNaming.Web.Models
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey(t => t.RequestId)
                 .IsRequired();
+
+
+            /*
+             * Indexes
+             */
+            modelBuilder.Entity<Request>()
+               .HasIndex(r => r.Reference)
+               .IsUnique();
+
+            modelBuilder.Entity<Transaction>()
+                .HasIndex(t => t.Reference)
+                .IsUnique();
         }
     }
 }
