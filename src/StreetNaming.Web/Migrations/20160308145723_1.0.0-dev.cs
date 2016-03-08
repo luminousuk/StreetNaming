@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace StreetNaming.Web.Migrations
 {
-    public partial class Initial : Migration
+    public partial class _100dev : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,6 +108,11 @@ namespace StreetNaming.Web.Migrations
                         principalColumn: "RequestId",
                         onDelete: ReferentialAction.Cascade);
                 });
+            migrationBuilder.CreateIndex(
+                name: "IX_Applicant_FirstName_LastName_Email",
+                table: "Applicant",
+                columns: new[] { "FirstName", "LastName", "Email" },
+                unique: true);
             migrationBuilder.CreateIndex(
                 name: "IX_Request_Reference",
                 table: "Request",

@@ -8,8 +8,8 @@ using StreetNaming.Web.Models;
 namespace StreetNaming.Web.Migrations
 {
     [DbContext(typeof(StreetNamingEntities))]
-    [Migration("20160307105452_Initial")]
-    partial class Initial
+    [Migration("20160308145723_1.0.0-dev")]
+    partial class _100dev
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,9 @@ namespace StreetNaming.Web.Migrations
                         .HasAnnotation("MaxLength", 20);
 
                     b.HasKey("ApplicantId");
+
+                    b.HasIndex("FirstName", "LastName", "Email")
+                        .IsUnique();
                 });
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Attachment", b =>

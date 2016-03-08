@@ -57,6 +57,9 @@ namespace StreetNaming.Web.Migrations
                         .HasAnnotation("MaxLength", 20);
 
                     b.HasKey("ApplicantId");
+
+                    b.HasIndex("FirstName", "LastName", "Email")
+                        .IsUnique();
                 });
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Attachment", b =>

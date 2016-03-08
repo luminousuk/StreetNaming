@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Net.Http.Headers;
+using Microsoft.Data.Entity;
 using StreetNaming.Domain.Models;
 using StreetNaming.Web.Models;
 using StreetNaming.Web.ViewModels;
@@ -42,10 +41,22 @@ namespace StreetNaming.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ExistingProperty(ExistingPropertyViewModel viewModel)
         {
-            var applicant = _mapper.Map<Applicant>(viewModel);
+            // TODO: Match criteria needs to be defined
+            var applicant =
+                await
+                    _db.Applicants.FirstOrDefaultAsync(
+                        a =>
+                            a.FirstName.Equals(viewModel.ApplicantFirstName) &&
+                            a.LastName.Equals(viewModel.ApplicantLastName) &&
+                            a.Email.Equals(viewModel.ApplicantEmail));
 
-            // TODO: Determine if Applicant already exists
-            _db.Applicants.Add(applicant);
+            if (applicant == null)
+            {
+                applicant = _mapper.Map<Applicant>(viewModel);
+                _db.Applicants.Add(applicant);
+            }
+            else
+                _mapper.Map(viewModel, applicant);
 
             var request = _mapper.Map<Request>(viewModel);
             request.Applicant = applicant;
@@ -55,16 +66,28 @@ namespace StreetNaming.Web.Controllers
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Initiate", "Payment", new { requestReference = request.Reference });
+            return RedirectToAction("Initiate", "Payment", new {requestReference = request.Reference});
         }
 
         [HttpPost]
         public async Task<IActionResult> NewProperty(NewPropertyViewModel viewModel)
         {
-            var applicant = _mapper.Map<Applicant>(viewModel);
+            // TODO: Match criteria needs to be defined
+            var applicant =
+                await
+                    _db.Applicants.FirstOrDefaultAsync(
+                        a =>
+                            a.FirstName.Equals(viewModel.ApplicantFirstName) &&
+                            a.LastName.Equals(viewModel.ApplicantLastName) &&
+                            a.Email.Equals(viewModel.ApplicantEmail));
 
-            // TODO: Determine if Applicant already exists
-            _db.Applicants.Add(applicant);
+            if (applicant == null)
+            {
+                applicant = _mapper.Map<Applicant>(viewModel);
+                _db.Applicants.Add(applicant);
+            }
+            else
+                _mapper.Map(viewModel, applicant);
 
             var request = _mapper.Map<Request>(viewModel);
             request.Applicant = applicant;
@@ -74,7 +97,7 @@ namespace StreetNaming.Web.Controllers
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Initiate", "Payment", new { requestReference = request.Reference });
+            return RedirectToAction("Initiate", "Payment", new {requestReference = request.Reference});
         }
     }
 }

@@ -246,6 +246,10 @@ namespace StreetNaming.Web.Models
             modelBuilder.Entity<Transaction>()
                 .HasIndex(t => t.Reference)
                 .IsUnique();
+
+            modelBuilder.Entity<Applicant>()
+                .HasIndex(a => new {a.FirstName, a.LastName, a.Email})
+                .IsUnique();
         }
     }
 }
