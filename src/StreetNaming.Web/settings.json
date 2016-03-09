@@ -10,11 +10,11 @@
             "Amount": 15.0,
             "Currency": "GBP",
             "Endpoint": "https://www.civicaepay.co.uk/BATHNESXMLTEST/PaylinkXMLUI/default.aspx",
-            "ApplicationId": "StreetNaming",
-            "PaymentSourceCode": "03",
-            "Reference": "REFERENCE",
-            "FundCode": "FUND",
-            "VatCode": "VAT",
+            "ApplicationId": "CRMWeb",
+            "PaymentSourceCode": "01",
+            "AccountReference": "STREETNAMING",
+            "FundCode": "Z5",
+            "VatCode": "",
             "Narrative": "Property naming/numbering"
         }
     }

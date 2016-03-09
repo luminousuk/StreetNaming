@@ -15,20 +15,30 @@ namespace StreetNaming.Web.AutoMapper
             CreateMap<NewPropertyViewModel, Applicant>()
                 .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.ApplicantFirstName))
                 .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.ApplicantLastName))
-                .ForMember(dest => dest.Address, opts => opts.MapFrom(src => src.ApplicantAddress))
+                .ForMember(dest => dest.HouseNumber, opts => opts.MapFrom(src => src.ApplicantHouseNumber))
+                .ForMember(dest => dest.HouseName, opts => opts.MapFrom(src => src.ApplicantHouseName))
+                .ForMember(dest => dest.Street, opts => opts.MapFrom(src => src.ApplicantStreet))
+                .ForMember(dest => dest.Area, opts => opts.MapFrom(src => src.ApplicantArea))
+                .ForMember(dest => dest.Town, opts => opts.MapFrom(src => src.ApplicantTown))
+                .ForMember(dest => dest.County, opts => opts.MapFrom(src => src.ApplicantCounty))
+                .ForMember(dest => dest.PostCode, opts => opts.MapFrom(src => src.ApplicantPostcode.ToUpper()))
                 .ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.ApplicantEmail))
                 .ForMember(dest => dest.Mobile, opts => opts.MapFrom(src => src.ApplicantMobile))
-                .ForMember(dest => dest.PostCode, opts => opts.MapFrom(src => src.ApplicantPostcode))
                 .ForMember(dest => dest.Telephone, opts => opts.MapFrom(src => src.ApplicantTelephone))
                 .ForMember(dest => dest.Title, opts => opts.MapFrom(src => src.ApplicantTitle));
 
             CreateMap<ExistingPropertyViewModel, Applicant>()
                 .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.ApplicantFirstName))
                 .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.ApplicantLastName))
-                .ForMember(dest => dest.Address, opts => opts.MapFrom(src => src.ApplicantAddress))
+                .ForMember(dest => dest.HouseNumber, opts => opts.MapFrom(src => src.ApplicantHouseNumber))
+                .ForMember(dest => dest.HouseName, opts => opts.MapFrom(src => src.ApplicantHouseName))
+                .ForMember(dest => dest.Street, opts => opts.MapFrom(src => src.ApplicantStreet))
+                .ForMember(dest => dest.Area, opts => opts.MapFrom(src => src.ApplicantArea))
+                .ForMember(dest => dest.Town, opts => opts.MapFrom(src => src.ApplicantTown))
+                .ForMember(dest => dest.County, opts => opts.MapFrom(src => src.ApplicantCounty))
+                .ForMember(dest => dest.PostCode, opts => opts.MapFrom(src => src.ApplicantPostcode.ToUpper()))
                 .ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.ApplicantEmail))
                 .ForMember(dest => dest.Mobile, opts => opts.MapFrom(src => src.ApplicantMobile))
-                .ForMember(dest => dest.PostCode, opts => opts.MapFrom(src => src.ApplicantPostcode))
                 .ForMember(dest => dest.Telephone, opts => opts.MapFrom(src => src.ApplicantTelephone))
                 .ForMember(dest => dest.Title, opts => opts.MapFrom(src => src.ApplicantTitle));
 
@@ -44,9 +54,6 @@ namespace StreetNaming.Web.AutoMapper
                         opts.MapFrom(
                             src => ContentDispositionHeaderValue.Parse(src.ContentDisposition).FileName.Trim('"')))
                 .ForMember(dest => dest.Bytes, opts => opts.MapFrom(src => src.OpenReadStream().ToBytes()));
-
-            CreateMap<PaymentResponseViewModel, Transaction>()
-                .ForMember(dest => dest.ResponseDate, opts => opts.UseValue(DateTime.Now));
         }
     }
 }

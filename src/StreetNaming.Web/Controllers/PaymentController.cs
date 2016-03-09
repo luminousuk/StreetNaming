@@ -27,24 +27,33 @@ namespace StreetNaming.Web.Controllers
 
         public async Task<IActionResult> Initiate(Guid requestReference)
         {
-            var request = await _context.Requests.FirstOrDefaultAsync(r => r.Reference == requestReference);
+            var request = await _context.Requests.Include(r => r.Applicant).FirstOrDefaultAsync(r => r.Reference == requestReference);
 
             if (request == null) return new BadRequestResult();
 
             // Some business logic here?
 
-            var transaction = new Transaction
-            {
-                Request = request,
-                Provider = _options.Value.Payment.Provider,
-                Reference = Guid.NewGuid(),
-                TransactionStatus = TransactionStatus.Pending,
-                Amount = _options.Value.Payment.Amount,
-                Currency = _options.Value.Payment.Currency
-            };
+            // Get existing pending transaction for this request (if exists)
+            var transaction =
+                await
+                    _context.Transactions.FirstOrDefaultAsync(
+                        t => t.RequestId == request.RequestId && t.TransactionStatus == TransactionStatus.Pending);
 
-            _context.Transactions.Add(transaction);
-            await _context.SaveChangesAsync();
+            if (transaction == null)
+            {
+                transaction = new Transaction
+                {
+                    Request = request,
+                    Provider = _options.Value.Payment.Provider,
+                    Reference = Guid.NewGuid(),
+                    TransactionStatus = TransactionStatus.Pending,
+                    Amount = _options.Value.Payment.Amount,
+                    Currency = _options.Value.Payment.Currency
+                };
+
+                _context.Transactions.Add(transaction);
+                await _context.SaveChangesAsync();
+            }
 
             var viewModel = new PaymentInitiateViewModel
             {
@@ -55,12 +64,24 @@ namespace StreetNaming.Web.Controllers
                 PaymentSourceCode = _options.Value.Payment.PaymentSourceCode,
                 PaymentTotal = _options.Value.Payment.Amount,
                 Payment_1 = string.Concat(
-                    _options.Value.Payment.Reference, '|',
-                    _options.Value.Payment.FundCode, '|',
-                    _options.Value.Payment.Amount, '|',
-                    _options.Value.Payment.VatCode, '|',
-                    _options.Value.Payment.Narrative),
-                ReturnUrl = Url.Action("ProviderResponse", "Payment", null, "http")
+                    /* Reference */ _options.Value.Payment.AccountReference, '|',
+                    /* Fund Code */ _options.Value.Payment.FundCode, '|',
+                    /* Amount */ _options.Value.Payment.Amount, '|',
+                    /* Vat Code */ _options.Value.Payment.VatCode, '|',
+                    /* Narrative */ _options.Value.Payment.Narrative, '|',
+                    /* Business Name */ '|',
+                    /* Premise Number */ request.Applicant.HouseNumber, '|',
+                    /* Premise Name */ request.Applicant.HouseName, '|',
+                    /* Street */ request.Applicant.Street, '|',
+                    /* Area */ request.Applicant.Area, '|',
+                    /* Town */ request.Applicant.Town, '|',
+                    /* County */ request.Applicant.County, '|',
+                    /* Post Code */ request.Applicant.PostCode.ToUpper(), '|',
+                    /* Alternative Account Reference */ '|',
+                    /* Line Based Refund Receipt Number */ '|'
+                    ),
+                ReturnUrl = Url.Action("ProviderResponse", "Payment", null, "http"),
+                RequestType = request.RequestType.ToString()
             };
 
             return View(viewModel);

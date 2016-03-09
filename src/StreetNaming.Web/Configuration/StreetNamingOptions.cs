@@ -23,7 +23,7 @@ namespace StreetNaming.Web.Configuration
 
             public string PaymentSourceCode { get; set; }
 
-            public string Reference { get; set; }
+            public string AccountReference { get; set; }
 
             public string FundCode { get; set; }
 

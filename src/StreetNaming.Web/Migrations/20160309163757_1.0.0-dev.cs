@@ -14,16 +14,21 @@ namespace StreetNaming.Web.Migrations
                 {
                     ApplicantId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
-                    Address = table.Column<string>(nullable: false),
+                    Area = table.Column<string>(nullable: true),
+                    County = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: false),
+                    HouseName = table.Column<string>(nullable: true),
+                    HouseNumber = table.Column<int>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     Mobile = table.Column<string>(nullable: true),
                     ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     PostCode = table.Column<string>(nullable: false),
+                    Street = table.Column<string>(nullable: true),
                     Telephone = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    Town = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

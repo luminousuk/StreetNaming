@@ -18,5 +18,7 @@
         public string Payment_1 { get; set; }
 
         public string CallingApplicationTransactionReference { get; set; }
+
+        public string RequestType { get; set; }
     }
 }

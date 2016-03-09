@@ -16,7 +16,17 @@ namespace StreetNaming.Domain.Models
 
         public string LastName { get; set; }
 
-        public string Address { get; set; }
+        public int HouseNumber { get; set; }
+
+        public string HouseName { get; set; }
+
+        public string Street { get; set; }
+
+        public string Area { get; set; }
+
+        public string Town { get; set; }
+
+        public string County { get; set; }
 
         public string PostCode { get; set; }
 

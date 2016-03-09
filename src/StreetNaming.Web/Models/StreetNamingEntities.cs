@@ -38,9 +38,23 @@ namespace StreetNaming.Web.Models
                 .IsRequired();
 
             modelBuilder.Entity<Applicant>()
-                .Property(x => x.Address)
-                .HasMaxLength(400)
-                .IsRequired();
+                .Property(x => x.HouseNumber);
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.HouseName)
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.Street)
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.Area)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Applicant>()
+                .Property(x => x.Town)
+                .HasMaxLength(100);
 
             modelBuilder.Entity<Applicant>()
                 .Property(x => x.PostCode)

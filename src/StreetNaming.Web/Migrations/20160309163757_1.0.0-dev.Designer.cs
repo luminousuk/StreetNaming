@@ -8,7 +8,7 @@ using StreetNaming.Web.Models;
 namespace StreetNaming.Web.Migrations
 {
     [DbContext(typeof(StreetNamingEntities))]
-    [Migration("20160308145723_1.0.0-dev")]
+    [Migration("20160309163757_1.0.0-dev")]
     partial class _100dev
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,10 @@ namespace StreetNaming.Web.Migrations
                     b.Property<long>("ApplicantId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasAnnotation("MaxLength", 400);
+                    b.Property<string>("Area")
+                        .HasAnnotation("MaxLength", 100);
+
+                    b.Property<string>("County");
 
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
@@ -35,6 +36,11 @@ namespace StreetNaming.Web.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 50);
+
+                    b.Property<string>("HouseName")
+                        .HasAnnotation("MaxLength", 50);
+
+                    b.Property<int>("HouseNumber");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -51,11 +57,17 @@ namespace StreetNaming.Web.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 10);
 
+                    b.Property<string>("Street")
+                        .HasAnnotation("MaxLength", 50);
+
                     b.Property<string>("Telephone")
                         .HasAnnotation("MaxLength", 20);
 
                     b.Property<string>("Title")
                         .HasAnnotation("MaxLength", 20);
+
+                    b.Property<string>("Town")
+                        .HasAnnotation("MaxLength", 100);
 
                     b.HasKey("ApplicantId");
 
