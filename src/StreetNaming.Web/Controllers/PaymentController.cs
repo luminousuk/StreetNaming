@@ -81,7 +81,8 @@ namespace StreetNaming.Web.Controllers
                     /* Line Based Refund Receipt Number */ '|'
                     ),
                 ReturnUrl = Url.Action("ProviderResponse", "Payment", null, "http"),
-                RequestType = request.RequestType.ToString()
+                RequestType = request.RequestType.ToString(),
+                RequestReference = request.Reference.ToString()
             };
 
             return View(viewModel);

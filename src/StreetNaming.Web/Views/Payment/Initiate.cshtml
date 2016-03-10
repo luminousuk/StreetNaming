@@ -1,33 +1,46 @@
 ﻿@model StreetNaming.Web.ViewModels.PaymentInitiateViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Payment";
+}
 
-<form action="@Model.EndpointUrl" method="post">
-    <div class="form-group">
-        <label asp-for="CallingApplicationId"></label>
-        <input asp-for="CallingApplicationId" class="form-control">
+<div class="jumbotron">
+    <div class="container">
+        <img class="img-responsive pull-right" src="~/img/Bath_&_North_East_Somerset_Council_logo.gif" alt="Bath & North East Somerset Council" />
+        <h1 class="pull-left">Payment</h1>
     </div>
-    <div class="form-group">
-        <label asp-for="PaymentTotal"></label>
-        <input asp-for="PaymentTotal" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="ReturnUrl"></label>
-        <input asp-for="ReturnUrl" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="BackButtonUrl"></label>
-        <input asp-for="BackButtonUrl" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="PaymentSourceCode"></label>
-        <input asp-for="PaymentSourceCode" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="Payment_1"></label>
-        <input asp-for="Payment_1" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="CallingApplicationTransactionReference"></label>
-        <input asp-for="CallingApplicationTransactionReference" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-success">Submit</button>
-</form>
+</div>
+
+<div class="container">
+
+    <form action="@Model.EndpointUrl" method="post">
+        <input type="hidden" asp-for="CallingApplicationId">
+        <input type="hidden" asp-for="ReturnUrl">
+        <input type="hidden" asp-for="BackButtonUrl">
+        <input type="hidden" asp-for="PaymentSourceCode">
+        <input type="hidden" asp-for="Payment_1">
+        <input type="hidden" asp-for="CallingApplicationTransactionReference">
+        <input type="hidden" asp-for="PaymentTotal">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Payment Details</h3>
+            </div>
+            <div class="panel-body">
+                <p class="lead">
+                    You are about to be charged <strong>@Model.PaymentTotal.ToString("C")</strong>.
+                </p>
+                <dl class="dl-horizontal">
+                    <dt>Request Type</dt>
+                    <dd>@Model.RequestType</dd>
+                    <dt>Reference</dt>
+                    <dd>@Model.RequestReference</dd>
+                </dl>
+                <p>Click the button below to be redirected to our online payment gateway.</p>
+                <p>Please remember to press <span class="label label-primary">Finish</span> once payment is complete.</p>
+                <button type="submit" class="btn btn-primary btn-lg center-block">Make payment <i class="fa fa-arrow-circle-right"></i></button>
+            </div>
+        </div>
+    </form>
+
+</div>
