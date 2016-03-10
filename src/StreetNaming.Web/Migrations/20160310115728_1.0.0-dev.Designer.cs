@@ -8,7 +8,7 @@ using StreetNaming.Web.Models;
 namespace StreetNaming.Web.Migrations
 {
     [DbContext(typeof(StreetNamingEntities))]
-    [Migration("20160309163757_1.0.0-dev")]
+    [Migration("20160310115728_1.0.0-dev")]
     partial class _100dev
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,9 +20,6 @@ namespace StreetNaming.Web.Migrations
                 {
                     b.Property<long>("ApplicantId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Area")
-                        .HasAnnotation("MaxLength", 100);
 
                     b.Property<string>("County");
 
@@ -40,7 +37,7 @@ namespace StreetNaming.Web.Migrations
                     b.Property<string>("HouseName")
                         .HasAnnotation("MaxLength", 50);
 
-                    b.Property<int>("HouseNumber");
+                    b.Property<int?>("HouseNumber");
 
                     b.Property<string>("LastName")
                         .IsRequired()

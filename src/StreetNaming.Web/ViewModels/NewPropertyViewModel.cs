@@ -15,17 +15,11 @@ namespace StreetNaming.Web.ViewModels
         [Display(Name = "Surname")]
         public string ApplicantLastName { get; set; }
 
-        [Display(Name = "House Number")]
-        public string ApplicantHouseNumber { get; set; }
-
-        [Display(Name = "House Name")]
-        public string ApplicantHouseName { get; set; }
+        [Display(Name = "House Name/Number")]
+        public string ApplicantHouseNameNumber { get; set; }
 
         [Display(Name = "Street")]
         public string ApplicantStreet { get; set; }
-
-        [Display(Name = "Area")]
-        public string ApplicantArea { get; set; }
 
         [Display(Name = "Town")]
         public string ApplicantTown { get; set; }

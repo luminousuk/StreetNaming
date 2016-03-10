@@ -20,9 +20,6 @@ namespace StreetNaming.Web.Migrations
                     b.Property<long>("ApplicantId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Area")
-                        .HasAnnotation("MaxLength", 100);
-
                     b.Property<string>("County");
 
                     b.Property<DateTime>("CreatedDate")
@@ -39,7 +36,7 @@ namespace StreetNaming.Web.Migrations
                     b.Property<string>("HouseName")
                         .HasAnnotation("MaxLength", 50);
 
-                    b.Property<int>("HouseNumber");
+                    b.Property<int?>("HouseNumber");
 
                     b.Property<string>("LastName")
                         .IsRequired()

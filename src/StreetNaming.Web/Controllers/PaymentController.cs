@@ -73,7 +73,7 @@ namespace StreetNaming.Web.Controllers
                     /* Premise Number */ request.Applicant.HouseNumber, '|',
                     /* Premise Name */ request.Applicant.HouseName, '|',
                     /* Street */ request.Applicant.Street, '|',
-                    /* Area */ request.Applicant.Area, '|',
+                    /* Area */ '|',
                     /* Town */ request.Applicant.Town, '|',
                     /* County */ request.Applicant.County, '|',
                     /* Post Code */ request.Applicant.PostCode.ToUpper(), '|',

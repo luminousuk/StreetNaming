@@ -24,11 +24,10 @@
 
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Payment Details</h3>
+                <h3 class="panel-title">Request Saved Successfully</h3>
             </div>
             <div class="panel-body">
-                <p class="lead">
-                    You are about to be charged <strong>@Model.PaymentTotal.ToString("C")</strong>.
+                <p class="lead">You are about to be charged <strong>@Model.PaymentTotal.ToString("C")</strong>.
                 </p>
                 <dl class="dl-horizontal">
                     <dt>Request Type</dt>
@@ -37,7 +36,10 @@
                     <dd>@Model.RequestReference</dd>
                 </dl>
                 <p>Click the button below to be redirected to our online payment gateway.</p>
-                <p>Please remember to press <span class="label label-primary">Finish</span> once payment is complete.</p>
+                <div class="alert alert-info" role="alert">
+                    <p>Please remember to press <span class="label label-primary">Finish</span> once payment is complete.
+                    </p>
+                </div>
                 <button type="submit" class="btn btn-primary btn-lg center-block">Make payment <i class="fa fa-arrow-circle-right"></i></button>
             </div>
         </div>
