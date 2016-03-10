@@ -1,8 +1,8 @@
 /// <binding />
-var gulp = require('gulp'),
-    concat = require('gulp-concat'),
-    cssmin = require('gulp-cssmin'),
-    uglify = require('gulp-uglify');
+var gulp = require("gulp"),
+    concat = require("gulp-concat"),
+    cssmin = require("gulp-cssmin"),
+    uglify = require("gulp-uglify");
 
 var path = {
     webroot: "./wwwroot/",
@@ -30,31 +30,31 @@ path.dest = {
 };
 
 
-gulp.task("min:js", function () {
+gulp.task("min:js", function() {
     return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle, path.js.selectize])
         .pipe(concat(path.dest.js + "/site.min.js"))
         .pipe(uglify())
         .pipe(gulp.dest("."));
 });
 
-gulp.task("copy:js", function () {
+gulp.task("copy:js", function() {
     return gulp.src([path.js.jQuery, path.js.bootstrap_filestyle, path.js.selectize])
         .pipe(gulp.dest(path.dest.js));
 });
 
-gulp.task("min:css", function () {
+gulp.task("min:css", function() {
     return gulp.src([path.css.bootstrap, path.css.fontAwesome, path.css.awesomeCheckbox, path.css.selectize])
         .pipe(concat(path.dest.css + "/site.min.css"))
         .pipe(cssmin())
         .pipe(gulp.dest("."));
 });
 
-gulp.task("copy:css", function () {
+gulp.task("copy:css", function() {
     return gulp.src([path.css.bootstrap, path.css.fontAwesome, path.css.awesomeCheckbox, path.css.selectize])
         .pipe(gulp.dest(path.dest.css));
 });
 
-gulp.task("copy:fonts", function () {
+gulp.task("copy:fonts", function() {
     return gulp.src([path.font.bootstrap, path.font.fontAwesome])
         .pipe(gulp.dest(path.dest.font))
         .pipe(gulp.dest(path.dest.font_azurefix));

@@ -5,218 +5,221 @@
 }
 
 <div id="form-wrapper" class="container">
-    <div class="row">
-        <div class="col-sm-6 text-center">
-            <h1>
-                <img class="img-responsive" src="~/img/Bath_&_North_East_Somerset_Council_logo.gif" alt="Bath & North East Somerset Council" />
-            </h1>
-        </div>
-        <div class="col-sm-6 text-center">
-            <h1 class="text-uppercase">Application to name or number a new property</h1>
-            <p>
-                <small>
-                    Public Health Act 1925: Section 17 & 18<br />Towns Improvement Clauses Act 1847: Section 64 & 65
-                </small>
-            </p>
-        </div>
+<div class="row">
+    <div class="col-sm-6 text-center">
+        <h1>
+            <img class="img-responsive" src="~/img/Bath_&_North_East_Somerset_Council_logo.gif" alt="Bath & North East Somerset Council"/>
+        </h1>
     </div>
-    <div class="row">
-        <form role="form" asp-controller="Form" asp-action="NewProperty" method="post" enctype="multipart/form-data">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title text-uppercase">Applicant Details</h3>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item form-horizontal">
-                        <div class="form-group">
-                            <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantTitle" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantFirstName" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantFirstName" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantLastName" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantLastName" class="form-control">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item form-horizontal">
-                        <div class="form-group">
-                            <label asp-for="ApplicantHouseNameNumber" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantHouseNameNumber" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantStreet" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantStreet" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantTown" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantTown" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantCounty" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantCounty" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantPostcode" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantPostcode" class="form-control">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item form-horizontal">
-                        <div class="form-group">
-                            <label asp-for="ApplicantEmail" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantEmail" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantTelephone" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantTelephone" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantMobile" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantMobile" class="form-control">
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="panel-heading">
-                    <h3 class="panel-title text-uppercase">Proposed Address <small class="text-lowercase">(please supply 3 suggestions in order of preference)</small>
-                    </h3>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item form-horizontal">
-                        <div class="form-group">
-                            <label asp-for="ProposedAddress1" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ProposedAddress1" class="form-control">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item form-horizontal">
-                        <div class="form-group">
-                            <label asp-for="ProposedAddress2" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ProposedAddress2" class="form-control">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item form-horizontal">
-                        <div class="form-group">
-                            <label asp-for="ProposedAddress3" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ProposedAddress3" class="form-control">
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="panel-heading">
-                    <h3 class="panel-title text-uppercase">
-                        Are you the registered owner of the property? <small class="text-lowercase">(if not we need written confirmation from the owner that they have no objection to the change)</small>
-                    </h3>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item form-horizontal">
-                        <div class="row">
-                            <div class="radio col-xs-4 col-xs-offset-2 text-center">
-                                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerYes" value="1">
-                                <label for="IsRegisteredOwnerYes">
-                                    Yes
-                                </label>
-
-                            </div>
-                            <div class="radio col-xs-4 text-center">
-                                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerNo" value="0">
-                                <label for="IsRegisteredOwnerNo">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-
-                    </li>
-                </ul>
-                <div class="panel-heading">
-                    <h3 class="panel-title text-uppercase">
-                        ### You must attach plans or something ###
-                    </h3>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item form-horizontal">
-                        <div class="form-group">
-                            <label for="PlanUpload" class="control-label col-xs-3 col-sm-2">Attachments</label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input type="file" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" id="PlanUpload" name="PlanUpload" accept="image/*,application/pdf" multiple>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="panel-heading">
-                    <h3 class="panel-title text-uppercase">
-                        Confirmation
-                    </h3>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item form-horizontal">
-                        <div class="form-group col-sm-7">
-                            <label asp-for="Signed" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="Signed" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-5">
-                            <label asp-for="SignedDate" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="SignedDate" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </li>
-                </ul>
-                <div class="panel-footer">
-                    <button class="btn btn-lg btn-success pull-right">Continue to payment <i class="fa fa-arrow-circle-right"></i></button>
-                    <h5 class="pull-left"><small>By clicking submit, I confirm that I have read and understand the <a href="#">Terms & Conditions</a>.</small></h5>
-                    <div class="clearfix"></div>
-                </div>
+    <div class="col-sm-6 text-center">
+        <h1 class="text-uppercase">Application to name or number a new property</h1>
+        <p>
+            <small>
+                Public Health Act 1925: Section 17 & 18<br/>Towns Improvement Clauses Act 1847: Section 64 & 65
+            </small>
+        </p>
+    </div>
+</div>
+<div class="row">
+    <form role="form" asp-controller="Form" asp-action="NewProperty" method="post" enctype="multipart/form-data">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-uppercase">Applicant Details</h3>
             </div>
-        </form>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <h4 class="text-right">For more information please get in touch:</h4>
+            <ul class="list-group">
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantTitle" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantFirstName" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantFirstName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantLastName" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantLastName" class="form-control">
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="ApplicantHouseNameNumber" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantHouseNameNumber" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantStreet" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantStreet" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantTown" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantTown" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantCounty" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantCounty" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantPostcode" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantPostcode" class="form-control">
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="ApplicantEmail" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantEmail" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantTelephone" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantTelephone" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantMobile" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantMobile" class="form-control">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="panel-heading">
+                <h3 class="panel-title text-uppercase">
+                    Proposed Address <small class="text-lowercase">(please supply 3 suggestions in order of preference)</small>
+                </h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="ProposedAddress1" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ProposedAddress1" class="form-control">
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="ProposedAddress2" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ProposedAddress2" class="form-control">
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="ProposedAddress3" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ProposedAddress3" class="form-control">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="panel-heading">
+                <h3 class="panel-title text-uppercase">
+                    Are you the registered owner of the property? <small class="text-lowercase">(if not we need written confirmation from the owner that they have no objection to the change)</small>
+                </h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item form-horizontal">
+                    <div class="row">
+                        <div class="radio col-xs-4 col-xs-offset-2 text-center">
+                            <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerYes" value="1">
+                            <label for="IsRegisteredOwnerYes">
+                                Yes
+                            </label>
+
+                        </div>
+                        <div class="radio col-xs-4 text-center">
+                            <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerNo" value="0">
+                            <label for="IsRegisteredOwnerNo">
+                                No
+                            </label>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+            <div class="panel-heading">
+                <h3 class="panel-title text-uppercase">
+                    ### You must attach plans or something ###
+                </h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label for="PlanUpload" class="control-label col-xs-3 col-sm-2">Attachments</label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input type="file" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" id="PlanUpload" name="PlanUpload" accept="image/*,application/pdf" multiple>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="panel-heading">
+                <h3 class="panel-title text-uppercase">
+                    Confirmation
+                </h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group col-sm-7">
+                        <label asp-for="Signed" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="Signed" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-5">
+                        <label asp-for="SignedDate" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="SignedDate" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+            <div class="panel-footer">
+                <button class="btn btn-lg btn-success pull-right">Continue to payment <i class="fa fa-arrow-circle-right"></i></button>
+                <h5 class="pull-left">
+                    <small>By clicking submit, I confirm that I have read and understand the <a href="#">Terms & Conditions</a>.</small>
+                </h5>
+                <div class="clearfix"></div>
+            </div>
         </div>
-        <div class="col-sm-6">
-            <p>
-                <address>
-                    <strong>Street Naming and Numbering Officer</strong><br>
-                    GIS Team<br>
-                    Bath and North East Somerset Council<br>
-                    Lewis House<br>
-                    Manvers Street<br>
-                    Bath, BA1 1JG<br>
-                    Tel: 01225 394427<br>
-                    Email: <a href="mailto:gis_team@bathnes.gov.uk">gis_team@bathnes.gov.uk</a>
-                </address>
-            </p>
-        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <h4 class="text-right">For more information please get in touch:</h4>
     </div>
+    <div class="col-sm-6">
+        <p>
+            <address>
+                <strong>Street Naming and Numbering Officer</strong><br>
+                GIS Team<br>
+                Bath and North East Somerset Council<br>
+                Lewis House<br>
+                Manvers Street<br>
+                Bath, BA1 1JG<br>
+                Tel: 01225 394427<br>
+                Email: <a href="mailto:gis_team@bathnes.gov.uk">gis_team@bathnes.gov.uk</a>
+            </address>
+        </p>
+    </div>
+</div>
 </div>

@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 using StreetNaming.Domain.Models;
@@ -15,8 +14,17 @@ namespace StreetNaming.Web.AutoMapper
             CreateMap<NewPropertyViewModel, Applicant>()
                 .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.ApplicantFirstName))
                 .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.ApplicantLastName))
-                .ForMember(dest => dest.HouseNumber, opts => opts.MapFrom(src => src.ApplicantHouseNameNumber.IsNumeric() ? (int?)int.Parse(src.ApplicantHouseNameNumber) : null))
-                .ForMember(dest => dest.HouseName, opts => opts.MapFrom(src => !src.ApplicantHouseNameNumber.IsNumeric() ? src.ApplicantHouseNameNumber : null))
+                .ForMember(dest => dest.HouseNumber,
+                    opts =>
+                        opts.MapFrom(
+                            src =>
+                                src.ApplicantHouseNameNumber.IsNumeric()
+                                    ? (int?) int.Parse(src.ApplicantHouseNameNumber)
+                                    : null))
+                .ForMember(dest => dest.HouseName,
+                    opts =>
+                        opts.MapFrom(
+                            src => !src.ApplicantHouseNameNumber.IsNumeric() ? src.ApplicantHouseNameNumber : null))
                 .ForMember(dest => dest.Street, opts => opts.MapFrom(src => src.ApplicantStreet))
                 .ForMember(dest => dest.Town, opts => opts.MapFrom(src => src.ApplicantTown))
                 .ForMember(dest => dest.County, opts => opts.MapFrom(src => src.ApplicantCounty))
@@ -29,8 +37,17 @@ namespace StreetNaming.Web.AutoMapper
             CreateMap<ExistingPropertyViewModel, Applicant>()
                 .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.ApplicantFirstName))
                 .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.ApplicantLastName))
-                .ForMember(dest => dest.HouseNumber, opts => opts.MapFrom(src => src.ApplicantHouseNameNumber.IsNumeric() ? (int?)int.Parse(src.ApplicantHouseNameNumber) : null))
-                .ForMember(dest => dest.HouseName, opts => opts.MapFrom(src => !src.ApplicantHouseNameNumber.IsNumeric() ? src.ApplicantHouseNameNumber : null))
+                .ForMember(dest => dest.HouseNumber,
+                    opts =>
+                        opts.MapFrom(
+                            src =>
+                                src.ApplicantHouseNameNumber.IsNumeric()
+                                    ? (int?) int.Parse(src.ApplicantHouseNameNumber)
+                                    : null))
+                .ForMember(dest => dest.HouseName,
+                    opts =>
+                        opts.MapFrom(
+                            src => !src.ApplicantHouseNameNumber.IsNumeric() ? src.ApplicantHouseNameNumber : null))
                 .ForMember(dest => dest.Street, opts => opts.MapFrom(src => src.ApplicantStreet))
                 .ForMember(dest => dest.Town, opts => opts.MapFrom(src => src.ApplicantTown))
                 .ForMember(dest => dest.County, opts => opts.MapFrom(src => src.ApplicantCounty))

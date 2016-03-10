@@ -13,8 +13,8 @@ namespace StreetNaming.Web
 {
     public class Startup
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IConfiguration _config;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
         public Startup(IHostingEnvironment hostingEnvironment)
         {
@@ -22,13 +22,13 @@ namespace StreetNaming.Web
 
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("settings.json")
-                .AddJsonFile($"settings.{_hostingEnvironment.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"settings.{_hostingEnvironment.EnvironmentName}.json", true);
 
             if (hostingEnvironment.IsDevelopment())
                 builder.AddUserSecrets();
 
             builder.AddEnvironmentVariables();
-            
+
             _config = builder.Build();
         }
 
@@ -39,12 +39,10 @@ namespace StreetNaming.Web
             services.AddMvc();
             services.AddEntityFramework()
                 .AddNpgsql()
-                .AddDbContext<StreetNamingEntities>(opts => opts.UseNpgsql(_config["Data:DefaultConnection:ConnectionString"]));
+                .AddDbContext<StreetNamingEntities>(
+                    opts => opts.UseNpgsql(_config["Data:DefaultConnection:ConnectionString"]));
 
-            var mapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new StreetNamingProfile());
-            });
+            var mapperConfig = new MapperConfiguration(cfg => { cfg.AddProfile(new StreetNamingProfile()); });
             services.AddSingleton(sp => mapperConfig.CreateMapper());
         }
 

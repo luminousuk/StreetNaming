@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Data.Entity;
+﻿using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Metadata;
 using StreetNaming.Domain.Models;
 
@@ -250,8 +249,8 @@ namespace StreetNaming.Web.Models
              * Indexes
              */
             modelBuilder.Entity<Request>()
-               .HasIndex(r => r.Reference)
-               .IsUnique();
+                .HasIndex(r => r.Reference)
+                .IsUnique();
 
             modelBuilder.Entity<Transaction>()
                 .HasIndex(t => t.Reference)

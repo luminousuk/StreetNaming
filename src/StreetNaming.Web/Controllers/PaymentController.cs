@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Routing;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.OptionsModel;
 using StreetNaming.Domain.Models;
@@ -27,7 +25,10 @@ namespace StreetNaming.Web.Controllers
 
         public async Task<IActionResult> Initiate(Guid requestReference)
         {
-            var request = await _context.Requests.Include(r => r.Applicant).FirstOrDefaultAsync(r => r.Reference == requestReference);
+            var request =
+                await
+                    _context.Requests.Include(r => r.Applicant)
+                        .FirstOrDefaultAsync(r => r.Reference == requestReference);
 
             if (request == null) return new BadRequestResult();
 
@@ -57,7 +58,7 @@ namespace StreetNaming.Web.Controllers
 
             var viewModel = new PaymentInitiateViewModel
             {
-                BackButtonUrl = Url.Action("Initiate", "Payment", new { requestReference }, "http"),
+                BackButtonUrl = Url.Action("Initiate", "Payment", new {requestReference}, "http"),
                 CallingApplicationId = _options.Value.Payment.ApplicationId,
                 CallingApplicationTransactionReference = transaction.Reference.ToString(),
                 EndpointUrl = _options.Value.Payment.Endpoint,
@@ -65,20 +66,20 @@ namespace StreetNaming.Web.Controllers
                 PaymentTotal = _options.Value.Payment.Amount,
                 Payment_1 = string.Concat(
                     /* Reference */ _options.Value.Payment.AccountReference, '|',
-                    /* Fund Code */ _options.Value.Payment.FundCode, '|',
-                    /* Amount */ _options.Value.Payment.Amount, '|',
-                    /* Vat Code */ _options.Value.Payment.VatCode, '|',
-                    /* Narrative */ _options.Value.Payment.Narrative, '|',
-                    /* Business Name */ '|',
-                    /* Premise Number */ request.Applicant.HouseNumber, '|',
-                    /* Premise Name */ request.Applicant.HouseName, '|',
-                    /* Street */ request.Applicant.Street, '|',
-                    /* Area */ '|',
-                    /* Town */ request.Applicant.Town, '|',
-                    /* County */ request.Applicant.County, '|',
-                    /* Post Code */ request.Applicant.PostCode.ToUpper(), '|',
-                    /* Alternative Account Reference */ '|',
-                    /* Line Based Refund Receipt Number */ '|'
+                        /* Fund Code */ _options.Value.Payment.FundCode, '|',
+                        /* Amount */ _options.Value.Payment.Amount, '|',
+                        /* Vat Code */ _options.Value.Payment.VatCode, '|',
+                        /* Narrative */ _options.Value.Payment.Narrative, '|',
+                        /* Business Name */ '|',
+                        /* Premise Number */ request.Applicant.HouseNumber, '|',
+                        /* Premise Name */ request.Applicant.HouseName, '|',
+                        /* Street */ request.Applicant.Street, '|',
+                        /* Area */ '|',
+                        /* Town */ request.Applicant.Town, '|',
+                        /* County */ request.Applicant.County, '|',
+                        /* Post Code */ request.Applicant.PostCode.ToUpper(), '|',
+                        /* Alternative Account Reference */ '|',
+                        /* Line Based Refund Receipt Number */ '|'
                     ),
                 ReturnUrl = Url.Action("ProviderResponse", "Payment", null, "http"),
                 RequestType = request.RequestType.ToString(),
@@ -104,7 +105,7 @@ namespace StreetNaming.Web.Controllers
 
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Completed", new { transactionReference = transaction.Reference });
+            return RedirectToAction("Completed", new {transactionReference = transaction.Reference});
         }
 
         public async Task<IActionResult> Completed(Guid transactionReference)

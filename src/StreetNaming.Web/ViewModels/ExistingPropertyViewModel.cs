@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Http;
 using StreetNaming.Util.DataAnnotations;
@@ -43,7 +42,7 @@ namespace StreetNaming.Web.ViewModels
         [Display(Name = "Email")]
         [EmailAddress]
         public string ApplicantEmail { get; set; }
-        
+
         [Display(Name = "Address")]
         public long ExistingPropertyUrn { get; set; }
 
