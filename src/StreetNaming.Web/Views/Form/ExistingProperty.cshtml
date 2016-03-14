@@ -24,83 +24,6 @@
     <form role="form" asp-controller="Form" asp-action="ExistingProperty" method="post" enctype="multipart/form-data">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-uppercase">Applicant Details</h3>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantTitle" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantFirstName" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantFirstName" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantLastName" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantLastName" class="form-control">
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ApplicantHouseNameNumber" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantHouseNameNumber" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantStreet" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantStreet" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantTown" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantTown" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantCounty" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantCounty" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantPostcode" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantPostcode" class="form-control">
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ApplicantEmail" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantEmail" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantTelephone" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantTelephone" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantMobile" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantMobile" class="form-control">
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="panel-heading">
                 <h3 class="panel-title text-uppercase">
                     Existing Address <small class="text-lowercase">(address to be changed)</small>
                 </h3>
@@ -110,7 +33,7 @@
                     <div class="form-group">
                         <label asp-for="ExistingPropertyUrn" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
-                            <select asp-for="ExistingPropertyUrn" class="form-control"></select>
+                            <select asp-for="ExistingPropertyUrn" class="form-control" placeholder="Begin typing address to search"></select>
                         </div>
                     </div>
                 </li>
@@ -147,6 +70,102 @@
                 </li>
             </ul>
             <div class="panel-heading">
+                <h3 class="panel-title text-uppercase">Applicant Contact Details</h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantTitle" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantFirstName" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantFirstName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantLastName" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantLastName" class="form-control">
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label for="ApplicantUseSameAddress" class="control-label col-xs-3 col-sm-2">Use same address?</label>
+                        <div class="col-xs-9 col-sm-10">
+                            <div class="checkbox checkbox-primary">
+                                <input asp-for="ApplicantUseSameAddress" type="checkbox" id="ApplicantUseSameAddress">
+                                <label></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse in" id="ApplicantAddressSection">
+                        <div class="form-group">
+                            <label asp-for="ApplicantHouseNameNumber" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantHouseNameNumber" class="form-control">
+                                <span asp-validation-for="ApplicantHouseNameNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantStreet" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantStreet" class="form-control">
+                                <span asp-validation-for="ApplicantStreet" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantTown" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantTown" class="form-control">
+                                <span asp-validation-for="ApplicantTown" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantCounty" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantCounty" class="form-control">
+                                <span asp-validation-for="ApplicantCounty" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantPostcode" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantPostcode" class="form-control">
+                                <span asp-validation-for="ApplicantPostcode" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="ApplicantEmail" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantEmail" class="form-control">
+                            <span asp-validation-for="ApplicantEmail" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantTelephone" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantTelephone" class="form-control">
+                            <span asp-validation-for="ApplicantTelephone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApplicantMobile" class="control-label col-xs-3 col-sm-2"></label>
+                        <div class="col-xs-9 col-sm-10">
+                            <input asp-for="ApplicantMobile" class="form-control">
+                            <span asp-validation-for="ApplicantMobile" class="text-danger"></span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="panel-heading">
                 <h3 class="panel-title text-uppercase">
                     Are you the registered owner of the property? <small class="text-lowercase">(if not we need written confirmation from the owner that they have no objection to the change)</small>
                 </h3>
@@ -168,7 +187,7 @@
                             </label>
                         </div>
                     </div>
-
+                    <span asp-validation-for="IsRegisteredOwner" class="text-danger"></span>
                 </li>
             </ul>
             <div class="panel-heading">
@@ -181,7 +200,6 @@
                     <div class="form-group">
                         <label asp-for="Attachments" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
-                            @*<input type="file" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" id="Attachments" name="Attachments" accept="image/*,application/pdf" multiple>*@
                             <input asp-for="Attachments" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" accept="image/*,application/pdf" multiple>
                         </div>
                     </div>
@@ -198,6 +216,7 @@
                         <label asp-for="Signed" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <input asp-for="Signed" class="form-control">
+                            <span asp-validation-for="IsRegisteredOwner" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group col-sm-5">
@@ -243,22 +262,27 @@
 @section Scripts {
     <script>
         $(function() {
-            var $existingPropertyUrn = $("#ExistingPropertyUrn");
+            var $existingPropertyUrn = $("#ExistingPropertyUrn"),
+                $applicantUseSameAddress = $("#ApplicantUseSameAddress"),
+                $applicantAddressSection = $("#ApplicantAddressSection"),
+                $applicantHouseNameNumber = $("#ApplicantHouseNameNumber"),
+                $applicantStreet = $("#ApplicantStreet"),
+                $applicantTown = $("#ApplicantTown"),
+                $applicantCounty = $("#ApplicantCounty"),
+                $applicantPostcode = $("#ApplicantPostcode");
 
             var opts = {
                 className: "AddressAutocomplete",
-                url: "https://isharemapstest.bathnes.gov.uk/getdata.aspx",
-                pageSize: 20,
-                minChars: 3,
-                timeOut: 1000,
-                placeholder: "Begin typing address..."
+                url: "@Model.AddressLookupEndpoint",
+                pageSize: "@Model.AddressLookupPageSize",
+                minChars: "@Model.AddressLookupMinChars"
             };
 
             $existingPropertyUrn.selectize({
                 valueField: "id",
                 labelField: "address",
                 searchField: "search",
-                maxOptions: 20,
+                maxOptions: opts.pageSize,
                 maxItems: 1,
                 create: false,
                 closeAfterSelect: true,
@@ -266,7 +290,7 @@
                 highlight: false,
                 selectOnTab: true,
                 load: function(query, callback) {
-                    if (!query.length) return callback();
+                    if (query.length < opts.minChars) return callback();
                     $.ajax({
                         url: opts.url,
                         dataType: "jsonp",
@@ -291,6 +315,15 @@
                     });
                 }
             });
+
+            $applicantUseSameAddress.change(function() {
+                if ($applicantUseSameAddress.is(":checked")) {
+                    $applicantAddressSection.collapse('hide');
+
+                } else {
+                    $applicantAddressSection.collapse('show');
+                }
+            }).trigger("change");
         });
     </script>
 }

@@ -24,83 +24,6 @@
     <form role="form" asp-controller="Form" asp-action="NewProperty" method="post" enctype="multipart/form-data">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-uppercase">Applicant Details</h3>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantTitle" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantFirstName" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantFirstName" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantLastName" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantLastName" class="form-control">
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ApplicantHouseNameNumber" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantHouseNameNumber" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantStreet" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantStreet" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantTown" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantTown" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantCounty" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantCounty" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantPostcode" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantPostcode" class="form-control">
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ApplicantEmail" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantEmail" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantTelephone" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantTelephone" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantMobile" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantMobile" class="form-control">
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="panel-heading">
                 <h3 class="panel-title text-uppercase">
                     Proposed Address <small class="text-lowercase">(please supply 3 suggestions in order of preference)</small>
                 </h3>
@@ -130,6 +53,83 @@
                         </div>
                     </div>
                 </li>
+                <div class="panel-heading">
+                    <h3 class="panel-title text-uppercase">Applicant Contact Details</h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantTitle" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantFirstName" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantFirstName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantLastName" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantLastName" class="form-control">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label asp-for="ApplicantHouseNameNumber" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantHouseNameNumber" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantStreet" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantStreet" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantTown" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantTown" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantCounty" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantCounty" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantPostcode" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantPostcode" class="form-control">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item form-horizontal">
+                        <div class="form-group">
+                            <label asp-for="ApplicantEmail" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantEmail" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantTelephone" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantTelephone" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ApplicantMobile" class="control-label col-xs-3 col-sm-2"></label>
+                            <div class="col-xs-9 col-sm-10">
+                                <input asp-for="ApplicantMobile" class="form-control">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </ul>
             <div class="panel-heading">
                 <h3 class="panel-title text-uppercase">

@@ -1,8 +1,12 @@
-﻿namespace StreetNaming.Web.Configuration
+﻿using System.Security.AccessControl;
+
+namespace StreetNaming.Web.Configuration
 {
     public class StreetNamingOptions
     {
         public PaymentOptions Payment { get; set; }
+
+        public AddressLookupOptions AddressLookup { get; set; }
 
         public class PaymentOptions
         {
@@ -25,6 +29,15 @@
             public string VatCode { get; set; }
 
             public string Narrative { get; set; }
+        }
+
+        public class AddressLookupOptions
+        {
+            public string Endpoint { get; set; }
+
+            public int PageSize { get; set; }
+
+            public int MinChars { get; set; }
         }
     }
 }

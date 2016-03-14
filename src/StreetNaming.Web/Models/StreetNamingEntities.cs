@@ -53,8 +53,7 @@ namespace StreetNaming.Web.Models
 
             modelBuilder.Entity<Applicant>()
                 .Property(x => x.PostCode)
-                .HasMaxLength(10)
-                .IsRequired();
+                .HasMaxLength(10);
 
             modelBuilder.Entity<Applicant>()
                 .Property(x => x.Telephone)

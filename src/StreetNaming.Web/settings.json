@@ -15,7 +15,12 @@
             "AccountReference": "STREETNAMING",
             "FundCode": "Z5",
             "VatCode": "",
-            "Narrative": "Property naming/numbering"
+            "Narrative": "Street naming/numbering"
+        },
+        "AddressLookup": {
+            "Endpoint": "https://isharemapstest.bathnes.gov.uk/getdata.aspx",
+            "PageSize": 10,
+            "MinChars": 3
         }
     }
 }

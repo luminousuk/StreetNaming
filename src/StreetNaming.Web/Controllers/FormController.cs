@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
+using Microsoft.Extensions.OptionsModel;
 using StreetNaming.Domain.Models;
+using StreetNaming.Web.Configuration;
 using StreetNaming.Web.Models;
 using StreetNaming.Web.ViewModels;
 
@@ -13,18 +15,23 @@ namespace StreetNaming.Web.Controllers
     {
         private readonly StreetNamingEntities _db;
         private readonly IMapper _mapper;
+        private readonly IOptions<StreetNamingOptions> _options;
 
-        public FormController(StreetNamingEntities context, IMapper mapper)
+        public FormController(StreetNamingEntities context, IMapper mapper, IOptions<StreetNamingOptions> options)
         {
             _db = context;
             _mapper = mapper;
+            _options = options;
         }
 
         public IActionResult ExistingProperty()
         {
             var viewModel = new ExistingPropertyViewModel
             {
-                SignedDate = DateTime.Today.ToString("D")
+                SignedDate = DateTime.Today.ToString("D"),
+                AddressLookupEndpoint = _options.Value.AddressLookup.Endpoint,
+                AddressLookupMinChars = _options.Value.AddressLookup.MinChars,
+                AddressLookupPageSize = _options.Value.AddressLookup.PageSize
             };
             return View(viewModel);
         }
@@ -41,6 +48,9 @@ namespace StreetNaming.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ExistingProperty(ExistingPropertyViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
             // TODO: Match criteria needs to be defined
             var applicant =
                 await
@@ -72,6 +82,9 @@ namespace StreetNaming.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> NewProperty(NewPropertyViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
             // TODO: Match criteria needs to be defined
             var applicant =
                 await
