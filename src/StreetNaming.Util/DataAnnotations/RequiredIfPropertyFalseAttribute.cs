@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StreetNaming.Util.DataAnnotations
 {
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class RequiredIfBooleanPropertyFalseAttribute : ValidationAttribute
     {
         private readonly string _dependentPropertyName;

@@ -56,7 +56,7 @@ namespace StreetNaming.Web.ViewModels
         public string ApplicantEmail { get; set; }
 
         [Display(Name = "Address")]
-        [Required]
+        [Required(ErrorMessage = "Please select the existing address.")]
         public long ExistingPropertyUrn { get; set; }
 
         [Display(Name = "1st Choice")]
