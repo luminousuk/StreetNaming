@@ -55,9 +55,11 @@ namespace StreetNaming.Web.ViewModels
         public string ApplicantEmail { get; set; }
 
         [Display(Name = "Address")]
+        [Required]
         public long ExistingPropertyUrn { get; set; }
 
         [Display(Name = "Address 1")]
+        [Required]
         public string ProposedAddress1 { get; set; }
 
         [Display(Name = "Address 2")]
@@ -69,9 +71,12 @@ namespace StreetNaming.Web.ViewModels
         public bool IsRegisteredOwner { get; set; }
 
         [Display(Name = "Attachments")]
-        public IEnumerable<IFormFile> Attachments { get; set; }
+        // TODO: RequiredCollection not ever being reached
+        [RequiredCollection]
+        public ICollection<IFormFile> Attachments { get; set; }
 
         [Display(Name = "Signed")]
+        [Required]
         public string Signed { get; set; }
 
         [Display(Name = "Date")]

@@ -4,8 +4,6 @@
   "dependencies": {
     "bootstrap": "3.3.5",
     "jquery": "2.1.4",
-    "jquery-validation": "1.15.0",
-    "jquery-validation-unobtrusive": "3.2.6",
     "awesome-bootstrap-checkbox": "~0.3.7",
     "bootstrap-filestyle": "~1.2.1",
     "font-awesome": "4.4.0",

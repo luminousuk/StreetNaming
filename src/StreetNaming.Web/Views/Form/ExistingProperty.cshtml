@@ -34,6 +34,7 @@
                         <label asp-for="ExistingPropertyUrn" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <select asp-for="ExistingPropertyUrn" class="form-control" placeholder="Begin typing address to search"></select>
+                            <span asp-validation-for="ExistingPropertyUrn" class="text-danger"></span>
                         </div>
                     </div>
                 </li>
@@ -49,6 +50,7 @@
                         <label asp-for="ProposedAddress1" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <input asp-for="ProposedAddress1" class="form-control">
+                            <span asp-validation-for="ProposedAddress1" class="text-danger"></span>
                         </div>
                     </div>
                 </li>
@@ -57,6 +59,7 @@
                         <label asp-for="ProposedAddress2" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <input asp-for="ProposedAddress2" class="form-control">
+                            <span asp-validation-for="ProposedAddress2" class="text-danger"></span>
                         </div>
                     </div>
                 </li>
@@ -65,6 +68,7 @@
                         <label asp-for="ProposedAddress3" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <input asp-for="ProposedAddress3" class="form-control">
+                            <span asp-validation-for="ProposedAddress3" class="text-danger"></span>
                         </div>
                     </div>
                 </li>
@@ -78,18 +82,21 @@
                         <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <input asp-for="ApplicantTitle" class="form-control">
+                            <span asp-validation-for="ApplicantTitle" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="ApplicantFirstName" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <input asp-for="ApplicantFirstName" class="form-control">
+                            <span asp-validation-for="ApplicantFirstName" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="ApplicantLastName" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <input asp-for="ApplicantLastName" class="form-control">
+                            <span asp-validation-for="ApplicantLastName" class="text-danger"></span>
                         </div>
                     </div>
                 </li>
@@ -101,6 +108,7 @@
                                 <input asp-for="ApplicantUseSameAddress" type="checkbox" id="ApplicantUseSameAddress">
                                 <label></label>
                             </div>
+                            <span asp-validation-for="ApplicantUseSameAddress" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="collapse in" id="ApplicantAddressSection">
@@ -201,6 +209,7 @@
                         <label asp-for="Attachments" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <input asp-for="Attachments" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" accept="image/*,application/pdf" multiple>
+                            <span asp-validation-for="Attachments" class="text-danger"></span>
                         </div>
                     </div>
                 </li>
@@ -216,7 +225,7 @@
                         <label asp-for="Signed" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
                             <input asp-for="Signed" class="form-control">
-                            <span asp-validation-for="IsRegisteredOwner" class="text-danger"></span>
+                            <span asp-validation-for="Signed" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group col-sm-5">

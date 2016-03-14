@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace StreetNaming.Util.DataAnnotations
 {
-    public class RequiredGroup : ValidationAttribute
+    public class RequiredGroupAttribute : ValidationAttribute
     {
         private readonly IList<string> _properties;
-        protected const string DefaultErrorMessageFormatString = "At least one must be populated: {0}";
+        protected const string DefaultErrorMessageFormatString = "At least one is required: {0}";
 
-        public RequiredGroup(params string[] properties)
+        public RequiredGroupAttribute(params string[] properties)
         {
             _properties = properties.ToList();
             ErrorMessage = DefaultErrorMessageFormatString;
@@ -27,7 +27,7 @@ namespace StreetNaming.Util.DataAnnotations
                             .GetProperty(property)
                             .GetValue(validationContext.ObjectInstance, null) != null);
             
-            return anyPopulated ? new ValidationResult(string.Format(ErrorMessageString, validationContext.DisplayName)) : ValidationResult.Success;
+            return anyPopulated ? ValidationResult.Success : new ValidationResult(string.Format(ErrorMessageString, string.Join(", ", _properties)));
         }
     }
 }
