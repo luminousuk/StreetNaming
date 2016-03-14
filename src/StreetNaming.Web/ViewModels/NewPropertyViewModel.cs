@@ -52,14 +52,14 @@ namespace StreetNaming.Web.ViewModels
         [EmailAddress]
         public string ApplicantEmail { get; set; }
 
-        [Display(Name = "Address 1")]
+        [Display(Name = "1st Choice")]
         [Required]
         public string ProposedAddress1 { get; set; }
 
-        [Display(Name = "Address 2")]
+        [Display(Name = "2nd Choice")]
         public string ProposedAddress2 { get; set; }
 
-        [Display(Name = "Address 3")]
+        [Display(Name = "3rd Choice")]
         public string ProposedAddress3 { get; set; }
 
         public bool IsRegisteredOwner { get; set; }

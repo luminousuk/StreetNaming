@@ -173,15 +173,15 @@
             </ul>
             <div class="panel-heading">
                 <h3 class="panel-title text-uppercase">
-                    ### You must attach plans or something ###
+                    Please attach a site location and any other supporting documentation
                 </h3>
             </div>
             <ul class="list-group">
                 <li class="list-group-item form-horizontal">
                     <div class="form-group">
-                        <label for="PlanUpload" class="control-label col-xs-3 col-sm-2">Attachments</label>
+                        <label asp-for="Attachments" class="control-label col-xs-3 col-sm-2"></label>
                         <div class="col-xs-9 col-sm-10">
-                            <input asp-for="Attachments" type="file" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" accept="image/*,application/pdf" multiple>
+                            <input asp-for="Attachments" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple>
                             <span asp-validation-for="Attachments" class="text-danger"></span>
                         </div>
                     </div>
