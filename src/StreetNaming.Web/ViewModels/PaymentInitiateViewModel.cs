@@ -19,8 +19,8 @@
 
         public string CallingApplicationTransactionReference { get; set; }
 
-        public string RequestType { get; set; }
+        public string CaseType { get; set; }
 
-        public string RequestReference { get; set; }
+        public string CaseReference { get; set; }
     }
 }

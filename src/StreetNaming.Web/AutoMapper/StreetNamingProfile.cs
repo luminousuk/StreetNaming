@@ -57,11 +57,11 @@ namespace StreetNaming.Web.AutoMapper
                 .ForMember(dest => dest.Telephone, opts => opts.MapFrom(src => src.ApplicantTelephone))
                 .ForMember(dest => dest.Title, opts => opts.MapFrom(src => src.ApplicantTitle));
 
-            CreateMap<NewPropertyViewModel, Request>()
-                .ForMember(dest => dest.RequestType, opts => opts.UseValue(RequestType.NewPropertyRequest));
+            CreateMap<NewPropertyViewModel, Case>()
+                .ForMember(dest => dest.CaseType, opts => opts.UseValue(CaseType.NewPropertyCase));
 
-            CreateMap<ExistingPropertyViewModel, Request>()
-                .ForMember(dest => dest.RequestType, opts => opts.UseValue(RequestType.ExistingPropertyRequest));
+            CreateMap<ExistingPropertyViewModel, Case>()
+                .ForMember(dest => dest.CaseType, opts => opts.UseValue(CaseType.ExistingPropertyCase));
 
             CreateMap<IFormFile, Attachment>()
                 .ForMember(dest => dest.OriginalFileName,

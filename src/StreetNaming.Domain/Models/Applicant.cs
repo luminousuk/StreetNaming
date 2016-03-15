@@ -38,6 +38,6 @@ namespace StreetNaming.Domain.Models
 
         public DateTime ModifiedDate { get; set; }
 
-        public ICollection<Request> Requests { get; set; }
+        public ICollection<Case> Cases { get; set; }
     }
 }

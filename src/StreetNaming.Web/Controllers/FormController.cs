@@ -68,11 +68,11 @@ namespace StreetNaming.Web.Controllers
             else
                 _mapper.Map(viewModel, applicant);
 
-            var request = _mapper.Map<Request>(viewModel);
+            var request = _mapper.Map<Case>(viewModel);
             request.Applicant = applicant;
-            request.RequestStatus = RequestStatus.New;
+            request.CaseStatus = CaseStatus.New;
             request.Reference = Guid.NewGuid();
-            _db.Requests.Add(request);
+            _db.Cases.Add(request);
 
             await _db.SaveChangesAsync();
 
@@ -102,11 +102,11 @@ namespace StreetNaming.Web.Controllers
             else
                 _mapper.Map(viewModel, applicant);
 
-            var request = _mapper.Map<Request>(viewModel);
+            var request = _mapper.Map<Case>(viewModel);
             request.Applicant = applicant;
-            request.RequestStatus = RequestStatus.New;
+            request.CaseStatus = CaseStatus.New;
             request.Reference = Guid.NewGuid();
-            _db.Requests.Add(request);
+            _db.Cases.Add(request);
 
             await _db.SaveChangesAsync();
 

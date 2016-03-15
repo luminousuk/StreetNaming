@@ -4,16 +4,16 @@ using StreetNaming.Domain.Models.Interfaces;
 
 namespace StreetNaming.Domain.Models
 {
-    public class Request
+    public class Case
         : ICreatable
             , IModifiable
             , IReferable
     {
-        public long RequestId { get; set; }
+        public long CaseId { get; set; }
 
-        public RequestType RequestType { get; set; }
+        public CaseType CaseType { get; set; }
 
-        public RequestStatus RequestStatus { get; set; }
+        public CaseStatus CaseStatus { get; set; }
 
         public long ApplicantId { get; set; }
 
@@ -42,17 +42,19 @@ namespace StreetNaming.Domain.Models
         public Guid Reference { get; set; }
     }
 
-    public enum RequestType
+    public enum CaseType
     {
-        NewPropertyRequest = 0,
-        ExistingPropertyRequest = 1
+        NewPropertyCase = 1<<0,
+        ExistingPropertyCase = 1<<1
     }
 
-    public enum RequestStatus
+    public enum CaseStatus
     {
         New = 0,
-        Active = 1,
-        Completed = 2,
-        Rejected = 4
+        Active = 1<<0,
+        Completed = 1<<1,
+        Rejected = 1<<2,
+        Cancelled = 1<<3,
+        Refunded = 1<<4
     }
 }

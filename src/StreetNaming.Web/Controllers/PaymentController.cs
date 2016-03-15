@@ -27,7 +27,7 @@ namespace StreetNaming.Web.Controllers
         {
             var request =
                 await
-                    _context.Requests.Include(r => r.Applicant)
+                    _context.Cases.Include(r => r.Applicant)
                         .FirstOrDefaultAsync(r => r.Reference == requestReference);
 
             if (request == null) return new BadRequestResult();
@@ -38,13 +38,13 @@ namespace StreetNaming.Web.Controllers
             var transaction =
                 await
                     _context.Transactions.FirstOrDefaultAsync(
-                        t => t.RequestId == request.RequestId && t.TransactionStatus == TransactionStatus.Pending);
+                        t => t.CaseId == request.CaseId && t.TransactionStatus == TransactionStatus.Pending);
 
             if (transaction == null)
             {
                 transaction = new Transaction
                 {
-                    Request = request,
+                    Case = request,
                     Provider = _options.Value.Payment.Provider,
                     Reference = Guid.NewGuid(),
                     TransactionStatus = TransactionStatus.Pending,
@@ -82,8 +82,8 @@ namespace StreetNaming.Web.Controllers
                         /* Line Based Refund Receipt Number */ '|'
                     ),
                 ReturnUrl = Url.Action("ProviderResponse", "Payment", null, "http"),
-                RequestType = request.RequestType.ToString(),
-                RequestReference = request.Reference.ToString()
+                CaseType = request.CaseType.ToString(),
+                CaseReference = request.Reference.ToString()
             };
 
             return View(viewModel);

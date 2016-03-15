@@ -8,7 +8,7 @@ namespace StreetNaming.Web.Models
     {
         public DbSet<Applicant> Applicants { get; set; }
 
-        public DbSet<Request> Requests { get; set; }
+        public DbSet<Case> Cases { get; set; }
 
         public DbSet<Attachment> Attachments { get; set; }
 
@@ -114,57 +114,57 @@ namespace StreetNaming.Web.Models
 
 
             /*
-             * Request
+             * Case
              */
-            modelBuilder.Entity<Request>()
-                .HasKey(x => x.RequestId);
+            modelBuilder.Entity<Case>()
+                .HasKey(x => x.CaseId);
 
-            modelBuilder.Entity<Request>()
-                .Property(x => x.RequestType)
+            modelBuilder.Entity<Case>()
+                .Property(x => x.CaseType)
                 .IsRequired();
 
-            modelBuilder.Entity<Request>()
-                .Property(x => x.RequestStatus)
+            modelBuilder.Entity<Case>()
+                .Property(x => x.CaseStatus)
                 .IsRequired();
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .Property(x => x.ProposedAddress1)
                 .HasMaxLength(400)
                 .IsRequired();
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .Property(x => x.ProposedAddress2)
                 .HasMaxLength(400);
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .Property(x => x.ProposedAddress3)
                 .HasMaxLength(400);
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .Property(x => x.ExistingPropertyUrn)
                 .IsRequired(false);
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .Property(x => x.IsRegisteredOwner)
                 .IsRequired();
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .Property(x => x.Signed)
                 .HasMaxLength(100)
                 .IsRequired();
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .Property(x => x.Reference)
                 .ValueGeneratedOnAdd()
                 .IsRequired();
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .Property(x => x.CreatedDate)
                 .ValueGeneratedOnAdd()
                 .HasDefaultValueSql("NOW()")
                 .IsRequired();
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .Property(x => x.ModifiedDate)
                 .ValueGeneratedOnAddOrUpdate()
                 .HasDefaultValueSql("NOW()")
@@ -223,31 +223,31 @@ namespace StreetNaming.Web.Models
              * Relationships
              */
             modelBuilder.Entity<Attachment>()
-                .HasOne(a => a.Request)
+                .HasOne(a => a.Case)
                 .WithMany(r => r.Attachments)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasForeignKey(a => a.RequestId)
+                .HasForeignKey(a => a.CaseId)
                 .IsRequired();
 
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .HasOne(r => r.Applicant)
-                .WithMany(a => a.Requests)
+                .WithMany(a => a.Cases)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(r => r.ApplicantId)
                 .IsRequired();
 
             modelBuilder.Entity<Transaction>()
-                .HasOne(t => t.Request)
+                .HasOne(t => t.Case)
                 .WithMany(r => r.Transactions)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasForeignKey(t => t.RequestId)
+                .HasForeignKey(t => t.CaseId)
                 .IsRequired();
 
 
             /*
              * Indexes
              */
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Case>()
                 .HasIndex(r => r.Reference)
                 .IsUnique();
 

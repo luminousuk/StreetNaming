@@ -50,7 +50,6 @@ namespace StreetNaming.Web.Migrations
                         .HasAnnotation("Relational:GeneratedValueSql", "NOW()");
 
                     b.Property<string>("PostCode")
-                        .IsRequired()
                         .HasAnnotation("MaxLength", 10);
 
                     b.Property<string>("Street")
@@ -79,6 +78,8 @@ namespace StreetNaming.Web.Migrations
                     b.Property<byte[]>("Bytes")
                         .IsRequired();
 
+                    b.Property<long>("CaseId");
+
                     b.Property<string>("ContentType")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 128);
@@ -95,17 +96,19 @@ namespace StreetNaming.Web.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 128);
 
-                    b.Property<long>("RequestId");
-
                     b.HasKey("AttachmentId");
                 });
 
-            modelBuilder.Entity("StreetNaming.Domain.Models.Request", b =>
+            modelBuilder.Entity("StreetNaming.Domain.Models.Case", b =>
                 {
-                    b.Property<long>("RequestId")
+                    b.Property<long>("CaseId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<long>("ApplicantId");
+
+                    b.Property<int>("CaseStatus");
+
+                    b.Property<int>("CaseType");
 
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
@@ -132,15 +135,11 @@ namespace StreetNaming.Web.Migrations
                     b.Property<Guid>("Reference")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("RequestStatus");
-
-                    b.Property<int>("RequestType");
-
                     b.Property<string>("Signed")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 100);
 
-                    b.HasKey("RequestId");
+                    b.HasKey("CaseId");
 
                     b.HasIndex("Reference")
                         .IsUnique();
@@ -152,6 +151,8 @@ namespace StreetNaming.Web.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("Amount");
+
+                    b.Property<long>("CaseId");
 
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
@@ -167,8 +168,6 @@ namespace StreetNaming.Web.Migrations
 
                     b.Property<Guid>("Reference")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<long>("RequestId");
 
                     b.Property<int?>("ResponseCode");
 
@@ -187,12 +186,12 @@ namespace StreetNaming.Web.Migrations
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Attachment", b =>
                 {
-                    b.HasOne("StreetNaming.Domain.Models.Request")
+                    b.HasOne("StreetNaming.Domain.Models.Case")
                         .WithMany()
-                        .HasForeignKey("RequestId");
+                        .HasForeignKey("CaseId");
                 });
 
-            modelBuilder.Entity("StreetNaming.Domain.Models.Request", b =>
+            modelBuilder.Entity("StreetNaming.Domain.Models.Case", b =>
                 {
                     b.HasOne("StreetNaming.Domain.Models.Applicant")
                         .WithMany()
@@ -201,9 +200,9 @@ namespace StreetNaming.Web.Migrations
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Transaction", b =>
                 {
-                    b.HasOne("StreetNaming.Domain.Models.Request")
+                    b.HasOne("StreetNaming.Domain.Models.Case")
                         .WithMany()
-                        .HasForeignKey("RequestId");
+                        .HasForeignKey("CaseId");
                 });
         }
     }

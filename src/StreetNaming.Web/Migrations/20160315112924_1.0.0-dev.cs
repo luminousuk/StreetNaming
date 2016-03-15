@@ -23,7 +23,7 @@ namespace StreetNaming.Web.Migrations
                     LastName = table.Column<string>(nullable: false),
                     Mobile = table.Column<string>(nullable: true),
                     ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
-                    PostCode = table.Column<string>(nullable: false),
+                    PostCode = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
                     Telephone = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
@@ -34,12 +34,14 @@ namespace StreetNaming.Web.Migrations
                     table.PrimaryKey("PK_Applicant", x => x.ApplicantId);
                 });
             migrationBuilder.CreateTable(
-                name: "Request",
+                name: "Case",
                 columns: table => new
                 {
-                    RequestId = table.Column<long>(nullable: false)
+                    CaseId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
                     ApplicantId = table.Column<long>(nullable: false),
+                    CaseStatus = table.Column<int>(nullable: false),
+                    CaseType = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     ExistingPropertyUrn = table.Column<long>(nullable: true),
                     IsRegisteredOwner = table.Column<bool>(nullable: false),
@@ -48,15 +50,13 @@ namespace StreetNaming.Web.Migrations
                     ProposedAddress2 = table.Column<string>(nullable: true),
                     ProposedAddress3 = table.Column<string>(nullable: true),
                     Reference = table.Column<Guid>(nullable: false),
-                    RequestStatus = table.Column<int>(nullable: false),
-                    RequestType = table.Column<int>(nullable: false),
                     Signed = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Request", x => x.RequestId);
+                    table.PrimaryKey("PK_Case", x => x.CaseId);
                     table.ForeignKey(
-                        name: "FK_Request_Applicant_ApplicantId",
+                        name: "FK_Case_Applicant_ApplicantId",
                         column: x => x.ApplicantId,
                         principalTable: "Applicant",
                         principalColumn: "ApplicantId",
@@ -69,20 +69,20 @@ namespace StreetNaming.Web.Migrations
                     AttachmentId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
                     Bytes = table.Column<byte[]>(nullable: false),
+                    CaseId = table.Column<long>(nullable: false),
                     ContentType = table.Column<string>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
-                    OriginalFileName = table.Column<string>(nullable: false),
-                    RequestId = table.Column<long>(nullable: false)
+                    OriginalFileName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Attachment", x => x.AttachmentId);
                     table.ForeignKey(
-                        name: "FK_Attachment_Request_RequestId",
-                        column: x => x.RequestId,
-                        principalTable: "Request",
-                        principalColumn: "RequestId",
+                        name: "FK_Attachment_Case_CaseId",
+                        column: x => x.CaseId,
+                        principalTable: "Case",
+                        principalColumn: "CaseId",
                         onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
@@ -92,11 +92,11 @@ namespace StreetNaming.Web.Migrations
                     TransactionId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
                     Amount = table.Column<decimal>(nullable: false),
+                    CaseId = table.Column<long>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     Currency = table.Column<string>(nullable: false),
                     Provider = table.Column<string>(nullable: false),
                     Reference = table.Column<Guid>(nullable: false),
-                    RequestId = table.Column<long>(nullable: false),
                     ResponseCode = table.Column<int>(nullable: true),
                     ResponseDate = table.Column<DateTime>(nullable: true),
                     ResponseDescription = table.Column<string>(nullable: true),
@@ -106,10 +106,10 @@ namespace StreetNaming.Web.Migrations
                 {
                     table.PrimaryKey("PK_Transaction", x => x.TransactionId);
                     table.ForeignKey(
-                        name: "FK_Transaction_Request_RequestId",
-                        column: x => x.RequestId,
-                        principalTable: "Request",
-                        principalColumn: "RequestId",
+                        name: "FK_Transaction_Case_CaseId",
+                        column: x => x.CaseId,
+                        principalTable: "Case",
+                        principalColumn: "CaseId",
                         onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateIndex(
@@ -118,8 +118,8 @@ namespace StreetNaming.Web.Migrations
                 columns: new[] { "FirstName", "LastName", "Email" },
                 unique: true);
             migrationBuilder.CreateIndex(
-                name: "IX_Request_Reference",
-                table: "Request",
+                name: "IX_Case_Reference",
+                table: "Case",
                 column: "Reference",
                 unique: true);
             migrationBuilder.CreateIndex(
@@ -133,7 +133,7 @@ namespace StreetNaming.Web.Migrations
         {
             migrationBuilder.DropTable("Attachment");
             migrationBuilder.DropTable("Transaction");
-            migrationBuilder.DropTable("Request");
+            migrationBuilder.DropTable("Case");
             migrationBuilder.DropTable("Applicant");
         }
     }
