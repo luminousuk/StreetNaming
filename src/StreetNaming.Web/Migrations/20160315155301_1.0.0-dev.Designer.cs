@@ -8,7 +8,7 @@ using StreetNaming.Web.Models;
 namespace StreetNaming.Web.Migrations
 {
     [DbContext(typeof(StreetNamingEntities))]
-    [Migration("20160315112924_1.0.0-dev")]
+    [Migration("20160315155301_1.0.0-dev")]
     partial class _100dev
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,8 @@ namespace StreetNaming.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("Relational:GeneratedValueSql", "NOW()");
 
+                    b.Property<string>("CustomerReference");
+
                     b.Property<long?>("ExistingPropertyUrn");
 
                     b.Property<bool>("IsRegisteredOwner");
@@ -134,13 +136,17 @@ namespace StreetNaming.Web.Migrations
                         .HasAnnotation("MaxLength", 400);
 
                     b.Property<Guid>("Reference")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MaxLength", 20);
 
                     b.Property<string>("Signed")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 100);
 
                     b.HasKey("CaseId");
+
+                    b.HasIndex("CustomerReference")
+                        .IsUnique();
 
                     b.HasIndex("Reference")
                         .IsUnique();

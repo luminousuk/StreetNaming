@@ -83,7 +83,7 @@ namespace StreetNaming.Web.Controllers
                     ),
                 ReturnUrl = Url.Action("ProviderResponse", "Payment", null, "http"),
                 CaseType = request.CaseType.ToString(),
-                CaseReference = request.Reference.ToString()
+                CaseReference = request.CustomerReference
             };
 
             return View(viewModel);

@@ -40,6 +40,8 @@ namespace StreetNaming.Domain.Models
         public DateTime ModifiedDate { get; set; }
 
         public Guid Reference { get; set; }
+
+        public string CustomerReference { get; set; }
     }
 
     public enum CaseType

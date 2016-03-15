@@ -43,6 +43,7 @@ namespace StreetNaming.Web.Migrations
                     CaseStatus = table.Column<int>(nullable: false),
                     CaseType = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
+                    CustomerReference = table.Column<string>(nullable: true),
                     ExistingPropertyUrn = table.Column<long>(nullable: true),
                     IsRegisteredOwner = table.Column<bool>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
@@ -116,6 +117,11 @@ namespace StreetNaming.Web.Migrations
                 name: "IX_Applicant_FirstName_LastName_Email",
                 table: "Applicant",
                 columns: new[] { "FirstName", "LastName", "Email" },
+                unique: true);
+            migrationBuilder.CreateIndex(
+                name: "IX_Case_CustomerReference",
+                table: "Case",
+                column: "CustomerReference",
                 unique: true);
             migrationBuilder.CreateIndex(
                 name: "IX_Case_Reference",

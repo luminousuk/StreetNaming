@@ -5,6 +5,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.OptionsModel;
 using StreetNaming.Domain.Models;
+using StreetNaming.Util;
 using StreetNaming.Web.Configuration;
 using StreetNaming.Web.Models;
 using StreetNaming.Web.ViewModels;
@@ -76,6 +77,11 @@ namespace StreetNaming.Web.Controllers
 
             await _db.SaveChangesAsync();
 
+            request.CustomerReference =
+                UniqueReferenceGenerator.GetCaseReference(_options.Value.ExistingPropertyReferencePrefix, request.CaseId);
+
+            await _db.SaveChangesAsync();
+
             return RedirectToAction("Initiate", "Payment", new {requestReference = request.Reference});
         }
 
@@ -107,6 +113,11 @@ namespace StreetNaming.Web.Controllers
             request.CaseStatus = CaseStatus.New;
             request.Reference = Guid.NewGuid();
             _db.Cases.Add(request);
+
+            await _db.SaveChangesAsync();
+
+            request.CustomerReference =
+                UniqueReferenceGenerator.GetCaseReference(_options.Value.NewPropertyReferencePrefix, request.CaseId);
 
             await _db.SaveChangesAsync();
 

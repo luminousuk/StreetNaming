@@ -8,6 +8,10 @@ namespace StreetNaming.Web.Configuration
 
         public AddressLookupOptions AddressLookup { get; set; }
 
+        public string NewPropertyReferencePrefix { get; set; }
+
+        public string ExistingPropertyReferencePrefix { get; set; }
+
         public class PaymentOptions
         {
             public string Provider { get; set; }

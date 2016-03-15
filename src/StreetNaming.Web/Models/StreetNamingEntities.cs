@@ -159,6 +159,12 @@ namespace StreetNaming.Web.Models
                 .IsRequired();
 
             modelBuilder.Entity<Case>()
+                .Property(x => x.Reference)
+                .HasMaxLength(20)
+                .ValueGeneratedOnAdd()
+                .IsRequired();
+
+            modelBuilder.Entity<Case>()
                 .Property(x => x.CreatedDate)
                 .ValueGeneratedOnAdd()
                 .HasDefaultValueSql("NOW()")
@@ -249,6 +255,10 @@ namespace StreetNaming.Web.Models
              */
             modelBuilder.Entity<Case>()
                 .HasIndex(r => r.Reference)
+                .IsUnique();
+
+            modelBuilder.Entity<Case>()
+                .HasIndex(r => r.CustomerReference)
                 .IsUnique();
 
             modelBuilder.Entity<Transaction>()

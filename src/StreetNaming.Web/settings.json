@@ -21,6 +21,8 @@
             "Endpoint": "https://isharemapstest.bathnes.gov.uk/getdata.aspx",
             "PageSize": 10,
             "MinChars": 3
-        }
+        },
+        "ExistingPropertyReferencePrefix": "EP",
+        "NewPropertyReferencePrefix": "NP"
     }
 }
