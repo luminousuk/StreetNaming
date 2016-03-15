@@ -99,10 +99,11 @@ namespace StreetNaming.Web.Controllers
 
             transaction.ResponseDate = DateTime.Now;
             transaction.ResponseCode = int.Parse(viewModel.ResponseCode);
+            transaction.TransactionStatus = transaction.ResponseCode == 0 ? TransactionStatus.Complete : TransactionStatus.Failed;
             transaction.ResponseDescription = viewModel.ResponseDescription;
 
             // Business Logic here
-
+            
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Completed", new {transactionReference = transaction.Reference});

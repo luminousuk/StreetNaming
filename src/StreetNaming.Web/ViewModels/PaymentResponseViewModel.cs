@@ -29,5 +29,9 @@
         public string ResponseCode { get; set; }
 
         public string ResponseDescription { get; set; }
+
+        public string CaseReference { get; set; }
+
+        public string CaseType { get; set; }
     }
 }

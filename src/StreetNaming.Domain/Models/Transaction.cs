@@ -38,6 +38,8 @@ namespace StreetNaming.Domain.Models
     {
         Pending = 1 << 0,
         Complete = 1 << 1,
-        Cancelled = 1 << 2
+        Failed = 1 << 2,
+        Cancelled = 1 << 3,
+        Refunded = 1 << 4
     }
 }
