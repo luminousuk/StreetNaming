@@ -34,6 +34,7 @@
             <label asp-for="ExistingPropertyUrn" class="control-label col-xs-3 col-sm-2"></label>
             <div class="col-xs-9 col-sm-10">
                 <select asp-for="ExistingPropertyUrn" class="form-control" placeholder="Begin typing address to search" required></select>
+                <input asp-for="ApplicantFullAddress" type="hidden" />
                 <span asp-validation-for="ExistingPropertyUrn" class="text-danger"></span>
             </div>
         </div>
@@ -285,7 +286,8 @@
                 $applicantStreet = $("#ApplicantStreet"),
                 $applicantTown = $("#ApplicantTown"),
                 $applicantCounty = $("#ApplicantCounty"),
-                $applicantPostcode = $("#ApplicantPostcode");
+                $applicantPostcode = $("#ApplicantPostcode"),
+                $applicantFullAddress = $("#ApplicantFullAddress");
 
             var opts = {
                 className: "AddressAutocomplete",
@@ -329,6 +331,9 @@
                             }
                         }
                     });
+                },
+                onItemAdd: function(value, $item) {
+                    $applicantFullAddress.val($item.text());
                 }
             });
 

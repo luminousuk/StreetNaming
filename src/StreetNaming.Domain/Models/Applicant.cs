@@ -28,6 +28,8 @@ namespace StreetNaming.Domain.Models
 
         public string PostCode { get; set; }
 
+        public string FullAddress { get; set; }
+
         public string Telephone { get; set; }
 
         public string Mobile { get; set; }

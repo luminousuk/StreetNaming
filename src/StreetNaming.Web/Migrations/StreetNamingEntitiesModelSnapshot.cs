@@ -33,6 +33,9 @@ namespace StreetNaming.Web.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 50);
 
+                    b.Property<string>("FullAddress")
+                        .HasAnnotation("MaxLength", 200);
+
                     b.Property<string>("HouseName")
                         .HasAnnotation("MaxLength", 50);
 

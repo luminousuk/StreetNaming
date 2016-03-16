@@ -41,6 +41,8 @@ namespace StreetNaming.Web.ViewModels
         [PostCode(ErrorMessage = "Please enter a valid UK Postcode.")]
         public string ApplicantPostcode { get; set; }
 
+        public string ApplicantFullAddress { get; set; }
+
         [Display(Name = "Telephone")]
         [RequiredGroup("ApplicantTelephone", "ApplicantMobile", "ApplicantEmail")]
         [Telephone(ErrorMessage = "Please enter a valid telephone number.")]

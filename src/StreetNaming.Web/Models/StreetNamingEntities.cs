@@ -56,6 +56,10 @@ namespace StreetNaming.Web.Models
                 .HasMaxLength(10);
 
             modelBuilder.Entity<Applicant>()
+                .Property(x => x.FullAddress)
+                .HasMaxLength(200);
+
+            modelBuilder.Entity<Applicant>()
                 .Property(x => x.Telephone)
                 .HasMaxLength(20);
 
