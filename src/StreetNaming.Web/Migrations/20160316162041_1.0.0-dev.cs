@@ -40,6 +40,7 @@ namespace StreetNaming.Web.Migrations
                 {
                     CaseId = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
+                    AdditionalInformation = table.Column<string>(nullable: true),
                     ApplicantId = table.Column<long>(nullable: false),
                     CaseStatus = table.Column<int>(nullable: false),
                     CaseType = table.Column<int>(nullable: false),

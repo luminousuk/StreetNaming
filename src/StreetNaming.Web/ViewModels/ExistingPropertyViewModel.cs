@@ -77,6 +77,9 @@ namespace StreetNaming.Web.ViewModels
 
         public bool IsRegisteredOwner { get; set; }
 
+        [Display(Name="Additional Information")]
+        public string AdditionalInformation { get; set; }
+
         [Display(Name = "Attachments")]
         // TODO: RequiredCollection not ever being reached
         [RequiredCollection(ErrorMessage = "You must attached at least one file.")]

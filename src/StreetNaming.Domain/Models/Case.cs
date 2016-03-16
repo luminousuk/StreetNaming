@@ -44,6 +44,8 @@ namespace StreetNaming.Domain.Models
         public Guid Reference { get; set; }
 
         public string CustomerReference { get; set; }
+
+        public string AdditionalInformation { get; set; }
     }
 
     public enum CaseType

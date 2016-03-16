@@ -107,6 +107,9 @@ namespace StreetNaming.Web.Migrations
                     b.Property<long>("CaseId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AdditionalInformation")
+                        .HasAnnotation("MaxLength", 2000);
+
                     b.Property<long>("ApplicantId");
 
                     b.Property<int>("CaseStatus");
@@ -117,7 +120,8 @@ namespace StreetNaming.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("Relational:GeneratedValueSql", "NOW()");
 
-                    b.Property<string>("CustomerReference");
+                    b.Property<string>("CustomerReference")
+                        .HasAnnotation("MaxLength", 20);
 
                     b.Property<DateTime?>("EffectiveDate");
 
@@ -140,8 +144,7 @@ namespace StreetNaming.Web.Migrations
                         .HasAnnotation("MaxLength", 400);
 
                     b.Property<Guid>("Reference")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MaxLength", 20);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Signed")
                         .IsRequired()

@@ -156,6 +156,10 @@ namespace StreetNaming.Web.Models
                 .IsRequired();
 
             modelBuilder.Entity<Case>()
+                .Property(x => x.AdditionalInformation)
+                .HasMaxLength(2000);
+
+            modelBuilder.Entity<Case>()
                 .Property(x => x.Signed)
                 .HasMaxLength(100)
                 .IsRequired();
@@ -166,10 +170,8 @@ namespace StreetNaming.Web.Models
                 .IsRequired();
 
             modelBuilder.Entity<Case>()
-                .Property(x => x.Reference)
-                .HasMaxLength(20)
-                .ValueGeneratedOnAdd()
-                .IsRequired();
+                .Property(x => x.CustomerReference)
+                .HasMaxLength(20);
 
             modelBuilder.Entity<Case>()
                 .Property(x => x.CreatedDate)

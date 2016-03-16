@@ -34,7 +34,7 @@
             <label asp-for="ExistingPropertyUrn" class="control-label col-xs-3 col-sm-2"></label>
             <div class="col-xs-9 col-sm-10">
                 <select asp-for="ExistingPropertyUrn" class="form-control" placeholder="Begin typing address to search" required></select>
-                <input asp-for="ApplicantFullAddress" type="hidden" />
+                <input asp-for="ApplicantFullAddress" type="hidden"/>
                 <span asp-validation-for="ExistingPropertyUrn" class="text-danger"></span>
             </div>
         </div>
@@ -73,6 +73,54 @@
             </div>
         </div>
     </li>
+</ul>
+<div class="panel-heading">
+    <h3 class="panel-title text-uppercase">
+        Are you the registered owner of the property? <small class="text-lowercase">(if not we need written confirmation from the owner that they have no objection to the change)</small>
+    </h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item form-horizontal">
+        <div class="row">
+            <div class="radio col-xs-4 col-xs-offset-2 text-center">
+                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerYes" value="true" required>
+                <label for="IsRegisteredOwnerYes">
+                    Yes
+                </label>
+
+            </div>
+            <div class="radio col-xs-4 text-center">
+                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerNo" value="false" required>
+                <label for="IsRegisteredOwnerNo">
+                    No
+                </label>
+            </div>
+        </div>
+        <span asp-validation-for="IsRegisteredOwner" class="text-danger"></span>
+    </li>
+</ul>
+<div class="panel-heading">
+    <h3 class="panel-title text-uppercase">
+        Please attach a site location and any other supporting documentation
+    </h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="Attachments" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="Attachments" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple>
+                <span asp-validation-for="Attachments" class="text-danger"></span>
+            </div>
+        </div>
+    </li>
+</ul>
+<div class="panel-heading">
+    <h3 class="panel-title text-uppercase">
+        Additional Information
+    </h3>
+</div>
+<ul class="list-group">
     <li class="list-group-item form-horizontal">
         <div class="form-group">
             <label asp-for="EffectiveDate" class="control-label col-xs-3 col-sm-2"></label>
@@ -82,8 +130,16 @@
             </div>
         </div>
     </li>
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="AdditionalInformation" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <textarea asp-for="AdditionalInformation" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="AdditionalInformation" class="text-danger"></span>
+            </div>
+        </div>
+    </li>
 </ul>
-
 <div class="panel-heading">
     <h3 class="panel-title text-uppercase">Applicant Contact Details</h3>
 </div>
@@ -180,47 +236,6 @@
             <div class="col-xs-9 col-sm-10">
                 <input asp-for="ApplicantMobile" class="form-control">
                 <span asp-validation-for="ApplicantMobile" class="text-danger"></span>
-            </div>
-        </div>
-    </li>
-</ul>
-<div class="panel-heading">
-    <h3 class="panel-title text-uppercase">
-        Are you the registered owner of the property? <small class="text-lowercase">(if not we need written confirmation from the owner that they have no objection to the change)</small>
-    </h3>
-</div>
-<ul class="list-group">
-    <li class="list-group-item form-horizontal">
-        <div class="row">
-            <div class="radio col-xs-4 col-xs-offset-2 text-center">
-                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerYes" value="true" required>
-                <label for="IsRegisteredOwnerYes">
-                    Yes
-                </label>
-
-            </div>
-            <div class="radio col-xs-4 text-center">
-                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerNo" value="false" required>
-                <label for="IsRegisteredOwnerNo">
-                    No
-                </label>
-            </div>
-        </div>
-        <span asp-validation-for="IsRegisteredOwner" class="text-danger"></span>
-    </li>
-</ul>
-<div class="panel-heading">
-    <h3 class="panel-title text-uppercase">
-        Please attach a site location and any other supporting documentation
-    </h3>
-</div>
-<ul class="list-group">
-    <li class="list-group-item form-horizontal">
-        <div class="form-group">
-            <label asp-for="Attachments" class="control-label col-xs-3 col-sm-2"></label>
-            <div class="col-xs-9 col-sm-10">
-                <input asp-for="Attachments" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple>
-                <span asp-validation-for="Attachments" class="text-danger"></span>
             </div>
         </div>
     </li>
