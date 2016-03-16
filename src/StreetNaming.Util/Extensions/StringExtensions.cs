@@ -8,7 +8,7 @@ namespace StreetNaming.Util.Extensions
 
         public static bool IsNumeric(this string input)
         {
-            return NumericRegex.IsMatch(input);
+            return input != null && NumericRegex.IsMatch(input);
         }
     }
 }

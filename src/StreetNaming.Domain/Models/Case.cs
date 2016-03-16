@@ -25,6 +25,8 @@ namespace StreetNaming.Domain.Models
 
         public string ProposedAddress3 { get; set; }
 
+        public DateTime? EffectiveDate { get; set; }
+
         public long? ExistingPropertyUrn { get; set; }
 
         public bool IsRegisteredOwner { get; set; }

@@ -21,228 +21,238 @@
     </div>
 </div>
 <div class="row">
-    <form role="form" asp-controller="Form" asp-action="ExistingProperty" method="post" enctype="multipart/form-data">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title text-uppercase">
-                    Existing Address <small class="text-lowercase">(address to be changed)</small>
-                </h3>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ExistingPropertyUrn" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <select asp-for="ExistingPropertyUrn" class="form-control" placeholder="Begin typing address to search" required></select>
-                            <span asp-validation-for="ExistingPropertyUrn" class="text-danger"></span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="panel-heading">
-                <h3 class="panel-title text-uppercase">
-                    Proposed Address <small class="text-lowercase">(please supply 3 suggestions in order of preference)</small>
-                </h3>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ProposedAddress1" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ProposedAddress1" class="form-control" required>
-                            <span asp-validation-for="ProposedAddress1" class="text-danger"></span>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ProposedAddress2" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ProposedAddress2" class="form-control">
-                            <span asp-validation-for="ProposedAddress2" class="text-danger"></span>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ProposedAddress3" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ProposedAddress3" class="form-control">
-                            <span asp-validation-for="ProposedAddress3" class="text-danger"></span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="panel-heading">
-                <h3 class="panel-title text-uppercase">Applicant Contact Details</h3>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantTitle" class="form-control" required>
-                            <span asp-validation-for="ApplicantTitle" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantFirstName" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantFirstName" class="form-control">
-                            <span asp-validation-for="ApplicantFirstName" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantLastName" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantLastName" class="form-control" required>
-                            <span asp-validation-for="ApplicantLastName" class="text-danger"></span>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label for="ApplicantUseSameAddress" class="control-label col-xs-3 col-sm-2">Use same address?</label>
-                        <div class="col-xs-9 col-sm-10">
-                            <div class="checkbox checkbox-primary">
-                                <input asp-for="ApplicantUseSameAddress" type="checkbox" id="ApplicantUseSameAddress">
-                                <label></label>
-                            </div>
-                            <span asp-validation-for="ApplicantUseSameAddress" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="collapse in" id="ApplicantAddressSection">
-                        <div class="form-group">
-                            <label asp-for="ApplicantHouseNameNumber" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantHouseNameNumber" class="form-control">
-                                <span asp-validation-for="ApplicantHouseNameNumber" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantStreet" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantStreet" class="form-control">
-                                <span asp-validation-for="ApplicantStreet" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantTown" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantTown" class="form-control">
-                                <span asp-validation-for="ApplicantTown" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantCounty" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantCounty" class="form-control">
-                                <span asp-validation-for="ApplicantCounty" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ApplicantPostcode" class="control-label col-xs-3 col-sm-2"></label>
-                            <div class="col-xs-9 col-sm-10">
-                                <input asp-for="ApplicantPostcode" class="form-control">
-                                <span asp-validation-for="ApplicantPostcode" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="ApplicantEmail" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantEmail" class="form-control">
-                            <span asp-validation-for="ApplicantEmail" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantTelephone" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantTelephone" class="form-control">
-                            <span asp-validation-for="ApplicantTelephone" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ApplicantMobile" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="ApplicantMobile" class="form-control">
-                            <span asp-validation-for="ApplicantMobile" class="text-danger"></span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="panel-heading">
-                <h3 class="panel-title text-uppercase">
-                    Are you the registered owner of the property? <small class="text-lowercase">(if not we need written confirmation from the owner that they have no objection to the change)</small>
-                </h3>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item form-horizontal">
-                    <div class="row">
-                        <div class="radio col-xs-4 col-xs-offset-2 text-center">
-                            <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerYes" value="true" required>
-                            <label for="IsRegisteredOwnerYes">
-                                Yes
-                            </label>
-
-                        </div>
-                        <div class="radio col-xs-4 text-center">
-                            <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerNo" value="false" required>
-                            <label for="IsRegisteredOwnerNo">
-                                No
-                            </label>
-                        </div>
-                    </div>
-                    <span asp-validation-for="IsRegisteredOwner" class="text-danger"></span>
-                </li>
-            </ul>
-            <div class="panel-heading">
-                <h3 class="panel-title text-uppercase">
-                    Please attach a site location and any other supporting documentation
-                </h3>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="Attachments" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="Attachments" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple>
-                            <span asp-validation-for="Attachments" class="text-danger"></span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="panel-heading">
-                <h3 class="panel-title text-uppercase">
-                    Confirmation
-                </h3>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item form-horizontal">
-                    <div class="form-group col-sm-7">
-                        <label asp-for="Signed" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="Signed" class="form-control" placeholder="Type your name to sign" required>
-                            <span asp-validation-for="Signed" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-5">
-                        <label asp-for="SignedDate" class="control-label col-xs-3 col-sm-2"></label>
-                        <div class="col-xs-9 col-sm-10">
-                            <input asp-for="SignedDate" class="form-control" readonly>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </li>
-            </ul>
-            <div class="panel-footer">
-                <button class="btn btn-lg btn-success pull-right">Continue to payment <i class="fa fa-arrow-circle-right"></i></button>
-                <div class="clearfix"></div>
+<form role="form" asp-controller="Form" asp-action="ExistingProperty" method="post" enctype="multipart/form-data">
+<div class="panel panel-default">
+<div class="panel-heading">
+    <h3 class="panel-title text-uppercase">
+        Existing Address <small class="text-lowercase">(address to be changed)</small>
+    </h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="ExistingPropertyUrn" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <select asp-for="ExistingPropertyUrn" class="form-control" placeholder="Begin typing address to search" required></select>
+                <span asp-validation-for="ExistingPropertyUrn" class="text-danger"></span>
             </div>
         </div>
-    </form>
+    </li>
+</ul>
+<div class="panel-heading">
+    <h3 class="panel-title text-uppercase">
+        Proposed Address <small class="text-lowercase">(please supply 3 suggestions in order of preference)</small>
+    </h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="ProposedAddress1" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="ProposedAddress1" class="form-control" required>
+                <span asp-validation-for="ProposedAddress1" class="text-danger"></span>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="ProposedAddress2" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="ProposedAddress2" class="form-control">
+                <span asp-validation-for="ProposedAddress2" class="text-danger"></span>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="ProposedAddress3" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="ProposedAddress3" class="form-control">
+                <span asp-validation-for="ProposedAddress3" class="text-danger"></span>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="EffectiveDate" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="EffectiveDate" data-provide="datepicker" class="form-control" placeholder="optional">
+                <span asp-validation-for="EffectiveDate" class="text-danger"></span>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<div class="panel-heading">
+    <h3 class="panel-title text-uppercase">Applicant Contact Details</h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="ApplicantTitle" class="form-control" required>
+                <span asp-validation-for="ApplicantTitle" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ApplicantFirstName" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="ApplicantFirstName" class="form-control">
+                <span asp-validation-for="ApplicantFirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ApplicantLastName" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="ApplicantLastName" class="form-control" required>
+                <span asp-validation-for="ApplicantLastName" class="text-danger"></span>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label for="ApplicantUseSameAddress" class="control-label col-xs-3 col-sm-2">Use same address?</label>
+            <div class="col-xs-9 col-sm-10">
+                <div class="checkbox checkbox-primary">
+                    <input asp-for="ApplicantUseSameAddress" type="checkbox" id="ApplicantUseSameAddress">
+                    <label></label>
+                </div>
+                <span asp-validation-for="ApplicantUseSameAddress" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="collapse in" id="ApplicantAddressSection">
+            <div class="form-group">
+                <label asp-for="ApplicantHouseNameNumber" class="control-label col-xs-3 col-sm-2"></label>
+                <div class="col-xs-9 col-sm-10">
+                    <input asp-for="ApplicantHouseNameNumber" class="form-control">
+                    <span asp-validation-for="ApplicantHouseNameNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicantStreet" class="control-label col-xs-3 col-sm-2"></label>
+                <div class="col-xs-9 col-sm-10">
+                    <input asp-for="ApplicantStreet" class="form-control">
+                    <span asp-validation-for="ApplicantStreet" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicantTown" class="control-label col-xs-3 col-sm-2"></label>
+                <div class="col-xs-9 col-sm-10">
+                    <input asp-for="ApplicantTown" class="form-control">
+                    <span asp-validation-for="ApplicantTown" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicantCounty" class="control-label col-xs-3 col-sm-2"></label>
+                <div class="col-xs-9 col-sm-10">
+                    <input asp-for="ApplicantCounty" class="form-control">
+                    <span asp-validation-for="ApplicantCounty" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicantPostcode" class="control-label col-xs-3 col-sm-2"></label>
+                <div class="col-xs-9 col-sm-10">
+                    <input asp-for="ApplicantPostcode" class="form-control">
+                    <span asp-validation-for="ApplicantPostcode" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="ApplicantEmail" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="ApplicantEmail" class="form-control">
+                <span asp-validation-for="ApplicantEmail" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ApplicantTelephone" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="ApplicantTelephone" class="form-control">
+                <span asp-validation-for="ApplicantTelephone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ApplicantMobile" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="ApplicantMobile" class="form-control">
+                <span asp-validation-for="ApplicantMobile" class="text-danger"></span>
+            </div>
+        </div>
+    </li>
+</ul>
+<div class="panel-heading">
+    <h3 class="panel-title text-uppercase">
+        Are you the registered owner of the property? <small class="text-lowercase">(if not we need written confirmation from the owner that they have no objection to the change)</small>
+    </h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item form-horizontal">
+        <div class="row">
+            <div class="radio col-xs-4 col-xs-offset-2 text-center">
+                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerYes" value="true" required>
+                <label for="IsRegisteredOwnerYes">
+                    Yes
+                </label>
+
+            </div>
+            <div class="radio col-xs-4 text-center">
+                <input type="radio" name="IsRegisteredOwner" id="IsRegisteredOwnerNo" value="false" required>
+                <label for="IsRegisteredOwnerNo">
+                    No
+                </label>
+            </div>
+        </div>
+        <span asp-validation-for="IsRegisteredOwner" class="text-danger"></span>
+    </li>
+</ul>
+<div class="panel-heading">
+    <h3 class="panel-title text-uppercase">
+        Please attach a site location and any other supporting documentation
+    </h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item form-horizontal">
+        <div class="form-group">
+            <label asp-for="Attachments" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="Attachments" class="form-control filestyle" data-buttonBefore="true" data-buttonText="&nbsp;Choose file(s)" data-buttonName="btn-success" data-placeholder="No files attached" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple>
+                <span asp-validation-for="Attachments" class="text-danger"></span>
+            </div>
+        </div>
+    </li>
+</ul>
+<div class="panel-heading">
+    <h3 class="panel-title text-uppercase">
+        Confirmation
+    </h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item form-horizontal">
+        <div class="form-group col-sm-7">
+            <label asp-for="Signed" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="Signed" class="form-control" placeholder="Type your name to sign" required>
+                <span asp-validation-for="Signed" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group col-sm-5">
+            <label asp-for="SignedDate" class="control-label col-xs-3 col-sm-2"></label>
+            <div class="col-xs-9 col-sm-10">
+                <input asp-for="SignedDate" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </li>
+</ul>
+<div class="panel-footer">
+    <button class="btn btn-lg btn-success pull-right">Continue to payment <i class="fa fa-arrow-circle-right"></i></button>
+    <div class="clearfix"></div>
+</div>
+</div>
+</form>
 </div>
 <div class="row">
     <div class="col-sm-6">

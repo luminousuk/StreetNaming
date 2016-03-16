@@ -141,6 +141,9 @@ namespace StreetNaming.Web.Models
                 .HasMaxLength(400);
 
             modelBuilder.Entity<Case>()
+                .Property(x => x.EffectiveDate);
+
+            modelBuilder.Entity<Case>()
                 .Property(x => x.ExistingPropertyUrn)
                 .IsRequired(false);
 

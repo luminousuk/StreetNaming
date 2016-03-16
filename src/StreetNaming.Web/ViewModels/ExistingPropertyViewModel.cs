@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Http;
 using StreetNaming.Util.DataAnnotations;
@@ -68,6 +69,9 @@ namespace StreetNaming.Web.ViewModels
 
         [Display(Name = "3rd Choice")]
         public string ProposedAddress3 { get; set; }
+
+        [Display(Name = "Effective Date")]
+        public DateTime? EffectiveDate { get; set; }
 
         public bool IsRegisteredOwner { get; set; }
 
