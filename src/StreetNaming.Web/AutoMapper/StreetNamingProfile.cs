@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.IO;
+using AutoMapper;
 using Microsoft.AspNet.Http;
 using Microsoft.Net.Http.Headers;
 using StreetNaming.Domain.Models;
@@ -67,7 +68,7 @@ namespace StreetNaming.Web.AutoMapper
                 .ForMember(dest => dest.OriginalFileName,
                     opts =>
                         opts.MapFrom(
-                            src => ContentDispositionHeaderValue.Parse(src.ContentDisposition).FileName.Trim('"')))
+                            src => Path.GetFileName(ContentDispositionHeaderValue.Parse(src.ContentDisposition).FileName.Trim('"'))))
                 .ForMember(dest => dest.Bytes, opts => opts.MapFrom(src => src.OpenReadStream().ToBytes()));
         }
     }
