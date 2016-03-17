@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Mvc.Rendering;
 using StreetNaming.Util.DataAnnotations;
 
 namespace StreetNaming.Web.ViewModels
@@ -97,5 +98,7 @@ namespace StreetNaming.Web.ViewModels
         public int AddressLookupPageSize { get; set; }
 
         public int AddressLookupMinChars { get; set; }
+
+        public IEnumerable<SelectListItem> ApplicantTitleListItems { get; set; }
     }
 }

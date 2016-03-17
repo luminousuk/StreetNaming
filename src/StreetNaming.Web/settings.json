@@ -5,6 +5,14 @@
         }
     },
     "Settings": {
+        "AddressLookup": {
+            "Endpoint": "https://isharemapstest.bathnes.gov.uk/getdata.aspx",
+            "PageSize": 10,
+            "MinChars": 3
+        },
+        "ApplicantTitlesString": "Mr,Mrs,Miss,Ms,Dr,Other",
+        "ExistingPropertyReferencePrefix": "EP",
+        "NewPropertyReferencePrefix": "NP",
         "Payment": {
             "Provider": "CivicaEpay",
             "Amount": 15.0,
@@ -16,13 +24,6 @@
             "FundCode": "Z5",
             "VatCode": "",
             "Narrative": "Street naming/numbering"
-        },
-        "AddressLookup": {
-            "Endpoint": "https://isharemapstest.bathnes.gov.uk/getdata.aspx",
-            "PageSize": 10,
-            "MinChars": 3
-        },
-        "ExistingPropertyReferencePrefix": "EP",
-        "NewPropertyReferencePrefix": "NP"
+        }
     }
 }

@@ -123,7 +123,7 @@
         <div class="form-group">
             <label asp-for="ApplicantTitle" class="control-label col-xs-3 col-sm-2"></label>
             <div class="col-xs-9 col-sm-10">
-                <input asp-for="ApplicantTitle" class="form-control" required>
+                <select asp-for="ApplicantTitle" asp-items="Model.ApplicantTitleListItems" class="form-control" required></select>
                 <span asp-validation-for="ApplicantTitle" class="text-danger"></span>
             </div>
         </div>

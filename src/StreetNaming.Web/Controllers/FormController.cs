@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.OptionsModel;
 using StreetNaming.Domain.Models;
@@ -32,7 +34,8 @@ namespace StreetNaming.Web.Controllers
                 SignedDate = DateTime.Today.ToString("D"),
                 AddressLookupEndpoint = _options.Value.AddressLookup.Endpoint,
                 AddressLookupMinChars = _options.Value.AddressLookup.MinChars,
-                AddressLookupPageSize = _options.Value.AddressLookup.PageSize
+                AddressLookupPageSize = _options.Value.AddressLookup.PageSize,
+                ApplicantTitleListItems = new SelectList(_options.Value.ApplicantTitles)
             };
             return View(viewModel);
         }
@@ -41,7 +44,8 @@ namespace StreetNaming.Web.Controllers
         {
             var viewModel = new NewPropertyViewModel
             {
-                SignedDate = DateTime.Today.ToString("D")
+                SignedDate = DateTime.Today.ToString("D"),
+                ApplicantTitleListItems = new SelectList(_options.Value.ApplicantTitles)
             };
             return View(viewModel);
         }

@@ -1,4 +1,6 @@
-﻿using System.Security.AccessControl;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.AccessControl;
 
 namespace StreetNaming.Web.Configuration
 {
@@ -11,6 +13,10 @@ namespace StreetNaming.Web.Configuration
         public string NewPropertyReferencePrefix { get; set; }
 
         public string ExistingPropertyReferencePrefix { get; set; }
+
+        public IEnumerable<string> ApplicantTitles => ApplicantTitlesString?.Split(',');
+
+        public string ApplicantTitlesString { get; set; }
 
         public class PaymentOptions
         {

@@ -36,6 +36,8 @@ namespace StreetNaming.Web
         {
             services.Configure<StreetNamingOptions>(_config.GetSection("Settings"));
 
+            var x = _config.GetSection("Settings");
+
             services.AddMvc();
             services.AddEntityFramework()
                 .AddNpgsql()
