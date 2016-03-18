@@ -125,7 +125,7 @@
         <div class="form-group">
             <label asp-for="EffectiveDate" class="control-label col-xs-3 col-sm-2"></label>
             <div class="col-xs-9 col-sm-10">
-                <input asp-for="EffectiveDate" data-provide="datepicker" class="form-control" placeholder="optional">
+                <input asp-for="EffectiveDate" data-provide="datepicker" data-date-format="dd/mm/yyyy" class="form-control" placeholder="optional">
                 <span asp-validation-for="EffectiveDate" class="text-danger"></span>
             </div>
         </div>
