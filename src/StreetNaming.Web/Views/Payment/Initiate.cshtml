@@ -1,13 +1,27 @@
-﻿@model StreetNaming.Web.ViewModels.PaymentInitiateViewModel
+﻿@using System.Security.Cryptography.Xml
+@using System.Threading.Tasks
+@using StreetNaming.Domain.Models
+@model StreetNaming.Web.ViewModels.PaymentInitiateViewModel
 @{
     Layout = "_Layout";
     ViewBag.Title = "Payment";
 }
 
-<div class="jumbotron">
-    <div class="container">
-        <img class="img-responsive pull-right" src="~/img/Bath_&_North_East_Somerset_Council_logo.gif" alt="Bath & North East Somerset Council"/>
-        <h1 class="pull-left">Payment</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            <h1>
+                <img class="img-responsive" src="~/img/BATHNES__RGB_1000.gif" alt="Bath & North East Somerset Council"/>
+            </h1>
+        </div>
+        <div class="col-sm-6 text-center">
+            <h1 class="text-uppercase">@(Model.CaseType == CaseType.NewPropertyCase ? "Application to name or number a new property" : "Application to name or rename an existing property")</h1>
+            <p>
+                <small>
+                    Public Health Act 1925: Section 17 & 18<br />Towns Improvement Clauses Act 1847: Section 64 & 65
+                </small>
+            </p>
+        </div>
     </div>
 </div>
 
@@ -32,7 +46,7 @@
                 </p>
                 <dl class="dl-horizontal">
                     <dt>Case Type</dt>
-                    <dd>@Model.CaseType</dd>
+                    <dd>@(Model.CaseType == CaseType.NewPropertyCase ? "New Property" : "Existing Property")</dd>
                     <dt>Case Reference</dt>
                     <dd>@Model.CaseReference</dd>
                 </dl>

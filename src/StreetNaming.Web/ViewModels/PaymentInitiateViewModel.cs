@@ -1,4 +1,6 @@
-﻿namespace StreetNaming.Web.ViewModels
+﻿using StreetNaming.Domain.Models;
+
+namespace StreetNaming.Web.ViewModels
 {
     public class PaymentInitiateViewModel
     {
@@ -19,7 +21,7 @@
 
         public string CallingApplicationTransactionReference { get; set; }
 
-        public string CaseType { get; set; }
+        public CaseType CaseType { get; set; }
 
         public string CaseReference { get; set; }
     }

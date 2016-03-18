@@ -85,7 +85,7 @@ namespace StreetNaming.Web.Controllers
                         /* Post Code */ request.Applicant.PostCode?.ToUpper(), /* Alternative Account Reference */ "",
                         /* Line Based Refund Receipt Number */ ""),
                 ReturnUrl = Url.Action("ProviderResponse", "Payment", null, "http"),
-                CaseType = request.CaseType.ToString(),
+                CaseType = request.CaseType,
                 CaseReference = request.CustomerReference
             };
 
