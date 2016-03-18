@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
@@ -86,7 +85,7 @@ namespace StreetNaming.Web.Controllers
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Initiate", "Payment", new {requestReference = request.Reference});
+            return RedirectToAction("Initiate", "Payment", new {caseReference = request.CustomerReference});
         }
 
         [HttpPost]
@@ -125,7 +124,7 @@ namespace StreetNaming.Web.Controllers
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Initiate", "Payment", new {requestReference = request.Reference});
+            return RedirectToAction("Initiate", "Payment", new {caseReference = request.CustomerReference});
         }
     }
 }

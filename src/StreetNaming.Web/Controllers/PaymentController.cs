@@ -23,14 +23,16 @@ namespace StreetNaming.Web.Controllers
             _options = options;
         }
 
-        public async Task<IActionResult> Initiate(Guid requestReference)
+        public async Task<IActionResult> Initiate(string caseReference)
         {
             var request =
                 await
                     _context.Cases.Include(r => r.Applicant)
-                        .FirstOrDefaultAsync(r => r.Reference == requestReference);
+                        .FirstOrDefaultAsync(r => r.CustomerReference == caseReference);
 
             if (request == null) return new BadRequestResult();
+
+            if (!request.IsRegisteredOwner) return RedirectToAction("NoPayment", new {caseReference});
 
             // Some business logic here?
 
@@ -69,7 +71,7 @@ namespace StreetNaming.Web.Controllers
 
             var viewModel = new PaymentInitiateViewModel
             {
-                BackButtonUrl = Url.Action("Initiate", "Payment", new {requestReference}, "http"),
+                BackButtonUrl = Url.Action("Initiate", "Payment", new {caseReference}, "http"),
                 CallingApplicationId = _options.Value.Payment.ApplicationId,
                 CallingApplicationTransactionReference = transaction.Reference.ToString(),
                 EndpointUrl = _options.Value.Payment.Endpoint,
@@ -124,6 +126,26 @@ namespace StreetNaming.Web.Controllers
                 return View("Failed", transaction);
 
             return View("Completed", transaction);
+        }
+
+        public async Task<IActionResult> NoPayment(string caseReference)
+        {
+            var request =
+                await
+                    _context.Cases.Include(r => r.Applicant)
+                        .FirstOrDefaultAsync(r => r.CustomerReference == caseReference);
+
+            if (request == null) return new BadRequestResult();
+
+            if (request.IsRegisteredOwner) return RedirectToAction("Initiate", new { caseReference });
+
+            var viewModel = new PaymentNoPaymentViewModel
+            {
+                CaseType = request.CaseType,
+                CaseReference = request.CustomerReference
+            };
+
+            return View(viewModel);
         }
     }
 }
