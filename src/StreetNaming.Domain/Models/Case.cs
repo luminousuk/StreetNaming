@@ -9,13 +9,13 @@ namespace StreetNaming.Domain.Models
             , IModifiable
             , IReferable
     {
-        public long CaseId { get; set; }
+        public int CaseId { get; set; }
 
         public CaseType CaseType { get; set; }
 
         public CaseStatus CaseStatus { get; set; }
 
-        public long ApplicantId { get; set; }
+        public int ApplicantId { get; set; }
 
         public Applicant Applicant { get; set; }
 
@@ -27,7 +27,7 @@ namespace StreetNaming.Domain.Models
 
         public DateTime? EffectiveDate { get; set; }
 
-        public long? ExistingPropertyUrn { get; set; }
+        public int? ExistingPropertyUrn { get; set; }
 
         public bool IsRegisteredOwner { get; set; }
 

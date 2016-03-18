@@ -8,7 +8,7 @@ namespace StreetNaming.Domain.Models
         : ICreatable
         , IModifiable
     {
-        public long ApplicantId { get; set; }
+        public int ApplicantId { get; set; }
 
         public string Title { get; set; }
 

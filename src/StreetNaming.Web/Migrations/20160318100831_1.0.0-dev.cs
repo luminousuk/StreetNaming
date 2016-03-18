@@ -12,7 +12,7 @@ namespace StreetNaming.Web.Migrations
                 name: "Applicant",
                 columns: table => new
                 {
-                    ApplicantId = table.Column<long>(nullable: false)
+                    ApplicantId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
                     County = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
@@ -38,16 +38,16 @@ namespace StreetNaming.Web.Migrations
                 name: "Case",
                 columns: table => new
                 {
-                    CaseId = table.Column<long>(nullable: false)
+                    CaseId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
                     AdditionalInformation = table.Column<string>(nullable: true),
-                    ApplicantId = table.Column<long>(nullable: false),
+                    ApplicantId = table.Column<int>(nullable: false),
                     CaseStatus = table.Column<int>(nullable: false),
                     CaseType = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     CustomerReference = table.Column<string>(nullable: true),
                     EffectiveDate = table.Column<DateTime>(nullable: true),
-                    ExistingPropertyUrn = table.Column<long>(nullable: true),
+                    ExistingPropertyUrn = table.Column<int>(nullable: true),
                     IsRegisteredOwner = table.Column<bool>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     ProposedAddress1 = table.Column<string>(nullable: false),
@@ -70,10 +70,10 @@ namespace StreetNaming.Web.Migrations
                 name: "Attachment",
                 columns: table => new
                 {
-                    AttachmentId = table.Column<long>(nullable: false)
+                    AttachmentId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
                     Bytes = table.Column<byte[]>(nullable: false),
-                    CaseId = table.Column<long>(nullable: false),
+                    CaseId = table.Column<int>(nullable: false),
                     ContentType = table.Column<string>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
@@ -93,10 +93,10 @@ namespace StreetNaming.Web.Migrations
                 name: "Transaction",
                 columns: table => new
                 {
-                    TransactionId = table.Column<long>(nullable: false)
+                    TransactionId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:Serial", true),
                     Amount = table.Column<decimal>(nullable: false),
-                    CaseId = table.Column<long>(nullable: false),
+                    CaseId = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     Currency = table.Column<string>(nullable: false),
                     Provider = table.Column<string>(nullable: false),

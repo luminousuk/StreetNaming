@@ -7,9 +7,9 @@ namespace StreetNaming.Domain.Models
         : ICreatable
         , IModifiable
     {
-        public long AttachmentId { get; set; }
+        public int AttachmentId { get; set; }
 
-        public long CaseId { get; set; }
+        public int CaseId { get; set; }
 
         public Case Case { get; set; }
 

@@ -8,7 +8,7 @@ using StreetNaming.Web.Models;
 namespace StreetNaming.Web.Migrations
 {
     [DbContext(typeof(StreetNamingEntities))]
-    [Migration("20160316162041_1.0.0-dev")]
+    [Migration("20160318100831_1.0.0-dev")]
     partial class _100dev
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace StreetNaming.Web.Migrations
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Applicant", b =>
                 {
-                    b.Property<long>("ApplicantId")
+                    b.Property<int>("ApplicantId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("County");
@@ -76,13 +76,13 @@ namespace StreetNaming.Web.Migrations
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Attachment", b =>
                 {
-                    b.Property<long>("AttachmentId")
+                    b.Property<int>("AttachmentId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<byte[]>("Bytes")
                         .IsRequired();
 
-                    b.Property<long>("CaseId");
+                    b.Property<int>("CaseId");
 
                     b.Property<string>("ContentType")
                         .IsRequired()
@@ -105,13 +105,13 @@ namespace StreetNaming.Web.Migrations
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Case", b =>
                 {
-                    b.Property<long>("CaseId")
+                    b.Property<int>("CaseId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdditionalInformation")
                         .HasAnnotation("MaxLength", 2000);
 
-                    b.Property<long>("ApplicantId");
+                    b.Property<int>("ApplicantId");
 
                     b.Property<int>("CaseStatus");
 
@@ -126,7 +126,7 @@ namespace StreetNaming.Web.Migrations
 
                     b.Property<DateTime?>("EffectiveDate");
 
-                    b.Property<long?>("ExistingPropertyUrn");
+                    b.Property<int?>("ExistingPropertyUrn");
 
                     b.Property<bool>("IsRegisteredOwner");
 
@@ -162,12 +162,12 @@ namespace StreetNaming.Web.Migrations
 
             modelBuilder.Entity("StreetNaming.Domain.Models.Transaction", b =>
                 {
-                    b.Property<long>("TransactionId")
+                    b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("Amount");
 
-                    b.Property<long>("CaseId");
+                    b.Property<int>("CaseId");
 
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()

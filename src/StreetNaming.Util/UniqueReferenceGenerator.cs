@@ -6,16 +6,16 @@ namespace StreetNaming.Util
     {
         private static readonly Random Rand = new Random(DateTime.Now.Millisecond);
 
-        public static string GetCaseReference(string prefix, long sequence)
+        public static string GetCaseReference(string prefix, int sequence)
         {
             var year = DateTime.Now.Year - 2000;
             var rand = Rand.Next(99);
             var chk = GetParity(sequence + year + rand);
 
-            return $"{prefix}-{year}{sequence:000}-{rand:00}{chk}";
+            return $"{prefix}-{year}{sequence:0-000}-{rand:00}{chk}";
         }
 
-        public static int GetParity(long val)
+        public static int GetParity(int val)
         {
             var p = 1;
             do

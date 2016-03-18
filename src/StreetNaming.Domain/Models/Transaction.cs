@@ -7,11 +7,9 @@ namespace StreetNaming.Domain.Models
         : ICreatable
             , IReferable
     {
-        // WORK IN PROGRESS
+        public int TransactionId { get; set; }
 
-        public long TransactionId { get; set; }
-
-        public long CaseId { get; set; }
+        public int CaseId { get; set; }
 
         public Case Case { get; set; }
 
