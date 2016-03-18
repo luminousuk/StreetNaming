@@ -48,9 +48,20 @@ namespace StreetNaming.Web.Controllers
                     Provider = _options.Value.Payment.Provider,
                     Reference = Guid.NewGuid(),
                     TransactionStatus = TransactionStatus.Pending,
-                    Amount = _options.Value.Payment.Amount,
                     Currency = _options.Value.Payment.Currency
                 };
+
+                switch (request.CaseType)
+                {
+                    case CaseType.NewPropertyCase:
+                        transaction.Amount = _options.Value.Payment.NewPropertyAmount;
+                        break;
+                    case CaseType.ExistingPropertyCase:
+                        transaction.Amount = _options.Value.Payment.ExistingPropertyAmount;
+                        break;
+                    default:
+                        throw new InvalidOperationException("Invalid Case type.");
+                }
 
                 _context.Transactions.Add(transaction);
                 await _context.SaveChangesAsync();
@@ -63,24 +74,16 @@ namespace StreetNaming.Web.Controllers
                 CallingApplicationTransactionReference = transaction.Reference.ToString(),
                 EndpointUrl = _options.Value.Payment.Endpoint,
                 PaymentSourceCode = _options.Value.Payment.PaymentSourceCode,
-                PaymentTotal = _options.Value.Payment.Amount,
-                Payment_1 = string.Join("|",
-                    /* Reference */ _options.Value.Payment.AccountReference,
-                        /* Fund Code */ _options.Value.Payment.FundCode,
-                        /* Amount */ _options.Value.Payment.Amount,
-                        /* Vat Code */ _options.Value.Payment.VatCode,
-                        /* Narrative */ _options.Value.Payment.Narrative,
-                        /* Business Name */ "",
-                        /* Premise Number */ request.Applicant.HouseNumber?.ToString(),
-                        /* Premise Name */ request.Applicant.HouseName,
-                        /* Street */ request.Applicant.Street,
-                        /* Area */ "",
-                        /* Town */ request.Applicant.Town,
-                        /* County */ request.Applicant.County,
-                        /* Post Code */ request.Applicant.PostCode?.ToUpper(),
-                        /* Alternative Account Reference */ "",
-                        /* Line Based Refund Receipt Number */ ""
-                    ),
+                PaymentTotal = transaction.Amount,
+                Payment_1 =
+                    string.Join("|", /* Reference */ _options.Value.Payment.AccountReference, /* Fund Code */
+                        _options.Value.Payment.FundCode, /* Amount */ transaction.Amount, /* Vat Code */
+                        _options.Value.Payment.VatCode, /* Narrative */ _options.Value.Payment.Narrative,
+                        /* Business Name */ "", /* Premise Number */ request.Applicant.HouseNumber?.ToString(),
+                        /* Premise Name */ request.Applicant.HouseName, /* Street */ request.Applicant.Street,
+                        /* Area */ "", /* Town */ request.Applicant.Town, /* County */ request.Applicant.County,
+                        /* Post Code */ request.Applicant.PostCode?.ToUpper(), /* Alternative Account Reference */ "",
+                        /* Line Based Refund Receipt Number */ ""),
                 ReturnUrl = Url.Action("ProviderResponse", "Payment", null, "http"),
                 CaseType = request.CaseType.ToString(),
                 CaseReference = request.CustomerReference
@@ -99,11 +102,13 @@ namespace StreetNaming.Web.Controllers
 
             transaction.ResponseDate = DateTime.Now;
             transaction.ResponseCode = int.Parse(viewModel.ResponseCode);
-            transaction.TransactionStatus = transaction.ResponseCode == 0 ? TransactionStatus.Complete : TransactionStatus.Failed;
+            transaction.TransactionStatus = transaction.ResponseCode == 0
+                ? TransactionStatus.Complete
+                : TransactionStatus.Failed;
             transaction.ResponseDescription = viewModel.ResponseDescription;
 
             // Business Logic here
-            
+
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Completed", new {transactionReference = transaction.Reference});

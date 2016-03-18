@@ -15,7 +15,8 @@
         "NewPropertyReferencePrefix": "NP",
         "Payment": {
             "Provider": "CivicaEpay",
-            "Amount": 15.0,
+            "NewPropertyAmount": 60.00,
+            "ExistingPropertyAmount": 50.00,
             "Currency": "GBP",
             "Endpoint": "https://www.civicaepay.co.uk/BATHNESXMLTEST/PaylinkXMLUI/default.aspx",
             "ApplicationId": "CRMWeb",

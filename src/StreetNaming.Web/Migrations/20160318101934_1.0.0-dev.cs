@@ -47,7 +47,7 @@ namespace StreetNaming.Web.Migrations
                     CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     CustomerReference = table.Column<string>(nullable: true),
                     EffectiveDate = table.Column<DateTime>(nullable: true),
-                    ExistingPropertyUrn = table.Column<int>(nullable: true),
+                    ExistingPropertyUrn = table.Column<long>(nullable: true),
                     IsRegisteredOwner = table.Column<bool>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW()"),
                     ProposedAddress1 = table.Column<string>(nullable: false),

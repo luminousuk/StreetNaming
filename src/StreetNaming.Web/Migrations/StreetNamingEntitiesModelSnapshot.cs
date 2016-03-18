@@ -125,7 +125,7 @@ namespace StreetNaming.Web.Migrations
 
                     b.Property<DateTime?>("EffectiveDate");
 
-                    b.Property<int?>("ExistingPropertyUrn");
+                    b.Property<long?>("ExistingPropertyUrn");
 
                     b.Property<bool>("IsRegisteredOwner");
 

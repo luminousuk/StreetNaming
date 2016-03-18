@@ -22,7 +22,9 @@ namespace StreetNaming.Web.Configuration
         {
             public string Provider { get; set; }
 
-            public decimal Amount { get; set; }
+            public decimal NewPropertyAmount { get; set; }
+
+            public decimal ExistingPropertyAmount { get; set; }
 
             public string Currency { get; set; }
 

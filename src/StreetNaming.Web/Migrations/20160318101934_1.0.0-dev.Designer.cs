@@ -8,7 +8,7 @@ using StreetNaming.Web.Models;
 namespace StreetNaming.Web.Migrations
 {
     [DbContext(typeof(StreetNamingEntities))]
-    [Migration("20160318100831_1.0.0-dev")]
+    [Migration("20160318101934_1.0.0-dev")]
     partial class _100dev
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,7 +126,7 @@ namespace StreetNaming.Web.Migrations
 
                     b.Property<DateTime?>("EffectiveDate");
 
-                    b.Property<int?>("ExistingPropertyUrn");
+                    b.Property<long?>("ExistingPropertyUrn");
 
                     b.Property<bool>("IsRegisteredOwner");
 
