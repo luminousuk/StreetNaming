@@ -6,7 +6,8 @@
     "jquery": "2.2.2",
     "jquery-validation": "1.15.0",
     "jquery-validation-unobtrusive": "3.2.6",
-    "startbootstrap-sb-admin-2": "1.0.8"
+    "startbootstrap-sb-admin-2": "1.0.8",
+    "datatables": "1.10.11"
   },
   "resolutions": {
     "bootstrap": "~3.3.6"
