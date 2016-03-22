@@ -1,4 +1,5 @@
-﻿@{
+﻿@model StreetNaming.Admin.ViewModels.HomeDashboardViewModel
+@{
     ViewData["Title"] = "Dashboard";
 }
 
@@ -18,7 +19,7 @@
                         <i class="fa fa-briefcase fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">26</div>
+                        <div class="huge">@Model.ActiveCaseCount</div>
                         <div>Active Cases</div>
                     </div>
                 </div>
@@ -41,7 +42,7 @@
                         <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">88</div>
+                        <div class="huge">@Model.ApplicantCount</div>
                         <div>Applicants</div>
                     </div>
                 </div>
@@ -64,7 +65,7 @@
                         <i class="fa fa-exclamation-circle fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
+                        <div class="huge">@Model.UnpaidTransactionCount</div>
                         <div>Outstanding Fees</div>
                     </div>
                 </div>
@@ -87,7 +88,7 @@
                         <i class="fa fa-calendar-check-o fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
+                        <div class="huge">@Model.CaseFollowUpCount</div>
                         <div>Follow up</div>
                     </div>
                 </div>
@@ -133,52 +134,37 @@
 @section scripts {
     <script>
         $(function() {
-            Morris.Bar({
-                element: 'chart-casespermonth',
-                stacked: true,
-                data: [
-                  { month: 'Jan', newProperty: 12, existingProperty: 4 },
-                  { month: 'Feb', newProperty: 4, existingProperty: 1 },
-                  { month: 'Mar', newProperty: 1, existingProperty: 1 },
-                  { month: 'Apr', newProperty: 9, existingProperty: 7 },
-                  { month: 'May', newProperty: 30, existingProperty: 7 },
-                  { month: 'Jun', newProperty: 19, existingProperty: 16 },
-                  { month: 'Jul', newProperty: 11, existingProperty: 19 },
-                  { month: 'Aug', newProperty: 1, existingProperty: 14 },
-                  { month: 'Sep', newProperty: 8, existingProperty: 20 },
-                  { month: 'Oct', newProperty: 21, existingProperty: 14 },
-                  { month: 'Nov', newProperty: 13, existingProperty: 3 },
-                  { month: 'Dec', newProperty: 6, existingProperty: 2 }
-                ],
-                xkey: 'month',
-                ykeys: ['newProperty', 'existingProperty'],
-                labels: ['New Property', 'Existing Property'],
-                resize: true
+
+            $.ajax({
+                url: "@Url.Action("CasesPerMonth", "GraphData")",
+                dataType: "json"
+            }).done(function(result) {
+                Morris.Bar({
+                    element: 'chart-casespermonth',
+                    stacked: true,
+                    data: result,
+                    xkey: 'Month',
+                    ykeys: ['NewProperty', 'ExistingProperty'],
+                    labels: ['New Property', 'Existing Property'],
+                    resize: true
+                });
             });
 
-            Morris.Area({
-                element: 'chart-monthlycashflow',
-                data: [
-                  { month: 'Jan', income: 600.00 },
-                  { month: 'Feb', income: 200.00 },
-                  { month: 'Mar', income: 150.00 },
-                  { month: 'Apr', income: 450.00 },
-                  { month: 'May', income: 1500.00 },
-                  { month: 'Jun', income: 650.00 },
-                  { month: 'Jul', income: 550.00 },
-                  { month: 'Aug', income: 350.00 },
-                  { month: 'Sep', income: 400.00 },
-                  { month: 'Oct', income: 490.00 },
-                  { month: 'Nov', income: 650.00 },
-                  { month: 'Dec', income: 300.00 }
-                ],
-                xkey: 'month',
-                ykeys: ['income'],
-                labels: ['Income'],
-                resize: true,
-                parseTime: false,
-                preUnits: "£",
-                fillOpacity: 0.3
+            $.ajax({
+                url: "@Url.Action("MonthlyCashflow", "GraphData")",
+                dataType: "json"
+            }).done(function(result) {
+                Morris.Area({
+                    element: 'chart-monthlycashflow',
+                    data: result,
+                    xkey: 'Month',
+                    ykeys: ['Income'],
+                    labels: ['Income'],
+                    resize: true,
+                    parseTime: false,
+                    preUnits: "£",
+                    fillOpacity: 0.3
+                });
             });
         });
     </script>
