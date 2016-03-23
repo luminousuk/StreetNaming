@@ -145,14 +145,36 @@ namespace StreetNaming.DAL.Mock
             return cases;
         }
 
-        private Case GenerateCase(Applicant applicant = null)
+        public ICollection<Case> GetActiveCases()
+        {
+            var cases = new List<Case>();
+            for (var i = 0; i < AllCasesCount; i++)
+            {
+                cases.Add(GenerateCase(caseStatus: CaseStatus.Active));
+            }
+
+            return cases;
+        }
+
+        public ICollection<Case> GetCompletedCases()
+        {
+            var cases = new List<Case>();
+            for (var i = 0; i < AllCasesCount; i++)
+            {
+                cases.Add(GenerateCase(caseStatus: CaseStatus.Completed));
+            }
+
+            return cases;
+        }
+
+        private Case GenerateCase(Applicant applicant = null, CaseStatus? caseStatus = null)
         {
             var newCase = new Case
             {
                 CaseId = (_random.Next(100) + 123)*17,
                 Reference = Guid.NewGuid(),
                 Applicant = applicant ?? GenerateApplicant(),
-                CaseStatus = CaseStatus.New,
+                CaseStatus = caseStatus ?? (CaseStatus)(1<<_random.Next(0, 5)),
                 CaseType = (_random.Next(2) == 1) ? CaseType.NewPropertyCase : CaseType.ExistingPropertyCase,
                 IsRegisteredOwner = (_random.Next(10) > 0),
                 ProposedAddress1 = Names.HouseNames[_random.Next(Names.HouseNames.Length)],

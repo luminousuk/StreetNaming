@@ -26,24 +26,33 @@ namespace StreetNaming.Admin.Controllers
             {
                 Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetAllCases())
             };
-            return View(viewModel);
+
+            ViewData["Title"] = "All Cases";
+
+            return View("List", viewModel);
         }
         public IActionResult Active()
         {
             var viewModel = new CaseIndexViewModel
             {
-                Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetAllCases())
+                Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetActiveCases())
             };
-            return View(viewModel);
+
+            ViewData["Title"] = "Active Cases";
+
+            return View("List", viewModel);
         }
 
         public IActionResult Completed()
         {
             var viewModel = new CaseIndexViewModel
             {
-                Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetAllCases())
+                Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetCompletedCases())
             };
-            return View(viewModel);
+
+            ViewData["Title"] = "Completed Cases";
+
+            return View("List", viewModel);
         }
     }
 }
