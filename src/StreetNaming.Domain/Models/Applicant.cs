@@ -41,5 +41,7 @@ namespace StreetNaming.Domain.Models
         public DateTime ModifiedDate { get; set; }
 
         public ICollection<Case> Cases { get; set; }
+
+        public string FullName => string.Join(" ", Title, FirstName, LastName).Trim().Replace("  ", " ");
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace StreetNaming.Admin.ViewModels
 {
-    public class HomeDashboardViewModel
+    public class DashboardIndexViewModel
     {
         public int ActiveCaseCount { get; set; }
 

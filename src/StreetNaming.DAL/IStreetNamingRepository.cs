@@ -20,5 +20,7 @@ namespace StreetNaming.DAL
         ICollection<MonthlyCaseCountDto> GetMonthlyCaseCount();
 
         ICollection<MonthlyCashflowDto> GetMonthlyCashflow();
+
+        ICollection<Case> GetAllCases();
     }
 }

@@ -1,0 +1,31 @@
+﻿@model StreetNaming.Admin.ViewModels.CaseIndexViewModel
+@{
+    ViewData["Title"] = "Cases";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Cases</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Reference</th><th>Applicant</th><th>Case Type</th><th>Status</th><th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var c in Model.Cases)
+            {
+                <tr>
+                    <td>@c.CustomerReference</td><td>@c.ApplicantFullName</td><td>@c.CaseType</td><td>@c.CaseStatus</td><td>@c.CreatedDate.ToString("s")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

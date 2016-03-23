@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using StreetNaming.Admin.AutoMapper;
 using StreetNaming.DAL;
 using StreetNaming.DAL.Mock;
 
@@ -36,6 +38,9 @@ namespace StreetNaming.Admin
             services.AddMvc();
 
             services.AddSingleton<IStreetNamingRepository, MockStreetNamingRepository>();
+
+            var mapperConfig = new MapperConfiguration(cfg => { cfg.AddProfile(new StreetNamingProfile()); });
+            services.AddSingleton(sp => mapperConfig.CreateMapper());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +67,7 @@ namespace StreetNaming.Admin
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Dashboard}/{action=Index}/{id?}");
             });
         }
 

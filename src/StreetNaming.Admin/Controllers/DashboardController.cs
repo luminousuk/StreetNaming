@@ -8,18 +8,18 @@ using StreetNaming.DAL;
 
 namespace StreetNaming.Admin.Controllers
 {
-    public class HomeController : Controller
+    public class DashboardController : Controller
     {
         private readonly IStreetNamingRepository _repo;
 
-        public HomeController(IStreetNamingRepository repo)
+        public DashboardController(IStreetNamingRepository repo)
         {
             _repo = repo;
         }
 
         public IActionResult Index()
         {
-            var viewModel = new HomeDashboardViewModel
+            var viewModel = new DashboardIndexViewModel
             {
                 ActiveCaseCount = _repo.GetActiveCaseCount(),
                 ApplicantCount = _repo.GetApplicantCount(),
@@ -28,20 +28,6 @@ namespace StreetNaming.Admin.Controllers
             };
 
             return View(viewModel);
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
         }
 
         public IActionResult Error()

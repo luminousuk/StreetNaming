@@ -83,6 +83,9 @@ namespace StreetNaming.Web.Models
                 .HasDefaultValueSql("NOW()")
                 .IsRequired();
 
+            modelBuilder.Entity<Applicant>()
+                .Ignore(x => x.FullName);
+
 
             /*
              * Attachment
