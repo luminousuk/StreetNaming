@@ -183,7 +183,7 @@ namespace StreetNaming.DAL.Mock
                 ModifiedDate = DateTime.Now
             };
 
-            newCase.CustomerReference = UniqueReferenceGenerator.GetCaseReference("TS", newCase.CaseId);
+            newCase.CustomerReference = UniqueReferenceGenerator.GetCaseReference(newCase.CaseType == CaseType.ExistingPropertyCase ? "EP" : "NP", newCase.CaseId);
             newCase.ApplicantId = newCase.Applicant.ApplicantId;
             newCase.ProposedAddress3 = (newCase.ProposedAddress2 != null && _random.Next(2) == 0)
                 ? Names.HouseNames[_random.Next(Names.HouseNames.Length)]
