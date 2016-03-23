@@ -12,7 +12,7 @@ namespace StreetNaming.DAL.Mock
 
         private const int CashflowMax = 40000;
 
-        private const int AllCasesCount = 20;
+        private const int AllCasesCount = 100;
 
         private readonly Random _random = new Random();
 
