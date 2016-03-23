@@ -20,7 +20,24 @@ namespace StreetNaming.Admin.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult All()
+        {
+            var viewModel = new CaseIndexViewModel
+            {
+                Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetAllCases())
+            };
+            return View(viewModel);
+        }
+        public IActionResult Active()
+        {
+            var viewModel = new CaseIndexViewModel
+            {
+                Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetAllCases())
+            };
+            return View(viewModel);
+        }
+
+        public IActionResult Completed()
         {
             var viewModel = new CaseIndexViewModel
             {
