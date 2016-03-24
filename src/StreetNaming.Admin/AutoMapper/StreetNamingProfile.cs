@@ -8,7 +8,9 @@ namespace StreetNaming.Admin.AutoMapper
     {
         protected override void Configure()
         {
-            CreateMap<Case, CaseIndexCaseViewModel>();
+            CreateMap<Case, CaseIndexCaseViewModel>()
+                .ForMember(dest => dest.CaseType, opts => opts.MapFrom(src =>
+                    src.CaseType == CaseType.NewPropertyCase ? "New Property" : "Existing Property"));
         }
     }
 }

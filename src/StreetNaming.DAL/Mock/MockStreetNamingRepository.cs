@@ -179,7 +179,7 @@ namespace StreetNaming.DAL.Mock
                 IsRegisteredOwner = (_random.Next(10) > 0),
                 ProposedAddress1 = Names.HouseNames[_random.Next(Names.HouseNames.Length)],
                 ProposedAddress2 = (_random.Next(2) == 0) ? Names.HouseNames[_random.Next(Names.HouseNames.Length)] : null,
-                CreatedDate = DateTime.Now,
+                CreatedDate = DateTime.Now.AddDays(_random.Next(365)*-1).AddHours(_random.Next(24)*-1),
                 ModifiedDate = DateTime.Now
             };
 
