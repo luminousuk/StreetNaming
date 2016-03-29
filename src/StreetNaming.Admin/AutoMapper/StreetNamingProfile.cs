@@ -13,6 +13,8 @@ namespace StreetNaming.Admin.AutoMapper
                     src.CaseType == CaseType.NewPropertyCase ? "New Property" : "Existing Property"));
 
             CreateMap<Case, CaseGetViewModel>();
+
+            CreateMap<Attachment, CaseGetAttachmentViewModel>();
         }
     }
 }

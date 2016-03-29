@@ -11,7 +11,9 @@
     @if (!Model.IsRegisteredOwner)
     {
         <div class="col-lg-12">
-            <div class="alert alert-warning" role="alert"><strong>Note:</strong> The applicant has indicated that they do not own the property.</div>
+            <div class="alert alert-warning" role="alert">
+                <strong>Note:</strong> The applicant has indicated that they do not own the property.
+            </div>
         </div>
     }
     <div class="col-lg-6">
@@ -35,7 +37,10 @@
                 <div class="form-group">
                     <label asp-for="CaseStatus" class="col-sm-3 control-label"></label>
                     <div class="col-sm-9">
-                        <p class="form-control-static">@Model.CaseStatus</p>
+                        <form asp-controller="Case" asp-action="UpdateStatus" asp-route-reference="@Model.CustomerReference" class="form-inline">
+                            <select asp-for="CaseStatus" asp-items="Model.Statuses" class="form-control"></select>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
                     </div>
                 </div>
                 @if (Model.CaseType == "ExistingPropertyCase")
@@ -52,16 +57,19 @@
                     <div class="col-sm-9">
                         <ol style="padding-left: 1em;">
                             <li>
-                                <p class="form-control-static">@Model.ProposedAddress1</p></li>
+                                <p class="form-control-static">@Model.ProposedAddress1</p>
+                            </li>
                             @if (!string.IsNullOrEmpty(Model.ProposedAddress2))
                             {
                                 <li>
-                                    <p class="form-control-static">@Model.ProposedAddress2</p></li>
+                                    <p class="form-control-static">@Model.ProposedAddress2</p>
+                                </li>
                             }
                             @if (!string.IsNullOrEmpty(Model.ProposedAddress3))
                             {
                                 <li>
-                                    <p class="form-control-static">@Model.ProposedAddress3</p></li>
+                                    <p class="form-control-static">@Model.ProposedAddress3</p>
+                                </li>
                             }
                         </ol>
                     </div>
@@ -88,15 +96,35 @@
                 {
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Attachments</label>
-                    <div class="col-sm-9">
-                        <ul style="padding-left: 1em;">
-                            @foreach (var att in Model.Attachments)
-                            {
-                                <li>
-                                    <p class="form-control-static">Attachment</p>
-                                </li>
-                            }
-                        </ul>
+                        <div class="col-sm-9">
+                            <ul class="list-unstyled">
+                                @foreach (var att in Model.Attachments)
+                                {
+                                    string icon;
+                                    if (att.ContentType == "application/pdf")
+                                    {
+                                        icon = "file-pdf-o";
+                                    }
+                                    else if (att.ContentType.StartsWith("image"))
+                                    {
+                                        icon = "file-image-o";
+                                    }
+                                    else if (att.ContentType == "application/msword" || att.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                                    {
+                                        icon = "file-word-o";
+                                    }
+                                    else
+                                    {
+                                        icon = "file-o";
+                                    }
+
+                                    <li>
+                                        <a asp-controller="Case" asp-action="Attachment" asp-route-reference="@Model.CustomerReference" asp-route-filename="@att.OriginalFileName" class="form-control-static">
+                                            <i class="fa fa-@icon"></i> @att.OriginalFileName
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
                         </div>
                     </div>
                 }
@@ -162,5 +190,5 @@
 }
 
 @section Scripts {
-    
+
 }

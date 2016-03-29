@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Rendering;
 using StreetNaming.Admin.ViewModels;
 using StreetNaming.DAL;
+using StreetNaming.Domain.Models;
 
 namespace StreetNaming.Admin.Controllers
 {
@@ -70,14 +71,32 @@ namespace StreetNaming.Admin.Controllers
             var viewModel = _mapper.Map<CaseGetViewModel>(c);
 
             ViewData["Title"] = viewModel.CustomerReference;
+            viewModel.Statuses = Enum.GetValues(typeof (CaseStatus)).Cast<CaseStatus>().Select(cs => new SelectListItem { Text = cs.ToString(), Value = cs.ToString() });
 
             return View(viewModel);
         }
 
-        [Route("{reference}/attachment/{filename}")]
+        [Route("{reference}/{filename}")]
         public IActionResult Attachment(string reference, string filename)
         {
             return new HttpOkResult();
+        }
+
+        [Route("{reference}/Status")]
+        public IActionResult UpdateStatus(string reference, string caseStatus)
+        {
+            try
+            {
+                var status = (CaseStatus) Enum.Parse(typeof (CaseStatus), caseStatus);
+
+                _repo.UpdateCaseStatus(reference, status);
+            }
+            catch (ArgumentException)
+            {
+                return new HttpNotFoundResult();
+            }
+
+            return RedirectToAction("Get", new { reference });
         }
     }
 }

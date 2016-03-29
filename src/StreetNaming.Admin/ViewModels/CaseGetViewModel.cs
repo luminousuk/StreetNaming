@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace StreetNaming.Admin.ViewModels
 {
@@ -63,7 +64,7 @@ namespace StreetNaming.Admin.ViewModels
 
         public string Signed { get; set; }
 
-        public ICollection<string> Attachments { get; set; }
+        public ICollection<CaseGetAttachmentViewModel> Attachments { get; set; }
 
         //public ICollection<Transaction> Transactions { get; set; }
 
@@ -72,5 +73,7 @@ namespace StreetNaming.Admin.ViewModels
 
         [Display(Name = "Additional Information")]
         public string AdditionalInformation { get; set; }
+
+        public IEnumerable<SelectListItem> Statuses { get; set; }
     }
 }

@@ -172,6 +172,11 @@ namespace StreetNaming.DAL.Mock
             return GenerateCase(reference);
         }
 
+        public void UpdateCaseStatus(string reference, CaseStatus status)
+        {
+            // Do nothing
+        }
+
         private Case GenerateCase(string reference = null, Applicant applicant = null, CaseStatus? caseStatus = null)
         {
             var newCase = new Case
@@ -186,6 +191,7 @@ namespace StreetNaming.DAL.Mock
                 ProposedAddress2 = (_random.Next(2) == 0) ? Names.HouseNames[_random.Next(Names.HouseNames.Length)] : null,
                 EffectiveDate = (_random.Next(5) == 0) ? (DateTime?)DateTime.Today.AddDays(_random.Next(10, 60)) : null,
                 AdditionalInformation = (_random.Next(3) == 0) ? Names.Lorem.Substring(0, _random.Next(Names.Lorem.Length)) : null,
+                Attachments = new List<Attachment>(),
                 CreatedDate = DateTime.Now.AddDays(_random.Next(365)*-1).AddHours(_random.Next(24)*-1),
                 ModifiedDate = DateTime.Now
             };
@@ -198,6 +204,22 @@ namespace StreetNaming.DAL.Mock
 
             if (newCase.CaseType == CaseType.ExistingPropertyCase)
                 newCase.ExistingPropertyUrn = (_random.Next() << 32) | _random.Next();
+
+            for (var i = 0; i < _random.Next(4); i++)
+            {
+                var fileType = _random.Next(3);
+
+                newCase.Attachments.Add(new Attachment
+                {
+                    AttachmentId = (_random.Next(100) + 19)*13,
+                    Case = newCase,
+                    CaseId = newCase.CaseId,
+                    OriginalFileName = fileType == 0 ? $"attachment{i}.pdf" : fileType == 1 ? $"attachment{i}.jpg" : $"attachment{i}.docx",
+                    ContentType = fileType == 0 ? "application/pdf" : fileType == 1 ? "image/jpeg" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    CreatedDate = newCase.CreatedDate,
+                    ModifiedDate = DateTime.Now
+                });
+            }
 
             newCase.Signed = $"{newCase.Applicant.FirstName} {newCase.Applicant.LastName}";
             

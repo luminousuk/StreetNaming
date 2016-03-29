@@ -25,7 +25,8 @@
         "Newtonsoft.Json": "8.0.3",
         "StreetNaming.Domain": "1.0.0-dev",
         "StreetNaming.Util": "1.0.0-dev",
-        "StreetNaming.DAL": "1.0.0-dev"
+        "StreetNaming.DAL": "1.0.0-dev",
+        "System.Linq": "4.0.0"
     },
 
     "commands": {
