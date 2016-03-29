@@ -79,7 +79,16 @@ namespace StreetNaming.Admin.Controllers
         [Route("{reference}/{filename}")]
         public IActionResult Attachment(string reference, string filename)
         {
-            return new HttpOkResult();
+            try
+            {
+                var attachment = _repo.GetAttachment(reference, filename);
+
+                return File(attachment.Bytes, attachment.ContentType, attachment.OriginalFileName);
+            }
+            catch (Exception)
+            {
+                return new HttpNotFoundResult();
+            }
         }
 
         [Route("{reference}/Status")]

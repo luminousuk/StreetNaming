@@ -30,5 +30,7 @@ namespace StreetNaming.DAL
         Case GetCase(string reference);
 
         void UpdateCaseStatus(string reference, CaseStatus status);
+
+        Attachment GetAttachment(string reference, string filename);
     }
 }

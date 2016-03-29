@@ -177,6 +177,13 @@ namespace StreetNaming.DAL.Mock
             // Do nothing
         }
 
+        public Attachment GetAttachment(string reference, string filename)
+        {
+            var attachment = GenerateAttachment(GenerateCase(reference), filename);
+
+            return attachment;
+        }
+
         private Case GenerateCase(string reference = null, Applicant applicant = null, CaseStatus? caseStatus = null)
         {
             var newCase = new Case
@@ -206,24 +213,56 @@ namespace StreetNaming.DAL.Mock
                 newCase.ExistingPropertyUrn = (_random.Next() << 32) | _random.Next();
 
             for (var i = 0; i < _random.Next(4); i++)
-            {
-                var fileType = _random.Next(3);
-
-                newCase.Attachments.Add(new Attachment
-                {
-                    AttachmentId = (_random.Next(100) + 19)*13,
-                    Case = newCase,
-                    CaseId = newCase.CaseId,
-                    OriginalFileName = fileType == 0 ? $"attachment{i}.pdf" : fileType == 1 ? $"attachment{i}.jpg" : $"attachment{i}.docx",
-                    ContentType = fileType == 0 ? "application/pdf" : fileType == 1 ? "image/jpeg" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    CreatedDate = newCase.CreatedDate,
-                    ModifiedDate = DateTime.Now
-                });
-            }
+                newCase.Attachments.Add(GenerateAttachment(newCase));
 
             newCase.Signed = $"{newCase.Applicant.FirstName} {newCase.Applicant.LastName}";
             
             return newCase;
+        }
+
+        private Attachment GenerateAttachment(Case c, string filename = null)
+        {
+            int fileType;
+
+            if (filename != null)
+            {
+                if (filename.EndsWith("pdf"))
+                    fileType = 0;
+                else if (filename.EndsWith("jpg"))
+                    fileType = 1;
+                else if (filename.EndsWith("docx"))
+                    fileType = 2;
+                else
+                    throw new ArgumentException("Invalid file extension", nameof(filename));
+            }
+            else
+            {
+                fileType = _random.Next(3);
+            }
+
+            var attachment = new Attachment
+            {
+                AttachmentId = (_random.Next(100) + 19)*13,
+                Bytes = new byte[1024],
+                Case = c,
+                CaseId = c.CaseId,
+                OriginalFileName = filename ??
+                    (fileType == 0
+                        ? $"attachment{_random.Next(100)}.pdf"
+                        : fileType == 1 ? $"attachment{_random.Next(100)}.jpg" : $"attachment{_random.Next(100)}.docx"),
+                ContentType =
+                    fileType == 0
+                        ? "application/pdf"
+                        : fileType == 1
+                            ? "image/jpeg"
+                            : "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                CreatedDate = c.CreatedDate,
+                ModifiedDate = DateTime.Now
+            };
+
+            _random.NextBytes(attachment.Bytes);
+
+            return attachment;
         }
 
         private Applicant GenerateApplicant()
@@ -339,8 +378,7 @@ namespace StreetNaming.DAL.Mock
                 "Coach House", "Clarence", "Beeches", "Highclere", "Gables"
             };
 
-            public static readonly string Lorem =
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.";
+            public const string Lorem = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.";
         }
     }
 }
