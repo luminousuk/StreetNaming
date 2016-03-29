@@ -22,7 +22,7 @@ namespace StreetNaming.Admin.Controllers
         }
 
         [Route("")]
-        public IActionResult List()
+        public IActionResult All()
         {
             var viewModel = new ApplicantListViewModel
             {
@@ -31,7 +31,7 @@ namespace StreetNaming.Admin.Controllers
 
             ViewData["Title"] = "All Applicants";
 
-            return View(viewModel);
+            return View("List", viewModel);
         }
     }
 }
