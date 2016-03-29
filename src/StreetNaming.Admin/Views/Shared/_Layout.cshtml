@@ -32,14 +32,9 @@
                         <li>
                             <a asp-controller="Dashboard" asp-action="Index"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-briefcase fa-fw"></i> Cases<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a asp-controller="Case" asp-action="All">All Cases</a></li>
-                                <li><a asp-controller="Case" asp-action="Active">Active Cases</a></li>
-                                <li><a asp-controller="Case" asp-action="Completed">Completed Cases</a></li>
-                            </ul>
-                        </li>
+                        <li><a asp-controller="Case" asp-action="All"><i class="fa fa-briefcase fa-fw"></i> All Cases</a></li>
+                        <li><a asp-controller="Case" asp-action="Active"><i class="fa fa-folder-open fa-fw"></i> Active Cases</a></li>
+                        <li><a asp-controller="Case" asp-action="Completed"><i class="fa fa-folder fa-fw"></i> Completed Cases</a></li>
                         <li>
                             <a href="#applicants"><i class="fa fa-users fa-fw"></i> Applicants</a>
                         </li>
