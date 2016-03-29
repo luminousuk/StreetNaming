@@ -14,6 +14,8 @@ namespace StreetNaming.DAL.Mock
 
         private const int AllCasesCount = 100;
 
+        private const int AllApplicantsCount = 100;
+
         private readonly Random _random = new Random();
 
         public int GetActiveCaseCount()
@@ -182,6 +184,18 @@ namespace StreetNaming.DAL.Mock
             var attachment = GenerateAttachment(GenerateCase(reference), filename);
 
             return attachment;
+        }
+
+        public ICollection<Applicant> GetAllApplicants()
+        {
+            var applicants = new List<Applicant>();
+
+            for (var i = 0; i < AllApplicantsCount; i++)
+            {
+                applicants.Add(GenerateApplicant());
+            }
+
+            return applicants;
         }
 
         private Case GenerateCase(string reference = null, Applicant applicant = null, CaseStatus? caseStatus = null)

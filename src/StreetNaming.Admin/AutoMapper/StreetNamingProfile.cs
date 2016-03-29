@@ -15,6 +15,9 @@ namespace StreetNaming.Admin.AutoMapper
             CreateMap<Case, CaseGetViewModel>();
 
             CreateMap<Attachment, CaseGetAttachmentViewModel>();
+
+            CreateMap<Applicant, ApplicantListApplicantViewModel>()
+                .ForMember(dest => dest.CaseCount, opts => opts.MapFrom(src => src.Cases.Count));
         }
     }
 }

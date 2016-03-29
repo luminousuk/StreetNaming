@@ -32,5 +32,7 @@ namespace StreetNaming.DAL
         void UpdateCaseStatus(string reference, CaseStatus status);
 
         Attachment GetAttachment(string reference, string filename);
+
+        ICollection<Applicant> GetAllApplicants();
     }
 }
