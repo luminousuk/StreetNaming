@@ -9,6 +9,7 @@ using StreetNaming.DAL;
 
 namespace StreetNaming.Admin.Controllers
 {
+    [Route("[Controller]")]
     public class CaseController : Controller
     {
         private readonly IStreetNamingRepository _repo;
@@ -20,6 +21,7 @@ namespace StreetNaming.Admin.Controllers
             _mapper = mapper;
         }
 
+        [Route("All")]
         public IActionResult All()
         {
             var viewModel = new CaseIndexViewModel
@@ -31,6 +33,7 @@ namespace StreetNaming.Admin.Controllers
 
             return View("List", viewModel);
         }
+        [Route("Active")]
         public IActionResult Active()
         {
             var viewModel = new CaseIndexViewModel
@@ -43,6 +46,7 @@ namespace StreetNaming.Admin.Controllers
             return View("List", viewModel);
         }
 
+        [Route("Completed")]
         public IActionResult Completed()
         {
             var viewModel = new CaseIndexViewModel
@@ -53,6 +57,27 @@ namespace StreetNaming.Admin.Controllers
             ViewData["Title"] = "Completed Cases";
 
             return View("List", viewModel);
+        }
+
+        [Route("{reference}")]
+        public IActionResult Get(string reference)
+        {
+            var c = _repo.GetCase(reference);
+
+            if (c == null)
+                return new HttpNotFoundResult();
+
+            var viewModel = _mapper.Map<CaseGetViewModel>(c);
+
+            ViewData["Title"] = viewModel.CustomerReference;
+
+            return View(viewModel);
+        }
+
+        [Route("{reference}/attachment/{filename}")]
+        public IActionResult Attachment(string reference, string filename)
+        {
+            return new HttpOkResult();
         }
     }
 }

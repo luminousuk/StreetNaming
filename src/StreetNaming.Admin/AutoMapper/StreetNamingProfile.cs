@@ -11,6 +11,8 @@ namespace StreetNaming.Admin.AutoMapper
             CreateMap<Case, CaseIndexCaseViewModel>()
                 .ForMember(dest => dest.CaseType, opts => opts.MapFrom(src =>
                     src.CaseType == CaseType.NewPropertyCase ? "New Property" : "Existing Property"));
+
+            CreateMap<Case, CaseGetViewModel>();
         }
     }
 }

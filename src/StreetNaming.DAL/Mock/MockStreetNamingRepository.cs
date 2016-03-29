@@ -167,7 +167,12 @@ namespace StreetNaming.DAL.Mock
             return cases;
         }
 
-        private Case GenerateCase(Applicant applicant = null, CaseStatus? caseStatus = null)
+        public Case GetCase(string reference)
+        {
+            return GenerateCase(reference);
+        }
+
+        private Case GenerateCase(string reference = null, Applicant applicant = null, CaseStatus? caseStatus = null)
         {
             var newCase = new Case
             {
@@ -179,11 +184,13 @@ namespace StreetNaming.DAL.Mock
                 IsRegisteredOwner = (_random.Next(10) > 0),
                 ProposedAddress1 = Names.HouseNames[_random.Next(Names.HouseNames.Length)],
                 ProposedAddress2 = (_random.Next(2) == 0) ? Names.HouseNames[_random.Next(Names.HouseNames.Length)] : null,
+                EffectiveDate = (_random.Next(5) == 0) ? (DateTime?)DateTime.Today.AddDays(_random.Next(10, 60)) : null,
+                AdditionalInformation = (_random.Next(3) == 0) ? Names.Lorem.Substring(0, _random.Next(Names.Lorem.Length)) : null,
                 CreatedDate = DateTime.Now.AddDays(_random.Next(365)*-1).AddHours(_random.Next(24)*-1),
                 ModifiedDate = DateTime.Now
             };
 
-            newCase.CustomerReference = UniqueReferenceGenerator.GetCaseReference(newCase.CaseType == CaseType.ExistingPropertyCase ? "EP" : "NP", newCase.CaseId);
+            newCase.CustomerReference = reference ?? UniqueReferenceGenerator.GetCaseReference(newCase.CaseType == CaseType.ExistingPropertyCase ? "EP" : "NP", newCase.CaseId);
             newCase.ApplicantId = newCase.Applicant.ApplicantId;
             newCase.ProposedAddress3 = (newCase.ProposedAddress2 != null && _random.Next(2) == 0)
                 ? Names.HouseNames[_random.Next(Names.HouseNames.Length)]
@@ -193,8 +200,7 @@ namespace StreetNaming.DAL.Mock
                 newCase.ExistingPropertyUrn = (_random.Next() << 32) | _random.Next();
 
             newCase.Signed = $"{newCase.Applicant.FirstName} {newCase.Applicant.LastName}";
-
-
+            
             return newCase;
         }
 
@@ -310,6 +316,9 @@ namespace StreetNaming.DAL.Mock
                 "Vicarage", "Fairview", "Laurels", "Thornfield", "Hillcrest", "The Barn", "Firs", "The Cottage", "Nook",
                 "Coach House", "Clarence", "Beeches", "Highclere", "Gables"
             };
+
+            public static readonly string Lorem =
+                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.";
         }
     }
 }

@@ -12,6 +12,7 @@
         <table class="table table-striped table-hover" id="table-cases" style="width: 100%">
             <thead>
             <tr rolw="row">
+                <th><i class="fa fa-cogs"></i> Action</th>
                 <th><i class="fa fa-file"></i> Reference</th>
                 <th><i class="fa fa-user"></i> Applicant</th>
                 <th><i class="fa fa-home"></i> Case Type</th>
@@ -22,7 +23,8 @@
             <tbody>
             @foreach (var c in Model.Cases)
             {
-                <tr role="row">
+                <tr role="row" data-caseurl="@Url.Action("Get", "Case", new {reference = c.CustomerReference})">
+                    <td><a asp-controller="Case" asp-action="Get" asp-route-reference="@c.CustomerReference" class="btn btn-sm btn-success">View <i class="fa fa-arrow-circle-right"></i></a></td>
                     <td>@c.CustomerReference</td>
                     <td>@c.ApplicantFullName</td>
                     <td>@c.CaseType</td>
@@ -48,11 +50,15 @@
             $("#table-cases").DataTable({
                 "columnDefs": [
                     {
-                        "targets": [2, 3, 4],
+                        "targets": [0, 3, 4, 5],
                         "searchable": false
                     },
                     {
-                        "targets": 4,
+                        "targets": [0],
+                        "sortable": false
+                    },
+                    {
+                        "targets": [5],
                         "render": function(data, type, row) {
                             if (type === "display")
                                 return moment(data).calendar(null, {
@@ -64,7 +70,7 @@
                     }
                 ],
                 "createdRow": function(row, data, index) {
-                    switch (data[3]) {
+                    switch (data[4]) {
                         case "New":
                         case "Active":
                             $(row).addClass("text-primary");
@@ -79,7 +85,7 @@
                             break;
                     }
                 },
-                "order": [4, "desc"]
+                "order": [5, "desc"]
             });
         });
     </script>

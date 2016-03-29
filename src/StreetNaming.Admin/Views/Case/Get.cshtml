@@ -1,0 +1,166 @@
+﻿@model StreetNaming.Admin.ViewModels.CaseGetViewModel
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">@ViewData["Title"]</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    @if (!Model.IsRegisteredOwner)
+    {
+        <div class="col-lg-12">
+            <div class="alert alert-warning" role="alert"><strong>Note:</strong> The applicant has indicated that they do not own the property.</div>
+        </div>
+    }
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Case Details</h3>
+            </div>
+            <div class="panel-body form-horizontal">
+                <div class="form-group">
+                    <label asp-for="CreatedDate" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.CreatedDate.ToString("f")</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CaseType" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.CaseType</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CaseStatus" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.CaseStatus</p>
+                    </div>
+                </div>
+                @if (Model.CaseType == "ExistingPropertyCase")
+                {
+                    <div class="form-group">
+                        <label asp-for="ExistingPropertyUrn" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <p class="form-control-static">@Model.ExistingPropertyUrn</p>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Proposed</label>
+                    <div class="col-sm-9">
+                        <ol style="padding-left: 1em;">
+                            <li>
+                                <p class="form-control-static">@Model.ProposedAddress1</p></li>
+                            @if (!string.IsNullOrEmpty(Model.ProposedAddress2))
+                            {
+                                <li>
+                                    <p class="form-control-static">@Model.ProposedAddress2</p></li>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.ProposedAddress3))
+                            {
+                                <li>
+                                    <p class="form-control-static">@Model.ProposedAddress3</p></li>
+                            }
+                        </ol>
+                    </div>
+                </div>
+                @if (Model.EffectiveDate != null)
+                {
+                    <div class="form-group">
+                        <label asp-for="EffectiveDate" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <p class="form-control-static">@Model.EffectiveDate.Value.ToString("D")</p>
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(Model.AdditionalInformation))
+                {
+                    <div class="form-group">
+                        <label asp-for="AdditionalInformation" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <p class="form-control-static">@Model.AdditionalInformation</p>
+                        </div>
+                    </div>
+                }
+                @if (Model.Attachments.Count > 0)
+                {
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Attachments</label>
+                    <div class="col-sm-9">
+                        <ul style="padding-left: 1em;">
+                            @foreach (var att in Model.Attachments)
+                            {
+                                <li>
+                                    <p class="form-control-static">Attachment</p>
+                                </li>
+                            }
+                        </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Applicant Details</h3>
+            </div>
+            <div class="panel-body form-horizontal">
+                <div class="form-group">
+                    <label asp-for="ApplicantTitle" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.ApplicantTitle</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ApplicantFirstName" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.ApplicantFirstName</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ApplicantLastName" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.ApplicantLastName</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ApplicantFullAddress" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.ApplicantFullAddress</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ApplicantTelephone" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.ApplicantTelephone</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ApplicantMobile" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.ApplicantMobile</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ApplicantEmail" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.ApplicantEmail</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+
+}
+
+@section Scripts {
+    
+}
