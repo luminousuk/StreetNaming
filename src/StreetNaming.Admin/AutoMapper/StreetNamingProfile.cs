@@ -20,6 +20,10 @@ namespace StreetNaming.Admin.AutoMapper
                 .ForMember(dest => dest.CaseCount, opts => opts.MapFrom(src => src.Cases.Count));
 
             CreateMap<Transaction, TransactionListTransactionViewModel>();
+
+            CreateMap<Case, CaseFollowUpCaseViewModel>();
+
+            CreateMap<Transaction, CaseFollowUpCaseTransactionViewModel>();
         }
     }
 }

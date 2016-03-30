@@ -1,4 +1,4 @@
-﻿@model StreetNaming.Admin.ViewModels.CaseListViewModel
+﻿@model StreetNaming.Admin.ViewModels.CaseFollowUpViewModel
 
 <div class="row">
     <div class="col-lg-12">
@@ -13,6 +13,7 @@
             <thead>
             <tr rolw="row">
                 <th><i class="fa fa-cogs"></i> Action</th>
+                <th><i class="fa fa-cogs"></i> Reason</th>
                 <th><i class="fa fa-file"></i> Reference</th>
                 <th><i class="fa fa-user"></i> Applicant</th>
                 <th><i class="fa fa-home"></i> Case Type</th>
@@ -21,10 +22,18 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var c in Model.Cases)
+            @foreach (var c in Model.FollowUpCases)
             {
                 <tr role="row">
                     <td><a asp-controller="Case" asp-action="Get" asp-route-reference="@c.CustomerReference" class="btn btn-sm btn-success">View <i class="fa fa-arrow-circle-right"></i></a></td>
+                    <td>
+                        <ul class="list-unstyled">
+                            @foreach (var reason in c.Reasons)
+                            {
+                                <li><i class="fa fa-exclamation-triangle fa-fw"></i> @reason</li>
+                            }
+                        </ul>
+                    </td>
                     <td>@c.CustomerReference</td>
                     <td>@c.ApplicantFullName</td>
                     <td>@c.CaseType</td>
@@ -50,7 +59,7 @@
             $("#table-cases").DataTable({
                 "columnDefs": [
                     {
-                        "targets": [0, 3, 4, 5],
+                        "targets": [0, 4, 5, 6],
                         "searchable": false
                     },
                     {
@@ -58,7 +67,7 @@
                         "sortable": false
                     },
                     {
-                        "targets": [5],
+                        "targets": [6],
                         "render": function(data, type, row) {
                             if (type === "display")
                                 return moment(data).calendar(null, {
@@ -69,23 +78,7 @@
                         }
                     }
                 ],
-                "createdRow": function(row, data, index) {
-                    switch (data[4]) {
-                        case "New":
-                        case "Active":
-                            $(row).addClass("text-primary");
-                            break;
-                        case "Completed":
-                            $(row).addClass("text-success");
-                            break;
-                        case "Rejected":
-                        case "Cancelled":
-                        case "Refunded":
-                            $(row).addClass("text-danger");
-                            break;
-                    }
-                },
-                "order": [5, "desc"]
+                "order": [6, "desc"]
             });
         });
     </script>

@@ -24,6 +24,8 @@ namespace StreetNaming.DAL
 
         ICollection<Case> GetCompletedCases();
 
+        ICollection<Case> GetFollowUpCases();
+
         Case GetCase(string reference);
 
         void UpdateCaseStatus(string reference, CaseStatus status);

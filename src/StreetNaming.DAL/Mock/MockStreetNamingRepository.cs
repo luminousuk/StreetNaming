@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using StreetNaming.DAL.DTO;
 using StreetNaming.Domain.Models;
 using StreetNaming.Util;
@@ -171,6 +172,27 @@ namespace StreetNaming.DAL.Mock
             return cases;
         }
 
+        public ICollection<Case> GetFollowUpCases()
+        {
+            var cases = new List<Case>();
+            for (var i = 0; i < AllCasesCount; i++)
+            {
+                var c = GenerateCase(caseStatus: CaseStatus.Active);
+
+                if (_random.Next(2) == 0)
+                    c.IsRegisteredOwner = false;
+                else
+                {
+                    foreach (var t in c.Transactions)
+                        t.TransactionStatus = _random.Next(2) == 0 ? TransactionStatus.Pending : TransactionStatus.Failed;
+                }
+
+                cases.Add(c);
+            }
+
+            return cases;
+        }
+
         public Case GetCase(string reference)
         {
             return GenerateCase(reference);
@@ -275,7 +297,8 @@ namespace StreetNaming.DAL.Mock
                     _random.Next(3) == 0 ? Names.Lorem.Substring(0, _random.Next(Names.Lorem.Length)) : null,
                 Attachments = new List<Attachment>(),
                 CreatedDate = DateTime.Now.AddDays(_random.Next(365)*-1).AddHours(_random.Next(24)*-1),
-                ModifiedDate = DateTime.Now
+                ModifiedDate = DateTime.Now,
+                Transactions = new List<Transaction>()
             };
 
             newCase.CustomerReference = reference ??
@@ -292,6 +315,9 @@ namespace StreetNaming.DAL.Mock
 
             for (var i = 0; i < _random.Next(4); i++)
                 newCase.Attachments.Add(GenerateAttachment(newCase));
+
+            for (var i=0; i < _random.Next(3); i++)
+                newCase.Transactions.Add(GenerateTransaction(c: newCase));
 
             newCase.Signed = $"{newCase.Applicant.FirstName} {newCase.Applicant.LastName}";
 

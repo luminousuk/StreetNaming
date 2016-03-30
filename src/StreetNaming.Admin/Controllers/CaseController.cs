@@ -60,6 +60,31 @@ namespace StreetNaming.Admin.Controllers
             return View("List", viewModel);
         }
 
+        [Route("FollowUp")]
+        public IActionResult FollowUp()
+        {
+            var viewModel = new CaseFollowUpViewModel()
+            {
+                FollowUpCases = _mapper.Map<ICollection<CaseFollowUpCaseViewModel>>(_repo.GetFollowUpCases())
+            };
+
+            foreach (var c in viewModel.FollowUpCases)
+            {
+                if (!c.IsRegisteredOwner)
+                    c.Reasons.Add("Applicant is not property owner");
+
+                if (c.Transactions.Any(t => t.TransactionStatus == "Pending"))
+                    c.Reasons.Add("Pending transaction");
+
+                if (c.Transactions.All(t => t.TransactionStatus == "Cancelled" || t.TransactionStatus == "Failed"))
+                    c.Reasons.Add("Case unpaid by applicant");
+            }
+
+            ViewData["Title"] = "Follow Up Cases";
+
+            return View("FollowUp", viewModel);
+        }
+
         [Route("{reference}")]
         public IActionResult Get(string reference)
         {

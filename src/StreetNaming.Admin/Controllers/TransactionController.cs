@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
 using StreetNaming.Admin.ViewModels;
@@ -12,8 +10,8 @@ namespace StreetNaming.Admin.Controllers
     [Route("[controller]s")]
     public class TransactionController : Controller
     {
-        private readonly IStreetNamingRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IStreetNamingRepository _repo;
 
         public TransactionController(IStreetNamingRepository repo, IMapper mapper)
         {
@@ -39,7 +37,8 @@ namespace StreetNaming.Admin.Controllers
         {
             var viewModel = new TransactionListViewModel
             {
-                Transactions = _mapper.Map<ICollection<TransactionListTransactionViewModel>>(_repo.GetPendingTransactions())
+                Transactions =
+                    _mapper.Map<ICollection<TransactionListTransactionViewModel>>(_repo.GetPendingTransactions())
             };
 
             ViewData["Title"] = "Pending Transactions";
