@@ -9,6 +9,7 @@
     "dependencies": {
         "EntityFramework.Commands": "7.0.0-rc1-final",
         "EntityFramework7.Npgsql": "3.1.0-rc1-3",
+        "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-final",
         "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
         "StreetNaming.Domain": "1.0.0-dev",
         "StreetNaming.Util": "1.0.0-dev"
@@ -22,5 +23,7 @@
     "frameworks": {
         "dnx451": { },
         "dnxcore50": { }
-    }
+    },
+
+    "userSecretsId": "aspnet5-StreetNaming.Web-20160229022223"
 }

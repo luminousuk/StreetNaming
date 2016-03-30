@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StreetNaming.Admin.AutoMapper;
 using StreetNaming.DAL;
-using StreetNaming.DAL.Mock;
+using StreetNaming.DAL.PostgreSQL;
 
 namespace StreetNaming.Admin
 {
@@ -37,7 +34,12 @@ namespace StreetNaming.Admin
             // Add framework services.
             services.AddMvc();
 
-            services.AddSingleton<IStreetNamingRepository, MockStreetNamingRepository>();
+            services.AddEntityFramework()
+                .AddNpgsql()
+                .AddDbContext<StreetNamingContext>(options =>
+                    options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
+
+            services.AddScoped<IStreetNamingRepository, PostgreSqlStreetNamingRepository>();
 
             var mapperConfig = new MapperConfiguration(cfg => { cfg.AddProfile(new StreetNamingProfile()); });
             services.AddSingleton(sp => mapperConfig.CreateMapper());
@@ -63,12 +65,7 @@ namespace StreetNaming.Admin
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Dashboard}/{action=Index}/{id?}");
-            });
+            app.UseMvc(routes => { routes.MapRoute("default", "{controller=Dashboard}/{action=Index}/{id?}"); });
         }
 
         // Entry point for the application.
