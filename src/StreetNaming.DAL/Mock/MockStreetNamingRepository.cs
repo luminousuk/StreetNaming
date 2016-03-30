@@ -258,7 +258,7 @@ namespace StreetNaming.DAL.Mock
             transaction.CaseId = transaction.Case.CaseId;
             transaction.Amount = transaction.Case.CaseType == CaseType.ExistingPropertyCase ? 50.00M : 60.00M;
 
-            switch (status)
+            switch (transaction.TransactionStatus)
             {
                 case TransactionStatus.Complete:
                     transaction.ResponseCode = 0;

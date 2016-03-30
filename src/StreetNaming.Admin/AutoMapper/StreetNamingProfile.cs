@@ -24,6 +24,8 @@ namespace StreetNaming.Admin.AutoMapper
             CreateMap<Case, CaseFollowUpCaseViewModel>();
 
             CreateMap<Transaction, CaseFollowUpCaseTransactionViewModel>();
+
+            CreateMap<Transaction, CaseGetTransactionViewModel>();
         }
     }
 }

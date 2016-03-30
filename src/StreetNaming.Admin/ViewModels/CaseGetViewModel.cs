@@ -66,7 +66,7 @@ namespace StreetNaming.Admin.ViewModels
 
         public ICollection<CaseGetAttachmentViewModel> Attachments { get; set; }
 
-        //public ICollection<Transaction> Transactions { get; set; }
+        public ICollection<CaseGetTransactionViewModel> Transactions { get; set; }
 
         [Display(Name = "Created")]
         public DateTime CreatedDate { get; set; }
