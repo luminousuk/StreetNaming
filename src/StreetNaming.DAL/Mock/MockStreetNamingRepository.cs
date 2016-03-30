@@ -16,6 +16,8 @@ namespace StreetNaming.DAL.Mock
 
         private const int AllApplicantsCount = 100;
 
+        private const int AllTransactionsCount = 100;
+
         private readonly Random _random = new Random();
 
         public int GetActiveCaseCount()
@@ -28,7 +30,7 @@ namespace StreetNaming.DAL.Mock
             return _random.Next(100);
         }
 
-        public int GetUnpaidTransactionCount()
+        public int GetPendingTransactionCount()
         {
             return _random.Next(100);
         }
@@ -198,6 +200,64 @@ namespace StreetNaming.DAL.Mock
             return applicants;
         }
 
+        public ICollection<Transaction> GetAllTransactions()
+        {
+            var trans = new List<Transaction>();
+
+            for (var i = 0; i < AllTransactionsCount; i++)
+                trans.Add(GenerateTransaction());
+
+            return trans;
+        }
+
+        public ICollection<Transaction> GetPendingTransactions()
+        {
+            var trans = new List<Transaction>();
+
+            for (var i = 0; i < AllTransactionsCount; i++)
+                trans.Add(GenerateTransaction(status: TransactionStatus.Pending));
+
+            return trans;
+        }
+
+        private Transaction GenerateTransaction(Case c = null, TransactionStatus? status = null)
+        {
+            var transaction = new Transaction
+            {
+                TransactionId = (_random.Next(100) + 201)*13,
+                Reference = Guid.NewGuid(),
+                Case = c ?? GenerateCase(),
+                Currency = "GBP",
+                Provider = "TestTransaction",
+                CreatedDate = DateTime.Now.AddDays(_random.Next(365)*-1).AddHours(_random.Next(24)*-1),
+                TransactionStatus = status ?? (TransactionStatus) (1 << _random.Next(5))
+            };
+
+            transaction.CaseId = transaction.Case.CaseId;
+            transaction.Amount = transaction.Case.CaseType == CaseType.ExistingPropertyCase ? 50.00M : 60.00M;
+
+            switch (status)
+            {
+                case TransactionStatus.Complete:
+                    transaction.ResponseCode = 0;
+                    transaction.ResponseDate = transaction.CreatedDate.AddHours(1);
+                    transaction.ResponseDescription = "Success";
+                    break;
+                case TransactionStatus.Failed:
+                    transaction.ResponseCode = 1;
+                    transaction.ResponseDate = transaction.CreatedDate.AddHours(1);
+                    transaction.ResponseDescription = "Failed";
+                    break;
+                case TransactionStatus.Cancelled:
+                    transaction.ResponseCode = 2;
+                    transaction.ResponseDate = transaction.CreatedDate.AddHours(1);
+                    transaction.ResponseDescription = "Cancelled";
+                    break;
+            }
+
+            return transaction;
+        }
+
         private Case GenerateCase(string reference = null, Applicant applicant = null, CaseStatus? caseStatus = null)
         {
             var newCase = new Case
@@ -205,21 +265,25 @@ namespace StreetNaming.DAL.Mock
                 CaseId = (_random.Next(100) + 123)*17,
                 Reference = Guid.NewGuid(),
                 Applicant = applicant ?? GenerateApplicant(),
-                CaseStatus = caseStatus ?? (CaseStatus)(1<<_random.Next(0, 5)),
-                CaseType = (_random.Next(2) == 1) ? CaseType.NewPropertyCase : CaseType.ExistingPropertyCase,
-                IsRegisteredOwner = (_random.Next(10) > 0),
+                CaseStatus = caseStatus ?? (CaseStatus) (1 << _random.Next(0, 5)),
+                CaseType = _random.Next(2) == 1 ? CaseType.NewPropertyCase : CaseType.ExistingPropertyCase,
+                IsRegisteredOwner = _random.Next(10) > 0,
                 ProposedAddress1 = Names.HouseNames[_random.Next(Names.HouseNames.Length)],
-                ProposedAddress2 = (_random.Next(2) == 0) ? Names.HouseNames[_random.Next(Names.HouseNames.Length)] : null,
-                EffectiveDate = (_random.Next(5) == 0) ? (DateTime?)DateTime.Today.AddDays(_random.Next(10, 60)) : null,
-                AdditionalInformation = (_random.Next(3) == 0) ? Names.Lorem.Substring(0, _random.Next(Names.Lorem.Length)) : null,
+                ProposedAddress2 = _random.Next(2) == 0 ? Names.HouseNames[_random.Next(Names.HouseNames.Length)] : null,
+                EffectiveDate = _random.Next(5) == 0 ? (DateTime?) DateTime.Today.AddDays(_random.Next(10, 60)) : null,
+                AdditionalInformation =
+                    _random.Next(3) == 0 ? Names.Lorem.Substring(0, _random.Next(Names.Lorem.Length)) : null,
                 Attachments = new List<Attachment>(),
                 CreatedDate = DateTime.Now.AddDays(_random.Next(365)*-1).AddHours(_random.Next(24)*-1),
                 ModifiedDate = DateTime.Now
             };
 
-            newCase.CustomerReference = reference ?? UniqueReferenceGenerator.GetCaseReference(newCase.CaseType == CaseType.ExistingPropertyCase ? "EP" : "NP", newCase.CaseId);
+            newCase.CustomerReference = reference ??
+                                        UniqueReferenceGenerator.GetCaseReference(
+                                            newCase.CaseType == CaseType.ExistingPropertyCase ? "EP" : "NP",
+                                            newCase.CaseId);
             newCase.ApplicantId = newCase.Applicant.ApplicantId;
-            newCase.ProposedAddress3 = (newCase.ProposedAddress2 != null && _random.Next(2) == 0)
+            newCase.ProposedAddress3 = newCase.ProposedAddress2 != null && _random.Next(2) == 0
                 ? Names.HouseNames[_random.Next(Names.HouseNames.Length)]
                 : null;
 
@@ -230,7 +294,7 @@ namespace StreetNaming.DAL.Mock
                 newCase.Attachments.Add(GenerateAttachment(newCase));
 
             newCase.Signed = $"{newCase.Applicant.FirstName} {newCase.Applicant.LastName}";
-            
+
             return newCase;
         }
 
@@ -261,9 +325,11 @@ namespace StreetNaming.DAL.Mock
                 Case = c,
                 CaseId = c.CaseId,
                 OriginalFileName = filename ??
-                    (fileType == 0
-                        ? $"attachment{_random.Next(100)}.pdf"
-                        : fileType == 1 ? $"attachment{_random.Next(100)}.jpg" : $"attachment{_random.Next(100)}.docx"),
+                                   (fileType == 0
+                                       ? $"attachment{_random.Next(100)}.pdf"
+                                       : fileType == 1
+                                           ? $"attachment{_random.Next(100)}.jpg"
+                                           : $"attachment{_random.Next(100)}.docx"),
                 ContentType =
                     fileType == 0
                         ? "application/pdf"
@@ -284,7 +350,7 @@ namespace StreetNaming.DAL.Mock
             var isMale = _random.Next(2) == 1;
             var applicant = new Applicant
             {
-                ApplicantId = (_random.Next(100)+88)*27,
+                ApplicantId = (_random.Next(100) + 88)*27,
                 Title = isMale ? "Mr" : "Mrs",
                 FirstName = isMale
                     ? Names.FirstNamesMale[_random.Next(Names.FirstNamesMale.Length)]
@@ -294,9 +360,12 @@ namespace StreetNaming.DAL.Mock
                 Street = Names.StreetNames[_random.Next(Names.StreetNames.Length)],
                 Town = Names.Towns[_random.Next(Names.Towns.Length)],
                 County = "Somerset",
-                PostCode = $"BA{_random.Next(1, 10)} {_random.Next(1, 10)}{(char)('A' + _random.Next(0, 26))}{(char)('A' + _random.Next(0, 26))}",
-                Mobile = $"07{_random.Next(10)}{_random.Next(10)}{_random.Next(10)} {_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}",
-                Telephone = $"01{_random.Next(10)}{_random.Next(10)}{_random.Next(10)} {_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}",
+                PostCode =
+                    $"BA{_random.Next(1, 10)} {_random.Next(1, 10)}{(char) ('A' + _random.Next(0, 26))}{(char) ('A' + _random.Next(0, 26))}",
+                Mobile =
+                    $"07{_random.Next(10)}{_random.Next(10)}{_random.Next(10)} {_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}",
+                Telephone =
+                    $"01{_random.Next(10)}{_random.Next(10)}{_random.Next(10)} {_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}{_random.Next(10)}",
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
@@ -310,6 +379,9 @@ namespace StreetNaming.DAL.Mock
 
         private static class Names
         {
+            public const string Lorem =
+                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.";
+
             public static readonly string[] FirstNamesMale =
             {
                 "Oliver", "Jack", "Harry", "Jacob", "Charlie", "Thomas", "George", "Oscar", "James", "William", "Noah",
@@ -391,8 +463,6 @@ namespace StreetNaming.DAL.Mock
                 "Vicarage", "Fairview", "Laurels", "Thornfield", "Hillcrest", "The Barn", "Firs", "The Cottage", "Nook",
                 "Coach House", "Clarence", "Beeches", "Highclere", "Gables"
             };
-
-            public const string Lorem = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.";
         }
     }
 }

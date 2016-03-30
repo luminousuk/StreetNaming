@@ -25,9 +25,9 @@ namespace StreetNaming.Admin.Controllers
         [Route("All")]
         public IActionResult All()
         {
-            var viewModel = new CaseIndexViewModel
+            var viewModel = new CaseListViewModel
             {
-                Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetAllCases())
+                Cases = _mapper.Map<ICollection<CaseListCaseViewModel>>(_repo.GetAllCases())
             };
 
             ViewData["Title"] = "All Cases";
@@ -37,9 +37,9 @@ namespace StreetNaming.Admin.Controllers
         [Route("Active")]
         public IActionResult Active()
         {
-            var viewModel = new CaseIndexViewModel
+            var viewModel = new CaseListViewModel
             {
-                Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetActiveCases())
+                Cases = _mapper.Map<ICollection<CaseListCaseViewModel>>(_repo.GetActiveCases())
             };
 
             ViewData["Title"] = "Active Cases";
@@ -50,9 +50,9 @@ namespace StreetNaming.Admin.Controllers
         [Route("Completed")]
         public IActionResult Completed()
         {
-            var viewModel = new CaseIndexViewModel
+            var viewModel = new CaseListViewModel
             {
-                Cases = _mapper.Map<ICollection<CaseIndexCaseViewModel>>(_repo.GetCompletedCases())
+                Cases = _mapper.Map<ICollection<CaseListCaseViewModel>>(_repo.GetCompletedCases())
             };
 
             ViewData["Title"] = "Completed Cases";

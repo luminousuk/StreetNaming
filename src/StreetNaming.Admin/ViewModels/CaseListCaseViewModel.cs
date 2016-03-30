@@ -2,7 +2,7 @@
 
 namespace StreetNaming.Admin.ViewModels
 {
-    public class CaseIndexCaseViewModel
+    public class CaseListCaseViewModel
     {
         public int CaseId { get; set; }
 

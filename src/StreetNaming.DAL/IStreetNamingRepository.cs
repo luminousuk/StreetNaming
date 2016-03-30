@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using StreetNaming.DAL.DTO;
 using StreetNaming.Domain.Models;
 
@@ -13,7 +10,7 @@ namespace StreetNaming.DAL
 
         int GetApplicantCount();
 
-        int GetUnpaidTransactionCount();
+        int GetPendingTransactionCount();
 
         int GetCaseFollowUpCount();
 
@@ -34,5 +31,9 @@ namespace StreetNaming.DAL
         Attachment GetAttachment(string reference, string filename);
 
         ICollection<Applicant> GetAllApplicants();
+
+        ICollection<Transaction> GetAllTransactions();
+
+        ICollection<Transaction> GetPendingTransactions();
     }
 }

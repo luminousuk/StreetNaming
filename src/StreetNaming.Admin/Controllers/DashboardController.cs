@@ -24,7 +24,7 @@ namespace StreetNaming.Admin.Controllers
                 ActiveCaseCount = _repo.GetActiveCaseCount(),
                 ApplicantCount = _repo.GetApplicantCount(),
                 CaseFollowUpCount = _repo.GetCaseFollowUpCount(),
-                UnpaidTransactionCount = _repo.GetUnpaidTransactionCount()
+                UnpaidTransactionCount = _repo.GetPendingTransactionCount()
             };
 
             return View(viewModel);

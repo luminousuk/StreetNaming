@@ -17,7 +17,7 @@
 //            return 20;
 //        }
 
-//        public int GetUnpaidTransactionCount()
+//        public int GetPendingTransactionCount()
 //        {
 //            return 30;
 //        }

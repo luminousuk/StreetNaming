@@ -8,7 +8,7 @@ namespace StreetNaming.Admin.AutoMapper
     {
         protected override void Configure()
         {
-            CreateMap<Case, CaseIndexCaseViewModel>()
+            CreateMap<Case, CaseListCaseViewModel>()
                 .ForMember(dest => dest.CaseType, opts => opts.MapFrom(src =>
                     src.CaseType == CaseType.NewPropertyCase ? "New Property" : "Existing Property"));
 
@@ -18,6 +18,8 @@ namespace StreetNaming.Admin.AutoMapper
 
             CreateMap<Applicant, ApplicantListApplicantViewModel>()
                 .ForMember(dest => dest.CaseCount, opts => opts.MapFrom(src => src.Cases.Count));
+
+            CreateMap<Transaction, TransactionListTransactionViewModel>();
         }
     }
 }
