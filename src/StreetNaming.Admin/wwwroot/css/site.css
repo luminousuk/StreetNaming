@@ -31,3 +31,7 @@ textarea {
         z-index: 10 !important;
     }
 }
+
+.form-group {
+    margin-bottom: 0;
+}
