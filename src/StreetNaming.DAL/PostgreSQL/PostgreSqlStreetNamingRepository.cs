@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.Data.Entity;
 using StreetNaming.DAL.DTO;
 using StreetNaming.Domain.Models;
+
 // ReSharper disable PossibleMultipleEnumeration
 
 namespace StreetNaming.DAL.PostgreSQL
@@ -57,17 +57,13 @@ namespace StreetNaming.DAL.PostgreSQL
             }
 
             _context.Cases.GroupBy(c => new {month = c.CreatedDate.ToString("yyyy-MM"), type = c.CaseType},
-                    (key, group) =>
-                        new MonthlyCaseCountDto(key.month,
-                            group.Count(g => g.CaseType == CaseType.ExistingPropertyCase),
-                            group.Count(g => g.CaseType == CaseType.NewPropertyCase)
-                            ))
-                    .ToList()
-                    .ForEach(obj =>
-                    {
-                        totals[obj.Month] = obj;
-                    });
-
+                (key, group) =>
+                    new MonthlyCaseCountDto(key.month,
+                        group.Count(g => g.CaseType == CaseType.ExistingPropertyCase),
+                        group.Count(g => g.CaseType == CaseType.NewPropertyCase)
+                        ))
+                .ToList()
+                .ForEach(obj => { totals[obj.Month] = obj; });
 
 
             return totals.Values;
@@ -88,12 +84,7 @@ namespace StreetNaming.DAL.PostgreSQL
                     (key, group) => new MonthlyCashflowDto(key, group.Sum(g => g.Amount))
                 )
                 .ToList()
-                .ForEach(obj =>
-                {
-                    totals[obj.Month] = obj;
-                });
-
-
+                .ForEach(obj => { totals[obj.Month] = obj; });
 
             return totals.Values;
         }

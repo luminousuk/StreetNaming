@@ -25,12 +25,15 @@
             @foreach (var c in Model.FollowUpCases)
             {
                 <tr role="row">
-                    <td><a asp-controller="Case" asp-action="Get" asp-route-reference="@c.CustomerReference" class="btn btn-sm btn-success">View <i class="fa fa-arrow-circle-right"></i></a></td>
+                    <td>
+                        <a asp-controller="Case" asp-action="Get" asp-route-reference="@c.CustomerReference" class="btn btn-sm btn-success">View <i class="fa fa-arrow-circle-right"></i></a>
+                    </td>
                     <td>
                         <ul class="list-unstyled">
                             @foreach (var reason in c.Reasons)
                             {
-                                <li><i class="fa fa-exclamation-triangle fa-fw"></i> @reason</li>
+                                <li>
+                                    <i class="fa fa-exclamation-triangle fa-fw"></i> @reason</li>
                             }
                         </ul>
                     </td>

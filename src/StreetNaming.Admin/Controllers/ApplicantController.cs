@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
 using StreetNaming.Admin.ViewModels;
@@ -12,8 +9,8 @@ namespace StreetNaming.Admin.Controllers
     [Route("[controller]s")]
     public class ApplicantController : Controller
     {
-        private readonly IStreetNamingRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IStreetNamingRepository _repo;
 
         public ApplicantController(IStreetNamingRepository repo, IMapper mapper)
         {

@@ -13,8 +13,8 @@ namespace StreetNaming.Admin.Controllers
     [Route("[Controller]")]
     public class CaseController : Controller
     {
-        private readonly IStreetNamingRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IStreetNamingRepository _repo;
 
         public CaseController(IStreetNamingRepository repo, IMapper mapper)
         {
@@ -34,6 +34,7 @@ namespace StreetNaming.Admin.Controllers
 
             return View("List", viewModel);
         }
+
         [Route("Active")]
         public IActionResult Active()
         {
@@ -63,7 +64,7 @@ namespace StreetNaming.Admin.Controllers
         [Route("FollowUp")]
         public IActionResult FollowUp()
         {
-            var viewModel = new CaseFollowUpViewModel()
+            var viewModel = new CaseFollowUpViewModel
             {
                 FollowUpCases = _mapper.Map<ICollection<CaseFollowUpCaseViewModel>>(_repo.GetFollowUpCases())
             };
@@ -96,7 +97,10 @@ namespace StreetNaming.Admin.Controllers
             var viewModel = _mapper.Map<CaseGetViewModel>(c);
 
             ViewData["Title"] = viewModel.CustomerReference;
-            viewModel.Statuses = Enum.GetValues(typeof (CaseStatus)).Cast<CaseStatus>().Select(cs => new SelectListItem { Text = cs.ToString(), Value = cs.ToString() });
+            viewModel.Statuses =
+                Enum.GetValues(typeof (CaseStatus))
+                    .Cast<CaseStatus>()
+                    .Select(cs => new SelectListItem {Text = cs.ToString(), Value = cs.ToString()});
 
             return View(viewModel);
         }
@@ -126,7 +130,7 @@ namespace StreetNaming.Admin.Controllers
                 return new HttpNotFoundResult();
             }
 
-            return RedirectToAction("Get", new { reference });
+            return RedirectToAction("Get", new {reference});
         }
     }
 }

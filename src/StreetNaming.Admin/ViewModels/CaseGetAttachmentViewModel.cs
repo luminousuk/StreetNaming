@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StreetNaming.Admin.ViewModels
+﻿namespace StreetNaming.Admin.ViewModels
 {
     public class CaseGetAttachmentViewModel
     {

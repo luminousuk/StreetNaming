@@ -24,7 +24,9 @@
             @foreach (var c in Model.Cases)
             {
                 <tr role="row">
-                    <td><a asp-controller="Case" asp-action="Get" asp-route-reference="@c.CustomerReference" class="btn btn-sm btn-success">View <i class="fa fa-arrow-circle-right"></i></a></td>
+                    <td>
+                        <a asp-controller="Case" asp-action="Get" asp-route-reference="@c.CustomerReference" class="btn btn-sm btn-success">View <i class="fa fa-arrow-circle-right"></i></a>
+                    </td>
                     <td>@c.CustomerReference</td>
                     <td>@c.ApplicantFullName</td>
                     <td>@c.CaseType</td>
@@ -71,18 +73,18 @@
                 ],
                 "createdRow": function(row, data, index) {
                     switch (data[4]) {
-                        case "New":
-                        case "Active":
-                            $(row).addClass("text-primary");
-                            break;
-                        case "Completed":
-                            $(row).addClass("text-success");
-                            break;
-                        case "Rejected":
-                        case "Cancelled":
-                        case "Refunded":
-                            $(row).addClass("text-danger");
-                            break;
+                    case "New":
+                    case "Active":
+                        $(row).addClass("text-primary");
+                        break;
+                    case "Completed":
+                        $(row).addClass("text-success");
+                        break;
+                    case "Rejected":
+                    case "Cancelled":
+                    case "Refunded":
+                        $(row).addClass("text-danger");
+                        break;
                     }
                 },
                 "order": [5, "desc"]

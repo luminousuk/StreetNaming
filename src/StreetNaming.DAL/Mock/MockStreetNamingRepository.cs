@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using StreetNaming.DAL.DTO;
 using StreetNaming.Domain.Models;
 using StreetNaming.Util;
@@ -184,7 +183,9 @@ namespace StreetNaming.DAL.Mock
                 else
                 {
                     foreach (var t in c.Transactions)
-                        t.TransactionStatus = _random.Next(2) == 0 ? TransactionStatus.Pending : TransactionStatus.Failed;
+                        t.TransactionStatus = _random.Next(2) == 0
+                            ? TransactionStatus.Pending
+                            : TransactionStatus.Failed;
                 }
 
                 cases.Add(c);
@@ -316,8 +317,8 @@ namespace StreetNaming.DAL.Mock
             for (var i = 0; i < _random.Next(4); i++)
                 newCase.Attachments.Add(GenerateAttachment(newCase));
 
-            for (var i=0; i < _random.Next(3); i++)
-                newCase.Transactions.Add(GenerateTransaction(c: newCase));
+            for (var i = 0; i < _random.Next(3); i++)
+                newCase.Transactions.Add(GenerateTransaction(newCase));
 
             newCase.Signed = $"{newCase.Applicant.FirstName} {newCase.Applicant.LastName}";
 
