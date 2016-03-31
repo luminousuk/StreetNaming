@@ -125,6 +125,10 @@ namespace StreetNaming.Web.Controllers
             if (transaction.ResponseCode > 0)
                 return View("Failed", transaction);
 
+            var cas = await _context.Cases.FirstOrDefaultAsync(c => c.CaseId == transaction.CaseId);
+            cas.CaseStatus = CaseStatus.Active;
+            await _context.SaveChangesAsync();
+
             return View("Completed", transaction);
         }
 

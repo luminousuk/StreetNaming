@@ -1,0 +1,77 @@
+﻿@model StreetNaming.Admin.ViewModels.ApplicantListViewModel
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">@ViewData["Title"]</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-striped table-hover" id="table-applicants" style="width: 100%">
+            <thead>
+            <tr rolw="row">
+                <th><i class="fa fa-user"></i> Name</th>
+                <th><i class="fa fa-home"></i> Address</th>
+                <th><i class="fa fa-phone"></i> Phone</th>
+                <th><i class="fa fa-mobile"></i> Mobile</th>
+                <th><i class="fa fa-envelope"></i> Email</th>
+                <th><i class="fa fa-briefcase"></i> Cases</th>
+                <th><i class="fa fa-calendar"></i> Created</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var applicant in Model.Applicants)
+            {
+                <tr role="row">
+                    <td>@applicant.FullName</td>
+                    <td>@applicant.FullAddress</td>
+                    <td>@applicant.Telephone</td>
+                    <td>@applicant.Mobile</td>
+                    <td>@applicant.Email</td>
+                    <td>@applicant.CaseCount</td>
+                    <td>@applicant.CreatedDate.ToString("s")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/lib/datatables-plugins/integration/bootstrap/3/datatables.bootstrap.css" rel="stylesheet"/>
+}
+
+@section Scripts {
+    <script src="~/lib/datatables/media/js/jquery.datatables.min.js"></script>
+    <script src="~/lib/datatables-plugins/integration/bootstrap/3/datatables.bootstrap.min.js"></script>
+    <script src="~/lib/moment/min/moment.min.js"></script>
+    <script>
+        $(function() {
+            $("#table-applicants").DataTable({
+                "columnDefs": [
+                    {
+                        "targets": [5, 6],
+                        "searchable": false
+                    },
+                    {
+                        "targets": [2, 3],
+                        "sortable": false
+                    },
+                    {
+                        "targets": [6],
+                        "render": function(data, type, row) {
+                            if (type === "display")
+                                return moment(data).calendar(null, {
+                                    sameElse: "D MMM YYYY"
+                                });
+                            else
+                                return data;
+                        }
+                    }
+                ],
+                "order": [0, "asc"]
+            });
+        });
+    </script>
+}

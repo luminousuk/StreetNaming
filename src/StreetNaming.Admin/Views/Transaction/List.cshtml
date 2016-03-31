@@ -1,0 +1,68 @@
+﻿@model StreetNaming.Admin.ViewModels.TransactionListViewModel
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">@ViewData["Title"]</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-striped table-hover" id="table-transactions" style="width: 100%">
+            <thead>
+            <tr role="row">
+                <th><i class="fa fa-file-o"></i> Transaction Ref</th>
+                <th><i class="fa fa-file-o"></i> Case Ref</th>
+                <th><i class="fa fa-gbp"></i> Amount</th>
+                <th><i class="fa fa-cogs"></i> Status</th>
+                <th><i class="fa fa-calendar"></i> Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var tran in Model.Transactions)
+            {
+                <tr role="row">
+                    <td>@tran.Reference</td>
+                    <td>
+                        <a asp-controller="Case" asp-action="Get" asp-route-reference="@tran.CaseCustomerReference">@tran.CaseCustomerReference</a>
+                    </td>
+                    <td>£@tran.Amount</td>
+                    <td>@tran.TransactionStatus</td>
+                    <td>@tran.CreatedDate.ToString("s")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/lib/datatables-plugins/integration/bootstrap/3/datatables.bootstrap.css" rel="stylesheet"/>
+}
+
+@section Scripts {
+    <script src="~/lib/datatables/media/js/jquery.datatables.min.js"></script>
+    <script src="~/lib/datatables-plugins/integration/bootstrap/3/datatables.bootstrap.min.js"></script>
+    <script src="~/lib/moment/min/moment.min.js"></script>
+    <script>
+        $(function() {
+            $("#table-transactions").DataTable({
+                "columnDefs": [
+                    {
+                        "targets": [4],
+                        "searchable": false,
+                        "render": function(data, type) {
+                            if (type === "display")
+                                return moment(data).calendar(null, {
+                                    sameElse: "D MMM YYYY"
+                                });
+                            else
+                                return data;
+                        }
+                    }
+                ],
+                "order": [4, "desc"]
+            });
+        });
+    </script>
+}

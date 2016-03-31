@@ -2,9 +2,9 @@
 using Microsoft.Data.Entity.Metadata;
 using StreetNaming.Domain.Models;
 
-namespace StreetNaming.Web.Models
+namespace StreetNaming.DAL.PostgreSQL
 {
-    public sealed class StreetNamingEntities : DbContext
+    public class StreetNamingContext : DbContext
     {
         public DbSet<Applicant> Applicants { get; set; }
 

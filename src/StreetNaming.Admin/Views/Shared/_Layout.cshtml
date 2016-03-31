@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] | StreetNaming</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+    <link href="~/lib/metismenu/dist/metismenu.css" rel="stylesheet"/>
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    @RenderSection("Styles", false)
+    <link href="~/lib/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+<div id="wrapper">
+    <div class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img src="~/images/bathnes__rgb_1000.gif" alt="Bath & North East Somerset Council" class="pull-left" style="max-height: 50px"/>
+            <a asp-controller="Dashboard" asp-action="Index" class="navbar-brand">
+                Street Naming & Numbering Admin
+            </a>
+        </div>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav in" id="side-menu">
+                    <li>
+                        <a asp-controller="Dashboard" asp-action="Index"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Case" asp-action="All"><i class="fa fa-briefcase fa-fw"></i> All Cases</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Case" asp-action="Active"><i class="fa fa-folder-open fa-fw"></i> Active Cases</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Case" asp-action="Completed"><i class="fa fa-folder fa-fw"></i> Completed Cases</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Case" asp-action="FollowUp"><i class="fa fa-list fa-fw"></i> Follow Up</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Applicant" asp-action="All"><i class="fa fa-users fa-fw"></i> Applicants</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Transaction" asp-action="All"><i class="fa fa-gbp fa-fw"></i> All Transactions</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Transaction" asp-action="Pending"><i class="fa fa-exclamation-circle fa-fw"></i> Pending Transactions</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-nav -->
+        </div>
+    </div>
+    <div id="page-wrapper">
+        @RenderBody()
+    </div>
+    <hr style="margin-top: 0;"/>
+    <footer>
+        <h6 class="text-center">&copy; @DateTime.Now.ToString("yyyy") - Bath & North East Somerset Council</h6>
+    </footer>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/lib/metismenu/dist/metismenu.js"></script>
+<script src="~/lib/raphael/raphael.js"></script>
+<script src="~/lib/morrisjs/morris.js"></script>
+<script src="~/lib/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+@RenderSection("scripts", false)
+<script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

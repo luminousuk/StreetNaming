@@ -1,0 +1,180 @@
+﻿@model StreetNaming.Admin.ViewModels.DashboardIndexViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Dashboard</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-briefcase fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.ActiveCaseCount</div>
+                        <div>Active Cases</div>
+                    </div>
+                </div>
+            </div>
+            <a asp-controller="Case" asp-action="Active">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.ApplicantCount</div>
+                        <div>Applicants</div>
+                    </div>
+                </div>
+            </div>
+            <a asp-controller="Applicant" asp-action="All">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-exclamation-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.UnpaidTransactionCount</div>
+                        <div>Outstanding Fees</div>
+                    </div>
+                </div>
+            </div>
+            <a asp-controller="Transaction" asp-action="Pending">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-list fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.CaseFollowUpCount</div>
+                        <div>Follow Up</div>
+                    </div>
+                </div>
+            </div>
+            <a asp-controller="Case" asp-action="FollowUp">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Cases per month
+            </div>
+            <div class="panel-body">
+                <div id="chart-casespermonth"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Monthly Cashflow
+            </div>
+            <div class="panel-body">
+                <div id="chart-monthlycashflow"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Styles {
+    <link href="~/lib/morrisjs/morris.css" rel="stylesheet"/>
+}
+
+@section scripts {
+    <script>
+        $(function() {
+
+            $.ajax({
+                url: "@Url.Action("CasesPerMonth", "GraphData")",
+                dataType: "json"
+            }).done(function(result) {
+                Morris.Bar({
+                    element: 'chart-casespermonth',
+                    stacked: true,
+                    data: result,
+                    xkey: 'Month',
+                    xLabels: "month",
+                    xLabelAngle: 45,
+                    ykeys: ['NewProperty', 'ExistingProperty'],
+                    labels: ['New Property', 'Existing Property'],
+                    resize: true
+                });
+            });
+
+            $.ajax({
+                url: "@Url.Action("MonthlyCashflow", "GraphData")",
+                dataType: "json"
+            }).done(function(result) {
+                Morris.Area({
+                    element: 'chart-monthlycashflow',
+                    data: result,
+                    xkey: 'Month',
+                    xLabels: "month",
+                    xLabelAngle: 45,
+                    ykeys: ['Income'],
+                    labels: ['Income'],
+                    resize: true,
+                    parseTime: false,
+                    preUnits: "£",
+                    smooth: false,
+                    fillOpacity: 0.3
+                });
+            });
+        });
+    </script>
+}
