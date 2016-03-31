@@ -1,5 +1,5 @@
 ﻿{
-    "version": "1.0.0-dev",
+    "version": "1.0.0",
     "description": "StreetNaming Data Access Layer",
     "authors": [ "Chris Pickford" ],
     "tags": [ "" ],
@@ -11,8 +11,8 @@
         "EntityFramework7.Npgsql": "3.1.0-rc1-3",
         "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-final",
         "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
-        "StreetNaming.Domain": "1.0.0-dev",
-        "StreetNaming.Util": "1.0.0-dev"
+        "StreetNaming.Domain": "1.0.0",
+        "StreetNaming.Util": "1.0.0"
     },
 
     "commands": {

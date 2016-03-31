@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0-*",
+    "version": "1.0.0",
     "compilationOptions": {
         "emitEntryPoint": true
     },
@@ -23,9 +23,9 @@
         "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
         "Newtonsoft.Json": "8.0.3",
-        "StreetNaming.Domain": "1.0.0-dev",
-        "StreetNaming.Util": "1.0.0-dev",
-        "StreetNaming.DAL": "1.0.0-dev",
+        "StreetNaming.Domain": "1.0.0",
+        "StreetNaming.Util": "1.0.0",
+        "StreetNaming.DAL": "1.0.0",
         "System.Linq": "4.0.0"
     },
 
