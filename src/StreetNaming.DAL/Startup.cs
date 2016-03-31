@@ -10,10 +10,13 @@ namespace StreetNaming.DAL
 {
     public class Startup
     {
+        // NOT INTENDED TO BE HOSTED - STARTUP CLASS TO ENABLE EF MIGRATIONS
+
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
