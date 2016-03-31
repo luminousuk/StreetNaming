@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.Data.Entity;
 using StreetNaming.DAL.DTO;
 using StreetNaming.Domain.Models;
+// ReSharper disable PossibleMultipleEnumeration
 
 namespace StreetNaming.DAL.PostgreSQL
 {
@@ -46,12 +48,54 @@ namespace StreetNaming.DAL.PostgreSQL
 
         public ICollection<MonthlyCaseCountDto> GetMonthlyCaseCount()
         {
-            return new List<MonthlyCaseCountDto>();
+            var totals = new Dictionary<string, MonthlyCaseCountDto>();
+
+            for (var i = 11; i >= 0; i--)
+            {
+                var val = new MonthlyCaseCountDto(DateTime.Today.AddMonths(-i).ToString("yyyy-MM"), 0, 0);
+                totals.Add(val.Month, val);
+            }
+
+            _context.Cases.GroupBy(c => new {month = c.CreatedDate.ToString("yyyy-MM"), type = c.CaseType},
+                    (key, group) =>
+                        new MonthlyCaseCountDto(key.month,
+                            group.Count(g => g.CaseType == CaseType.ExistingPropertyCase),
+                            group.Count(g => g.CaseType == CaseType.NewPropertyCase)
+                            ))
+                    .ToList()
+                    .ForEach(obj =>
+                    {
+                        totals[obj.Month] = obj;
+                    });
+
+
+
+            return totals.Values;
         }
 
         public ICollection<MonthlyCashflowDto> GetMonthlyCashflow()
         {
-            return new List<MonthlyCashflowDto>();
+            var totals = new Dictionary<string, MonthlyCashflowDto>();
+
+            for (var i = 11; i >= 0; i--)
+            {
+                var val = new MonthlyCashflowDto(DateTime.Today.AddMonths(-i).ToString("yyyy-MM"), 0.0M);
+                totals.Add(val.Month, val);
+            }
+
+            _context.Transactions.Where(t => t.TransactionStatus == TransactionStatus.Complete)
+                .GroupBy(t => t.CreatedDate.ToString("yyyy-MM"),
+                    (key, group) => new MonthlyCashflowDto(key, group.Sum(g => g.Amount))
+                )
+                .ToList()
+                .ForEach(obj =>
+                {
+                    totals[obj.Month] = obj;
+                });
+
+
+
+            return totals.Values;
         }
 
         public ICollection<Case> GetAllCases()

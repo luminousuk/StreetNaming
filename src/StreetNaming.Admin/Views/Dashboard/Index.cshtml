@@ -148,6 +148,8 @@
                     stacked: true,
                     data: result,
                     xkey: 'Month',
+                    xLabels: "month",
+                    xLabelAngle: 45,
                     ykeys: ['NewProperty', 'ExistingProperty'],
                     labels: ['New Property', 'Existing Property'],
                     resize: true
@@ -162,11 +164,14 @@
                     element: 'chart-monthlycashflow',
                     data: result,
                     xkey: 'Month',
+                    xLabels: "month",
+                    xLabelAngle: 45,
                     ykeys: ['Income'],
                     labels: ['Income'],
                     resize: true,
                     parseTime: false,
                     preUnits: "£",
+                    smooth: false,
                     fillOpacity: 0.3
                 });
             });
