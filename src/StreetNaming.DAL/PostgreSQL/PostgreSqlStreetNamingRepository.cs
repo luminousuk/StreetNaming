@@ -56,9 +56,9 @@ namespace StreetNaming.DAL.PostgreSQL
                 totals.Add(val.Month, val);
             }
 
-            _context.Cases.GroupBy(c => new {month = c.CreatedDate.ToString("yyyy-MM"), type = c.CaseType},
+            _context.Cases.GroupBy(c => c.CreatedDate.ToString("yyyy-MM"),
                 (key, group) =>
-                    new MonthlyCaseCountDto(key.month,
+                    new MonthlyCaseCountDto(key,
                         group.Count(g => g.CaseType == CaseType.ExistingPropertyCase),
                         group.Count(g => g.CaseType == CaseType.NewPropertyCase)
                         ))
